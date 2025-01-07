@@ -6,7 +6,7 @@ import 'swiper/css/free-mode';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
 import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
-import { useState } from 'react';
+import { CSSProperties, useState } from 'react';
 import styles from './Gallery.module.scss'
 
 interface IGalleryProps{
@@ -22,7 +22,7 @@ const Gallery = ({gallery}: IGalleryProps) =>{
           style={{
             '--swiper-navigation-color': '#fff',
             '--swiper-pagination-color': '#fff',
-          }}
+          }as CSSProperties}
           spaceBetween={10}
           navigation={true}
           thumbs={{ swiper: thumbsSwiper }}
