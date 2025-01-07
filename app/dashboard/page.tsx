@@ -12,8 +12,8 @@ export default function Dashboard() {
     // console.log(posts)
     // setProjects(posts.data)
     const [projectsResponse, articlesResponse] = await Promise.all([
-        fetch('http://localhost:1337/api/projects?populate=*'),
-        fetch('http://localhost:1337/api/articles?populate=*')
+        fetch('http://158.160.138.130:1337/api/projects?populate=*'),
+        fetch('http://158.160.138.130:1337/api/articles?populate=*')
     ])
 
     const projects = await projectsResponse.json();

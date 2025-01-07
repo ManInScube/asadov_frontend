@@ -69,9 +69,9 @@ const Grid = ({items}: IGridProps) =>{
                 <a key={item.documentId} className={`${styles.gridItem} ${size.get(item.size)}`}
                 style={{ animationDelay: `${index * 0.1}s` }} // Задержка для плавности
                 onClick={()=>dispatch(setCurrentProject(item.id))}
-                href={`http://localhost:3000/project/${item.documentId}`}
+                href={`http://158.160.138.130:3000/project/${item.documentId}`}
                 >
-                   <img src={`http://localhost:1337/${item.cover?.url}`}alt="" />
+                   <img src={`http://158.160.138.130:1337/${item.cover?.url}`}alt="" />
                    <div className={styles.gridItem__info}>
                    </div>
                    <span className={styles.gridItem__title}>{item.title}</span>
