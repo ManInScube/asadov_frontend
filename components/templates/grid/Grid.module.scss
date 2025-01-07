@@ -1,0 +1,167 @@
+
+  
+  .gridContainer {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(12, 1fr);
+    grid-gap: 10px;
+    box-sizing: border-box; /* Учитываем padding */
+    grid-auto-flow: dense; /* Включаем "уплотнение" для заполнения пробелов */
+
+    @media screen and (max-width: 560px){
+      grid-template-columns: repeat(6, 1fr);
+
+    }
+  }
+
+  
+  .gridItem {
+    margin: 0; /* Убираем внешние отступы */
+    padding: 0; /* Проверяем, нет ли внутренних отступов */
+    height: fit-content;
+    position: relative;
+    overflow: hidden;
+    // background-color: rgba(255, 0, 0, 0.2); /* Временный фон */
+    // border: 1px solid red; /* Временные границы */
+    opacity: 0; /* Изначально плитки невидимы */
+    transform: translateY(50px); /* Начальная позиция (ниже обычной) */
+    animation: slideIn 0.5s ease forwards; /* Анимация плавного появления */
+    cursor: pointer;
+
+
+    &__title, &__subtitle{
+        display: block;
+        position: absolute;
+        font-size: 1.5em;
+        font-family: $font-black;
+        color: white;
+        z-index: 100;
+        transition: all 1s ease-out;
+    }
+    &__title{
+        top: 10px;
+        opacity: 1;
+        left: -100%;
+        transition: all 0.3s ease-out;
+
+    }
+    &__subtitle{
+        bottom: 10px;
+        opacity: 0;
+        left: -50px;
+        transition: all 1s ease-out;
+
+    }
+
+    // &__info{
+    //   display: none;
+    // }
+
+    // &__subtitle{
+    //   display: none;
+    // }
+    
+
+    &:hover &__info{
+      display: block;
+      opacity: 1;
+      transition: all 0.5s ease-out;
+
+    }
+
+    &__info{
+      background: rgba($color: #000000, $alpha: .5);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 99;
+      transition: all 0.5s ease-out;
+      opacity: 0;
+    }
+
+    &:hover &__subtitle{
+      display: block !important;
+      opacity: 1;
+      left: 10px;
+
+
+    }
+    &:hover &__title{
+      display: block !important;
+      opacity: 1;
+      left: 10px;
+
+
+    }
+    img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+  }
+  
+  .large {
+    grid-column: span 6;
+    grid-row: span 2;
+    img{
+      height: 400px;
+
+      @media screen and (max-width: 560px){
+        height: 239px; //сделать через переменную
+      }
+    }
+  }
+  
+  .medium_horizontal {
+    grid-column: span 6;
+    img {
+        height: 194px;
+        @media screen and (max-width: 560px){
+          height: 117px; //сделать через переменную
+        }
+      }
+  }
+
+  .medium_vertical {
+    grid-column: span 3;
+    grid-row: span 2;
+
+    img {
+        height: 400px;
+        @media screen and (max-width: 560px){
+          height: 239px; //сделать через переменную
+        }
+    }
+  }
+  
+  .small {
+    grid-column: span 3;
+    grid-row: span 1;
+
+    img {
+        height: 194px;
+        @media screen and (max-width: 560px){
+          height: 117px; //сделать через переменную
+        }
+    }
+  }
+
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(100px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Анимация с задержкой */
+  .gridItem[data-delay] {
+    animation-delay: attr(data-delay s);
+  }
+  

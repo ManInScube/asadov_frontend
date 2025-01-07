@@ -1,0 +1,85 @@
+.project{
+    &__banner{
+        width: 100%;
+        position: relative;
+        // height: calc(100vh - 500px);
+        height: 300px;
+        img{
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit:cover;
+        }
+    }
+
+    &__block{
+        width: 66%;
+        margin: 0 auto;
+        margin-top: 60px;
+
+        @media screen and (max-width: 560px){
+            width: 100%;
+        }
+
+        h2{
+            font-family: $font-black;
+            text-transform: uppercase;
+        }
+    }
+
+    &__row{
+        display: flex;
+        justify-content: space-between;
+        margin-top: 70px;
+
+        @media screen and (max-width: 560px){
+            flex-direction: column;
+        }
+
+        &>div{
+            // width: 33%;
+            max-width: 300px;
+            width: fit-content;
+
+            @media screen and (max-width: 560px){
+                width: 100%;
+                max-width: 100%;
+
+                span{
+                    max-width: 300px;
+                    text-align: right;
+                }
+            }
+        }
+    }
+
+    &__description{
+        margin-top: 60px;
+        font-family: $font-light;
+        font-size: 1em;
+    }
+
+    &__gallery{
+        margin-top: 20px;
+    }
+}
+
+.info{
+    display: flex;
+    flex-direction: column;
+    @media screen and (max-width: 560px){
+        margin-top: 10px;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+    }
+    
+    span:first-of-type{
+        font-family: $font-black;
+        font-size: 1.25em;
+    }
+    span:last-of-type{
+        font-family: $font-light;
+        font-size: 1.25em;
+    }
+}

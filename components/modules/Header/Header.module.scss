@@ -1,0 +1,195 @@
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: $font-light;
+    padding: 20px 10px;
+    z-index: 1001;
+
+    &_scrolled{
+        position: fixed !important;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+        background: rgba(255, 255, 255, 0.8); /* Полупрозрачный фон */
+        backdrop-filter: blur(5px); /* Размытие */
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* Легкая линия снизу */
+        transition: all 0.3s ease-in-out; /* Плавный переход */
+    }
+
+    &__icons{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 20px;
+
+        a:first-of-type{
+            display: block;
+            height: 30px;
+        }
+        a:not(:last-of-type){
+            svg{
+                height: 30px;
+            }
+        }
+    }
+
+    &__mobile{
+        position: absolute;
+        left: 0;
+        top: 50px;
+        z-index: 1000;
+        width: 100vw;
+        height: 100vh;
+        background: white;
+        width: 100%;
+
+
+        ul{
+            margin-top: 50px !important;
+            flex-wrap: wrap;
+            justify-content:center  !important;
+            gap: 16px;
+        }
+
+        .header__menu{
+            width: 100%;
+        }
+
+        &__nav{
+            margin-top: 30px;
+            display: flex;
+            width: 100%;
+            flex-direction: column;
+            align-items: center;
+            font-size: 1.5em;
+            &>div{
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                margin-top: 21px;
+            }
+        }
+    }
+
+    a{
+        cursor: pointer;
+    }
+
+    &__logo{
+        width: 27%;
+        @media (max-width: 560px) {
+            width:40%;
+        }
+        svg{
+            width: 100%;
+        }
+    }
+
+    &__menu{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        // width: 50%;
+        ul{
+            margin-top: 10px !important;
+
+        }
+
+        &Btn{
+            svg{
+                height: 23px;
+                margin-top: 3px;
+            }
+        }
+
+        label{
+            cursor: pointer;
+            position: relative;
+            padding: 0 12px;
+            input{
+                opacity: 0;
+                position: absolute;
+            }
+        }
+
+        &>label:first-of-type{
+            padding-left: 0;
+        }
+
+        label input:checked ~ span{
+            // font-family: $font-black;
+            border-bottom: 3px solid $green;
+        }
+    }
+
+    &__nav{
+        font-size: 1.5em;
+        font-family: $font-light;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        // justify-content: flex-end;
+        a{
+            text-decoration: none;
+            padding: 0 12px;
+            color: $black !important;
+
+        }
+        // div:not(:last-of-type){
+        //     border-right: 1px solid $black;
+        //     padding-right:0 25px;
+        // }
+
+        &Divider{
+            height: 20px;
+            background-color: $black;
+            width: 1px;
+        }
+    }
+
+    ul{
+        display: flex;
+        justify-content: space-between;
+        margin: 0;
+        padding: 0;
+        label input:checked ~ span{
+            border: none;
+        }
+
+        label span:last-of-type{
+            left: -100%;
+            transition: all 0.3s ease-out;
+            // margin: 0 10px;
+            // padding: 0 12px;
+        }
+        
+            
+        label input:checked ~ span:last-of-type{
+                position: absolute;
+                height: 3px;
+                width: 90%;
+                left: 6px;
+                bottom: -5px;
+                background-color: #73A533;
+                border-radius: 2px;
+            }
+        
+
+        a{
+            cursor: pointer;
+            user-select: none;
+            &::selection{
+                background: transparent;
+            }
+        }
+
+
+    }
+}
+
+.anim{
+    transform: translate(200px, 0px);
+    transition: all 0.5s ease-out;
+    display: block;
+}

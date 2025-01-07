@@ -1,0 +1,12 @@
+$path: "../app/fonts/Gilroy-";
+
+@font-face {
+    src: url("#{$path}Light.otf");
+    font-family: "GilroyLight";
+    font-weight: 300;
+}
+@font-face {
+    src: url("#{$path}Black.ttf");
+    font-family: "GilroyBlack";
+    font-weight: 700;
+}
