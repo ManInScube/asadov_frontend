@@ -11,12 +11,13 @@ interface IGridItem{
 }
 const GridItem = ({item}:IGridItem) =>{
     return(
-        <div className={`${styles.gridItem} ${item.size.get(item.size)}`}>
-            <img src={`http://localhost:1337/${item.cover.url}`}alt="" />
-            <div className={styles.gridItem__info}>
-            </div>
-            <span className={styles.gridItem__title}>{item.title}</span>
-            <span className={styles.gridItem__subtitle}>{item.cover_subtitle}</span>
-        </div>
+        // <div className={`${styles.gridItem} ${item.size.get(item.size)}`}>
+        //     <img src={`http://localhost:1337/${item.cover.url}`}alt="" />
+        //     <div className={styles.gridItem__info}>
+        //     </div>
+        //     <span className={styles.gridItem__title}>{item.title}</span>
+        //     <span className={styles.gridItem__subtitle}>{item.cover_subtitle}</span>
+        // </div>
+        <></>
     )
 }
