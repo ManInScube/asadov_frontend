@@ -1,5 +1,5 @@
 import { ReactElement } from "react"
-import Header from "../modules/Header/Header"
+import Header from "../modules/HeaderNew/Header"
 import Footer from "../modules/Footer/Footer"
 
 interface ILayoutProps{
