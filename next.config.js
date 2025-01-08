@@ -16,7 +16,7 @@ const nextConfig = {
     return[
       {
         source:'/api/:path*',
-        destination: 'http://asadov-frontend-571p.vercel.app/',
+        destination: 'http://84.201.170.233:1337//api/:path*',
       }
     ]
   }
