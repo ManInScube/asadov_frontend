@@ -32,7 +32,7 @@ const Gallery = ({gallery}: IGalleryProps) =>{
         >
           {gallery&&gallery.map(item=>(
             <SwiperSlide >
-              <img src={`http://158.160.138.130:1337/${item.url}`} />
+              <img src={`http://84.201.170.233:1337/${item.url}`} />
             </SwiperSlide>
           ))}
         </Swiper>
@@ -47,7 +47,7 @@ const Gallery = ({gallery}: IGalleryProps) =>{
         >
           {gallery&&gallery.map(item=>(
             <SwiperSlide >
-              <img src={`http://158.160.138.130:1337/${item.url}`} />
+              <img src={`http://84.201.170.233:1337/${item.url}`} />
             </SwiperSlide>
           ))}
         </Swiper>
