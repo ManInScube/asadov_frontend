@@ -12,6 +12,14 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  async rewrites(){
+    return[
+      {
+        source:'/api/:path*',
+        destination: 'http://asadov-frontend-571p.vercel.app/',
+      }
+    ]
+  }
 };
 
 module.exports = nextConfig
