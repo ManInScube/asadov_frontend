@@ -27,7 +27,7 @@ const Project = () =>{
     return(
         <main className={styles.project}>
             <div className={styles.project__banner}>
-                <img src={`http://84.201.170.233:1337/${project?.cover.url}`} alt="" />
+                <img src={`http://84.201.170.233:1337${project?.cover.url}`} alt="" />
             </div>
             <div className={styles.project__block}>
                 <svg width="47" height="56" viewBox="0 0 47 56" fill="none" xmlns="http://www.w3.org/2000/svg">

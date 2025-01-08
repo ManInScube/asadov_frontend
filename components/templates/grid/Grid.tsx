@@ -71,7 +71,7 @@ const Grid = ({items}: IGridProps) =>{
                 onClick={()=>dispatch(setCurrentProject(item.id))}
                 href={`http://84.201.170.233:3000/project/${item.documentId}`}
                 >
-                   <img src={`http://84.201.170.233:1337/${item.cover?.url}`}alt="" />
+                   <img src={`http://84.201.170.233:1337${item.cover?.url}`}alt="" />
                    <div className={styles.gridItem__info}>
                    </div>
                    <span className={styles.gridItem__title}>{item.title}</span>
