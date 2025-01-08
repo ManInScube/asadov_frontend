@@ -12,19 +12,19 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  async headers() {
-    return [
-      {
-        source: '/:path*',
-        headers: [
-          {
-            key: 'Content-Security-Policy',
-            value: "upgrade-insecure-requests",
-          },
-        ],
-      },
-    ];
-  },
+  // async headers() {
+  //   return [
+  //     {
+  //       source: '/:path*',
+  //       headers: [
+  //         {
+  //           key: 'Content-Security-Policy',
+  //           value: "upgrade-insecure-requests",
+  //         },
+  //       ],
+  //     },
+  //   ];
+  // },
   // async rewrites(){
   //   return[
   //     {
