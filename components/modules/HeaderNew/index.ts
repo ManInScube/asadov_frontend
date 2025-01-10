@@ -12,3 +12,15 @@ export const categories = {
     transport:'ТРАНСПОРТ',
     improvement:'БЛАГОУСТРОЙСТВО',
 }
+
+export const categories2 = {
+    social:'МОП  и общественные',
+    living:'ЖИЛЬЕ',
+    horeca:'HoReCa',
+    offices:'ОФИСЫ',
+    med:'МЕДИЦИНА',
+    education:'ОБРАЗОВАНИЕ',
+    showroom:'ШОУРУМЫ',
+    market:'ТОРГОВЛЯ',
+    transport:'ТРАНСПОРТ',
+}

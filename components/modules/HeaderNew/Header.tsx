@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { useGetProjectsQuery } from '@/lib/services/projectApi'
 import styles from './Header.module.scss'
 import HeaderFilterItem from '@/components/elements/HeaderFilterItem/HeaderFilterItem'
-import { categories } from '.'
+import { categories, categories2 } from '.'
 import { useAppDispatch } from '@/lib/hooks'
 import { addProjects } from '@/lib/features/projects'
 import useMediaQuery from '@/hooks/useMediaQuery'
@@ -21,6 +21,7 @@ const Header = () =>{
     // const {data} = useGetProjectsQuery({type: type || '', status:status || ''})
     const [isScrolled, setIsScrolled] = useState(false);
     const [test, setTest] = useState(false);
+    const [submenu, setSubmenu] = useState<Object>(categories)
    
     const handleScroll = () => {
         setIsScrolled(window.scrollY > 10);
@@ -74,7 +75,17 @@ const Header = () =>{
 //сделать сортировку по порядку мб или добавить опцию в меню
     useEffect(()=>{
         hh()
+        handleType(type)
     },[type, status, selectedCategories])
+
+    const handleType = (type: any) =>{
+        setType(type);
+        if(type.includes("architecture")){
+            setSubmenu(categories)
+            return
+        }
+        setSubmenu(categories2)
+    }
     return(
         <header className={`${styles.header} ${isScrolled && styles.header_scrolled}`}>
             <a className={styles.header__logo} href='/'>
@@ -157,7 +168,7 @@ const Header = () =>{
                     <a>МАСТЕРПЛАНЫ</a>
                 </ul> */}
                 <ul onClick={()=>setTest(true)}>
-                    {Object.keys(categories).map((item:string)=>(
+                    {Object.keys(submenu).map((item:string)=>(
                         <HeaderFilterItem 
                             key={item}
                             type={'checkbox'}
