@@ -40,7 +40,7 @@ const Header = () =>{
     
     
     async function hh(){
-        await fetch(`http://84.201.170.233:1337/api/projects?${type.map(item=>`filters[type][$in]=${item}`).join("&")}&${status.map(item=>`filters[state][$in]=${item}`).join("&")}&${selectedCategories.map(item=>`filters[category][$in]=${item}`).join("&")}&populate=*`)
+        await fetch(`https://84.201.170.233:1337/api/projects?${type.map(item=>`filters[type][$in]=${item}`).join("&")}&${status.map(item=>`filters[state][$in]=${item}`).join("&")}&${selectedCategories.map(item=>`filters[category][$in]=${item}`).join("&")}&populate=*`)
         .then((response)=>{
             return response.json()
         })

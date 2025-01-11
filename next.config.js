@@ -29,7 +29,7 @@ const nextConfig = {
   //   return[
   //     {
   //       source:'/api/:path*',
-  //       destination: 'http://84.201.170.233:1337/api/:path*',
+  //       destination: 'https://84.201.170.233:1337/api/:path*',
   //     }
   //   ]
   // }
