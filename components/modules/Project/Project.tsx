@@ -14,7 +14,7 @@ const Project = () =>{
 
     const projectId = useAppSelector(state=>state.projectsSlice.currentProject)
         async function getProject(){
-            await fetch(`https://84.201.170.233:1337/api/projects?filters[documentId][$eq]=${id}&populate=*`)
+            await fetch(`https://84.201.170.233/api/projects?filters[documentId][$eq]=${id}&populate=*`)
             .then((response)=>{
                 return response.json()
             })
