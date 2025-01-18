@@ -3,14 +3,14 @@ import { useEffect, useState } from 'react'
 import { useGetProjectsQuery } from '@/lib/services/projectApi'
 import styles from './Header.module.scss'
 import HeaderFilterItem from '@/components/elements/HeaderFilterItem/HeaderFilterItem'
-import { categories } from '.'
+import { categories, categories2 } from '.'
 import { useAppDispatch } from '@/lib/hooks'
 import { addProjects } from '@/lib/features/projects'
 import useMediaQuery from '@/hooks/useMediaQuery'
 
 
-
-const Header = () =>{
+const all = ['project', 'realisation'];
+const HeaderProject = () =>{
     const [type, setType] = useState<string[]>(['architecture', 'interior'])
     const [status, setStatus] = useState<string[]>(['project', 'realisation'])
     const [selectedCategories, setSelectedCategories] = useState<string[]>([])
@@ -21,6 +21,7 @@ const Header = () =>{
     // const {data} = useGetProjectsQuery({type: type || '', status:status || ''})
     const [isScrolled, setIsScrolled] = useState(false);
     const [test, setTest] = useState(false);
+    const [submenu, setSubmenu] = useState<Object>(categories)
    
     const handleScroll = () => {
         setIsScrolled(window.scrollY > 10);
@@ -29,6 +30,14 @@ const Header = () =>{
       const handleUpButton = () => {
         window.scrollTo(0, 0);
       };
+
+      const handleState = (str:string) =>{
+        if(str==='all'){
+            setStatus(all);
+            return;
+        }
+        setStatus(['realisation'])
+      }
     
       useEffect(() => {
 
@@ -40,7 +49,7 @@ const Header = () =>{
     
     
     async function hh(){
-        await fetch(`http://84.201.170.233:1337/api/projects?${type.map(item=>`filters[type][$in]=${item}`).join("&")}&${status.map(item=>`filters[state][$in]=${item}`).join("&")}&${selectedCategories.map(item=>`filters[category][$in]=${item}`).join("&")}&populate=*`)
+        await fetch(`https://testinscube.ru/api/projects?${type.map(item=>`filters[type][$in]=${item}`).join("&")}&${status.map(item=>`filters[state][$in]=${item}`).join("&")}&${selectedCategories.map(item=>`filters[category][$in]=${item}`).join("&")}&populate=*`)
         .then((response)=>{
             return response.json()
         })
@@ -66,7 +75,17 @@ const Header = () =>{
 //сделать сортировку по порядку мб или добавить опцию в меню
     useEffect(()=>{
         hh()
+        handleType(type)
     },[type, status, selectedCategories])
+
+    const handleType = (type: any) =>{
+        setType(type);
+        if(type.includes("architecture")){
+            setSubmenu(categories)
+            return
+        }
+        setSubmenu(categories2)
+    }
     return(
         <header className={`${styles.header} ${isScrolled && styles.header_scrolled}`}>
             <a className={styles.header__logo} href='/'>
@@ -94,24 +113,19 @@ const Header = () =>{
                             <span>ИНТЕРЬЕРЫ</span>
                         </label>
                     </div>
-                    <div className={styles.header__navDivider}>
-
-                    </div>
-                    <div onChange={(e)=>setStatus([e.target.value])}>
+                    <a href="https://asadov.studio/about_ru/">О БЮРО</a>
+                    <div onChange={(e)=>handleState(e.target.value)} className={styles.header__switch}> 
                         <label htmlFor="project">
-                            <input type="radio" name="status" id="project" value="project"/>
-                            <span>ПРОЕКТ</span> 
+                            <input type="radio" name="status" id="project" value='all'/>
+                            <span>ВСЕ</span> 
                         </label>
+                        <label htmlFor="">/</label>
                         <label htmlFor="release">
-                            <input type="radio" name="status" id="release" value="release"/>
+                            <input type="radio" name="status" id="release" value="realisation"/>
                             <span>РЕАЛИЗАЦИЯ</span>
                         </label>
                     </div>
-                    <div className={styles.header__navDivider}>
-
-                    </div>
-                    <a href="https://asadov.studio/about_ru/">О БЮРО</a>
-                    <div className={styles.header__icons}>
+                    {/* <div className={styles.header__icons}>
                         <a>
                             <svg width="28" height="27" viewBox="0 0 27 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M15.5435 7.49511C17.1273 9.16521 18.112 10.7076 18.3521 12.1531C18.5852 13.5566 18.1296 14.9628 16.5921 16.4246C13.5885 19.2805 9.14976 18.6745 6.04991 15.4143C4.4593 13.7414 3.49393 12.1674 3.27818 10.6906C3.06855 9.25564 3.5545 7.81867 5.09285 6.35599C6.72426 4.80482 7.88569 4.01092 9.292 4.06126C10.7371 4.11299 12.5838 5.05777 15.5435 7.49511Z" stroke="#73A533"/>
@@ -129,7 +143,7 @@ const Header = () =>{
                                 <path d="M8.36328 15.9128C11.3954 15.0763 17.5225 11.9605 17.7734 6.18896" stroke="#73A533"/>
                             </svg>
                         </a>
-                    </div>
+                    </div> */}
                 </nav>
                 
                 {/* <ul onChange={(e)=>setCategory(e.target.value)}>
@@ -154,7 +168,7 @@ const Header = () =>{
                     <a>МАСТЕРПЛАНЫ</a>
                 </ul> */}
                 <ul onClick={()=>setTest(true)}>
-                    {Object.keys(categories).map((item:string)=>(
+                    {Object.keys(submenu).map((item:string)=>(
                         <HeaderFilterItem 
                             key={item}
                             type={'checkbox'}
@@ -242,4 +256,4 @@ const Header = () =>{
     )
 }
 
-export default Header
+export default HeaderProject

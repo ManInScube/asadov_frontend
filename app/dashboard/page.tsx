@@ -12,8 +12,8 @@ export default function Dashboard() {
     // console.log(posts)
     // setProjects(posts.data)
     const [projectsResponse, articlesResponse] = await Promise.all([
-        fetch('https://84.201.170.233/api/projects?populate=*'),
-        fetch('https://84.201.170.233/api/articles?populate=*')
+        fetch('https://testinscube.ru/api/projects?populate=*'),
+        fetch('https://testinscube.ru/articles?populate=*')
     ])
 
     const projects = await projectsResponse.json();
