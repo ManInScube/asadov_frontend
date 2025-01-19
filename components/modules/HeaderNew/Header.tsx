@@ -13,7 +13,7 @@ const all = ['project', 'realisation'];
 const Header = () =>{
     const [type, setType] = useState<string[]>(['architecture', 'interior'])
     const [status, setStatus] = useState<string[]>(['project', 'realisation'])
-    const [selectedCategories, setSelectedCategories] = useState<string[]>([])
+    const [selectedCategories, setSelectedCategories] = useState<string>()
     const dispatch = useAppDispatch();
     const isMobile = useMediaQuery('(max-width: 768px)');
     const [menuOpened, setMenuOpened] = useState<boolean>(false);
@@ -49,7 +49,7 @@ const Header = () =>{
     
     
     async function hh(){
-        await fetch(`https://testinscube.ru/api/projects?${type.map(item=>`filters[type][$in]=${item}`).join("&")}&${status.map(item=>`filters[state][$in]=${item}`).join("&")}&${selectedCategories.map(item=>`filters[category][$in]=${item}`).join("&")}&populate=*`)
+        await fetch(`https://testinscube.ru/api/projects?${type.map(item=>`filters[type][$in]=${item}`).join("&")}&${status.map(item=>`filters[state][$in]=${item}`).join("&")}&${selectedCategories&&`filters[category][$in]=${selectedCategories}`}&populate=*`)
         .then((response)=>{
             return response.json()
         })
@@ -65,11 +65,7 @@ const Header = () =>{
     }
 
     const handleCheckboxChange = (category:any) => {
-        setSelectedCategories((prev) =>
-          prev.includes(category)
-            ? prev.filter((item) => item !== category) // Убираем, если уже выбран
-            : [...prev, category] // Добавляем, если не выбран
-        );
+        setSelectedCategories(category);
         console.log(selectedCategories)
       };
 //сделать сортировку по порядку мб или добавить опцию в меню
@@ -145,33 +141,12 @@ const Header = () =>{
                         </a>
                     </div> */}
                 </nav>
-                
-                {/* <ul onChange={(e)=>setCategory(e.target.value)}>
-                    <label htmlFor="house">
-                        <input type="checkbox" name="category" id="house" value='house'/>
-                        <span>АРХИТЕКТУРА</span>
-                    </label>
-                    <label htmlFor="office">
-                        <input type="checkbox" name="category" id="office" value='office'/>
-                        <span>ОФИСЫ</span>
-                    </label>
-                    <label htmlFor="hotel">
-                        <input type="checkbox" name="category" id="hotel" value='hotel'/>
-                        <span>ГОСТИНИЦЫ</span>
-                    </label>
-                    <HeaderFilterItem type={'checkbox'} name={'category'} value={'culture'} title={'КУЛЬТУРА'} />
-                    <HeaderFilterItem type={'checkbox'} name={'category'} value={'education'} title={'ОБРАЗОВАНИЕ'} />
-                    <HeaderFilterItem type={'checkbox'} name={'category'} value={'sport'} title={'СПОРТ'} />
-                    <HeaderFilterItem type={'checkbox'} name={'category'} value={'market'} title={'ТОРГОВЛЯ'} />
-                    <a>ТРАНСПОРТ</a>
-                    <a>БЛАГОУСТРОЙСТВО</a>
-                    <a>МАСТЕРПЛАНЫ</a>
-                </ul> */}
+
                 <ul onClick={()=>setTest(true)}>
                     {Object.keys(submenu).map((item:string)=>(
                         <HeaderFilterItem 
                             key={item}
-                            type={'checkbox'}
+                            type={'radio'}
                             name={'category'}
                             value={item}
                             title={categories[item]} 
