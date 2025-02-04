@@ -5,6 +5,7 @@
     font-family: $font-light;
     padding: 20px 10px;
     z-index: 1001;
+    position: relative;
     
     &__switch{
         // font-size: 0.6em
@@ -52,12 +53,24 @@
         background: white;
         width: 100%;
 
+        &>div{
+            margin-top: 20px;
+        }
+
+        &>ul{
+            padding-top: 20px !important;
+        }
+
+
 
         ul{
-            margin-top: 50px !important;
             flex-wrap: wrap;
             justify-content:center  !important;
             gap: 16px;
+
+            label{
+                font-size: 1.4em !important;
+            }
         }
 
         .header__menu{
@@ -70,14 +83,19 @@
             width: 100%;
             flex-direction: column;
             align-items: center;
-            font-size: 1.5em;
+            font-size: 1.75em;
             &>div{
                 width: 100%;
                 display: flex;
                 justify-content: center;
                 margin-top: 21px;
             }
+
+            a{
+                margin-top: 15px;
+            }
         }
+
     }
 
     a{
@@ -196,8 +214,24 @@
     }
 }
 
+.header__mobileList{
+    label{
+        margin-top: 10px !important; 
+    }
+}
+
 .anim{
     transform: translate(200px, 0px);
     transition: all 0.5s ease-out;
     display: block;
+}
+
+.underline{
+    width: 10px;
+    height: 2px;
+    background: #000;
+    position: absolute;
+    transition: all 0.3s ease;
+    bottom: 0;
+
 }

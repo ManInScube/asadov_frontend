@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useGetProjectsQuery } from '@/lib/services/projectApi'
 import styles from './Header.module.scss'
 import HeaderFilterItem from '@/components/elements/HeaderFilterItem/HeaderFilterItem'
@@ -7,6 +7,7 @@ import { categories, categories2 } from '.'
 import { useAppDispatch } from '@/lib/hooks'
 import { addProjects } from '@/lib/features/projects'
 import useMediaQuery from '@/hooks/useMediaQuery'
+import { useSearchParams } from "next/navigation";
 
 
 const all = ['project', 'realisation'];
@@ -22,7 +23,11 @@ const Header = () =>{
     const [isScrolled, setIsScrolled] = useState(false);
     const [test, setTest] = useState(false);
     const [submenu, setSubmenu] = useState<Object>(categories)
-   
+    // const menuRefs = useRef([]); // Массив для хранения рефов каждого пункта меню
+
+    const searchParams = useSearchParams();
+    const categoryUrl = searchParams.get("category");
+
     const handleScroll = () => {
         setIsScrolled(window.scrollY > 10);
       };
@@ -46,7 +51,49 @@ const Header = () =>{
 
         return () => window.removeEventListener("scroll", handleScroll);
       }, [isScrolled]);
-    
+
+
+
+    //тест полоска
+    const [activeIndex, setActiveIndex] = useState(0); // Состояние активного пункта
+
+    const [underlineStyle, setUnderlineStyle] = useState({});
+    const menuRefs = useRef([]);
+
+    // const handleMenuClick = (index) => {
+    //   const selectedItem = menuRefs.current[index];
+    //   if(selectedItem){
+    //     const left = selectedItem.offsetLeft;
+    //     const width = selectedItem.offsetWidth;
+          
+    //   setUnderlineStyle({
+    //     left: `${left}px`,
+    //     width: `${width}px`,
+    //   });
+    //   }
+
+    // };
+    const underlineRef = useRef(null);
+
+
+    useEffect(()=>{
+
+        if(categoryUrl!==null){
+            setSelectedCategories(categoryUrl);
+        }
+ 
+    },[])
+
+    useEffect(() => {
+        // Обновляем позицию и ширину подчеркивания
+        const activeItem = menuRefs.current[activeIndex];
+        if (activeItem && underlineRef.current) {
+          underlineRef.current.style.width = `${activeItem.offsetWidth}px`;
+          underlineRef.current.style.transform = `translateX(${activeItem.offsetLeft}px)`;
+
+          console.log(underlineRef.current.style);
+        }
+      }, [activeIndex]);
     
     async function hh(){
         await fetch(`https://testinscube.ru/api/projects?${type.map(item=>`filters[type][$in]=${item}`).join("&")}&${status.map(item=>`filters[state][$in]=${item}`).join("&")}&${selectedCategories&&`filters[category][$in]=${selectedCategories}`}&populate=*`)
@@ -54,7 +101,6 @@ const Header = () =>{
             return response.json()
         })
         .then((data)=>{
-            console.log(data)
             const sortedProjects = data.data.sort((a, b)=>{
                 if(!a.order) return 1;
                 if(!b.order) return -1;
@@ -66,7 +112,6 @@ const Header = () =>{
 
     const handleCheckboxChange = (category:any) => {
         setSelectedCategories(category);
-        console.log(selectedCategories)
       };
 //сделать сортировку по порядку мб или добавить опцию в меню
     useEffect(()=>{
@@ -143,7 +188,7 @@ const Header = () =>{
                 </nav>
 
                 <ul onClick={()=>setTest(true)}>
-                    {Object.keys(submenu).map((item:string)=>(
+                    {Object.keys(submenu).map((item:string, index: number)=>(
                         <HeaderFilterItem 
                             key={item}
                             type={'radio'}
@@ -152,6 +197,10 @@ const Header = () =>{
                             title={categories[item]} 
                             isChecked={selectedCategories?.includes(item)}
                             handler={handleCheckboxChange}
+                            ref={(el) => (menuRefs.current[index] = el)} // Присваиваем рефы элементам
+                            // onClick={handleMenuClick(index)} 
+                            onClick={()=>setActiveIndex(index)}
+                            // ref={el => menuRefs.current[0] = el}
                         />
                     ))}
                 </ul>
@@ -188,7 +237,6 @@ const Header = () =>{
             <div className={styles.header__mobile}>
                 <div className={styles.header__menu}>
                     <nav className={styles.header__mobile__nav}>
-                        <a href="https://asadov.studio/about_ru/">О БЮРО</a>
                         <div onChange={(e)=>setType([e.target.value])}>
                             <label htmlFor="architecture">
                                 <input type="radio" name="type" id="architecture" value='architecture'/>
@@ -199,7 +247,9 @@ const Header = () =>{
                                 <span>ИНТЕРЬЕРЫ</span>
                             </label>
                         </div>
-                        <div onChange={(e)=>setStatus([e.target.value])}>
+                        <a href="https://asadov.studio/about_ru/">О БЮРО</a>
+
+                        {/* <div onChange={(e)=>setStatus([e.target.value])}>
                             <label htmlFor="project">
                                 <input type="radio" name="status" id="project" value="project"/>
                                 <span>ПРОЕКТ</span> 
@@ -208,25 +258,64 @@ const Header = () =>{
                                 <input type="radio" name="status" id="release" value="release"/>
                                 <span>РЕАЛИЗАЦИЯ</span>
                             </label>
-                        </div>
+                        </div> */}
                     </nav>
-                    <ul>
-                    {Object.keys(categories).map((item:string)=>(
-                        <HeaderFilterItem 
-                            key={item}
-                            type={'checkbox'}
-                            name={'category'}
-                            value={item}
-                            title={categories[item]} 
-                            isChecked={selectedCategories?.includes(item)}
-                            handler={handleCheckboxChange}
-                        />
-                    ))}
-                </ul>
+                    <ul
+                        className={styles.header__mobileList}
+                    >
+                        {Object.keys(categories)
+                        .filter((item, index)=> index<5)
+                        .map((item:string, index: number)=>(
+                            <HeaderFilterItem 
+                                key={item}
+                                type={'checkbox'}
+                                name={'category'}
+                                value={item}
+                                title={categories[item]} 
+                                isChecked={selectedCategories?.includes(item)}
+                                handler={handleCheckboxChange}
+                            />
+                        ))}
+                    </ul>
+                    <ul
+                        className={styles.header__mobileList}
+                    >
+                        {Object.keys(categories)
+                        .filter((item, index)=> index>5 && index < 10)
+                        .map((item:string, index: number)=>(
+                            <HeaderFilterItem 
+                                key={item}
+                                type={'checkbox'}
+                                name={'category'}
+                                value={item}
+                                title={categories[item]} 
+                                isChecked={selectedCategories?.includes(item)}
+                                handler={handleCheckboxChange}
+                            />
+                        ))}
+                    </ul>
+                    <ul
+                        className={styles.header__mobileList}
+                    >
+                        {Object.keys(categories)
+                        .filter((item, index)=> index > 10)
+                        .map((item:string, index: number)=>(
+                            <HeaderFilterItem 
+                                key={item}
+                                type={'checkbox'}
+                                name={'category'}
+                                value={item}
+                                title={categories[item]} 
+                                isChecked={selectedCategories?.includes(item)}
+                                handler={handleCheckboxChange}
+                            />
+                        ))}
+                    </ul>
                 </div>
 
             </div>
         }
+        {/* <div className={styles.underline} style={underlineStyle}></div> */}
         </header>
     )
 }

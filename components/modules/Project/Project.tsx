@@ -8,6 +8,14 @@ const Project = () =>{
     const [project, setProject] = useState(null);
     const url = window.location.pathname; // Получаем путь, например, "/project/40"
     const id = url.substring(url.lastIndexOf("/") + 1); // Извлекаем цифру после последнего "/"
+
+    const [isExpanded, setIsExpanded] = useState(false);
+    const maxLength = 200;
+
+    const toggleExpand = () => {
+      setIsExpanded(!isExpanded);
+    };
+
     useEffect(()=>{
         getProject()
     },[])
@@ -61,7 +69,7 @@ const Project = () =>{
                     <div>
                         <div className={styles.info}>
                             <span>Партнеры</span>
-                            <span>{project?.parters}</span>
+                            <span>{project?.partners}</span>
                         </div>
                         <div className={styles.info}>
                             <span>Показатели</span>
@@ -70,9 +78,19 @@ const Project = () =>{
                     </div>
                 </div>
 
+
                 <div className={styles.project__description}>
-                    <p>{project?.description}</p>
-                </div>
+      <p>
+        {isExpanded || project?.description?.length <= maxLength
+          ? project?.description
+          : `${project?.description?.slice(0, maxLength)}...`}
+      </p>
+      {project?.description.length > maxLength && (
+        <button onClick={toggleExpand} className={styles.expandButton}>
+          {isExpanded ? "Свернуть" : "Читать далее"}
+        </button>
+      )}
+    </div>
             </div>
             <div className={styles.project__gallery}>
                 <Gallery gallery={project?.gallery}/>

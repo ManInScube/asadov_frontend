@@ -44,6 +44,21 @@ const Gallery = ({gallery}: IGalleryProps) =>{
           watchSlidesProgress={true}
           modules={[FreeMode, Navigation, Thumbs]}
           className={styles.swiper__row}
+
+          breakpoints={{
+            320: { // Для экранов шириной от 320px
+              slidesPerView: 2,
+              spaceBetween: 5,
+            },
+            768: { // Для экранов шириной от 768px
+              slidesPerView: 3,
+              spaceBetween: 10,
+            },
+            1024: { // Для экранов шириной от 1024px и выше
+              slidesPerView: 6,
+              spaceBetween: 10,
+            },
+          }}
         >
           {gallery&&gallery.map(item=>(
             <SwiperSlide >

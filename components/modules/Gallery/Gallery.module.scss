@@ -19,6 +19,9 @@
         height: 500px;
         width: 100%;
 
+        @media screen and (max-width: 560px){
+            height: auto;
+        }
         img{
             width: 100%;
         }

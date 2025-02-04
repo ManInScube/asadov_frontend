@@ -7,13 +7,16 @@ import { categories, categories2 } from '.'
 import { useAppDispatch } from '@/lib/hooks'
 import { addProjects } from '@/lib/features/projects'
 import useMediaQuery from '@/hooks/useMediaQuery'
+import { useRouter } from 'next/navigation'
 
 
 const all = ['project', 'realisation'];
 const HeaderProject = () =>{
+    const router = useRouter();
+
     const [type, setType] = useState<string[]>(['architecture', 'interior'])
     const [status, setStatus] = useState<string[]>(['project', 'realisation'])
-    const [selectedCategories, setSelectedCategories] = useState<string[]>([])
+    const [selectedCategories, setSelectedCategories] = useState<string>()
     const dispatch = useAppDispatch();
     const isMobile = useMediaQuery('(max-width: 768px)');
     const [menuOpened, setMenuOpened] = useState<boolean>(false);
@@ -22,7 +25,7 @@ const HeaderProject = () =>{
     const [isScrolled, setIsScrolled] = useState(false);
     const [test, setTest] = useState(false);
     const [submenu, setSubmenu] = useState<Object>(categories)
-   
+
     const handleScroll = () => {
         setIsScrolled(window.scrollY > 10);
       };
@@ -49,7 +52,7 @@ const HeaderProject = () =>{
     
     
     async function hh(){
-        await fetch(`https://testinscube.ru/api/projects?${type.map(item=>`filters[type][$in]=${item}`).join("&")}&${status.map(item=>`filters[state][$in]=${item}`).join("&")}&${selectedCategories.map(item=>`filters[category][$in]=${item}`).join("&")}&populate=*`)
+        await fetch(`https://testinscube.ru/api/projects?${type.map(item=>`filters[type][$in]=${item}`).join("&")}&${status.map(item=>`filters[state][$in]=${item}`).join("&")}&${selectedCategories&&`filters[category][$in]=${selectedCategories}`}&populate=*`)
         .then((response)=>{
             return response.json()
         })
@@ -65,12 +68,9 @@ const HeaderProject = () =>{
     }
 
     const handleCheckboxChange = (category:any) => {
-        setSelectedCategories((prev) =>
-          prev.includes(category)
-            ? prev.filter((item) => item !== category) // Убираем, если уже выбран
-            : [...prev, category] // Добавляем, если не выбран
-        );
-        console.log(selectedCategories)
+        setSelectedCategories(category);
+        router.push(`/?category=${category}`);
+
       };
 //сделать сортировку по порядку мб или добавить опцию в меню
     useEffect(()=>{
@@ -114,7 +114,7 @@ const HeaderProject = () =>{
                         </label>
                     </div>
                     <a href="https://asadov.studio/about_ru/">О БЮРО</a>
-                    <div onChange={(e)=>handleState(e.target.value)} className={styles.header__switch}> 
+                    {/* <div onChange={(e)=>handleState(e.target.value)} className={styles.header__switch}> 
                         <label htmlFor="project">
                             <input type="radio" name="status" id="project" value='all'/>
                             <span>ВСЕ</span> 
@@ -124,7 +124,7 @@ const HeaderProject = () =>{
                             <input type="radio" name="status" id="release" value="realisation"/>
                             <span>РЕАЛИЗАЦИЯ</span>
                         </label>
-                    </div>
+                    </div> */}
                     {/* <div className={styles.header__icons}>
                         <a>
                             <svg width="28" height="27" viewBox="0 0 27 28" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -171,7 +171,7 @@ const HeaderProject = () =>{
                     {Object.keys(submenu).map((item:string)=>(
                         <HeaderFilterItem 
                             key={item}
-                            type={'checkbox'}
+                            type={'radio'}
                             name={'category'}
                             value={item}
                             title={categories[item]} 
