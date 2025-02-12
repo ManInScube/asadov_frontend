@@ -60,29 +60,15 @@ const Header = () =>{
     const [underlineStyle, setUnderlineStyle] = useState({});
     const menuRefs = useRef([]);
 
-    // const handleMenuClick = (index) => {
-    //   const selectedItem = menuRefs.current[index];
-    //   if(selectedItem){
-    //     const left = selectedItem.offsetLeft;
-    //     const width = selectedItem.offsetWidth;
-          
-    //   setUnderlineStyle({
-    //     left: `${left}px`,
-    //     width: `${width}px`,
-    //   });
-    //   }
 
-    // };
     const underlineRef = useRef(null);
 
 
-    useEffect(()=>{
-
-        if(categoryUrl!==null){
+    useEffect(() => {
+        if (categoryUrl) {
             setSelectedCategories(categoryUrl);
         }
- 
-    },[])
+    }, [categoryUrl]);
 
     useEffect(() => {
         // Обновляем позицию и ширину подчеркивания
@@ -94,9 +80,28 @@ const Header = () =>{
           console.log(underlineRef.current.style);
         }
       }, [activeIndex]);
+
+      useEffect(() => {
+        console.log("Selected Category:", selectedCategories); // Должно меняться при обновлении URL
+    }, [selectedCategories]);
     
     async function hh(){
         await fetch(`https://testinscube.ru/api/projects?${type.map(item=>`filters[type][$in]=${item}`).join("&")}&${status.map(item=>`filters[state][$in]=${item}`).join("&")}&${selectedCategories&&`filters[category][$in]=${selectedCategories}`}&populate=*`)
+        .then((response)=>{
+            return response.json()
+        })
+        .then((data)=>{
+            const sortedProjects = data.data.sort((a, b)=>{
+                if(!a.order) return 1;
+                if(!b.order) return -1;
+                return a.order-b.order;
+            })
+            dispatch(addProjects(sortedProjects))
+        })
+    }
+
+    async function getDefaultProjects(){
+        await fetch(`https://testinscube.ru/api/projects?${type.map(item=>`filters[type][$in]=${item}`).join("&")}&populate=*`)
         .then((response)=>{
             return response.json()
         })
@@ -114,10 +119,17 @@ const Header = () =>{
         setSelectedCategories(category);
       };
 //сделать сортировку по порядку мб или добавить опцию в меню
-    useEffect(()=>{
-        hh()
-        handleType(type)
-    },[type, status, selectedCategories])
+useEffect(() => {
+    if (selectedCategories !== undefined) {
+        hh();
+    }
+    if(!categoryUrl && !selectedCategories){
+        getDefaultProjects()
+    }
+    //!categoryUrl
+    handleType(type);
+
+}, [type, status, selectedCategories]);
 
     const handleType = (type: any) =>{
         setType(type);

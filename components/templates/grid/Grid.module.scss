@@ -27,6 +27,7 @@
     transform: translateY(50px); /* Начальная позиция (ниже обычной) */
     animation: slideIn 0.5s ease forwards; /* Анимация плавного появления */
     cursor: pointer;
+    aspect-ratio: 1.75;
 
 
     &__title, &__subtitle{
@@ -41,7 +42,7 @@
     &__title{
         top: 10px;
         opacity: 1;
-        left: -120%;
+        left: -200%;
         transition: all 0.3s ease-out;
 
     }
@@ -97,7 +98,7 @@
     }
     img {
       width: 100%;
-      height: auto;
+      height: 100%;
       display: block;
       object-fit: cover;
     }
@@ -107,7 +108,7 @@
     grid-column: span 6;
     grid-row: span 2;
     img{
-      height: 400px;
+      // height: 400px;
 
       @media screen and (max-width: 560px){
         height: 239px; //сделать через переменную
@@ -118,7 +119,7 @@
   .medium_horizontal {
     grid-column: span 6;
     img {
-        height: 194px;
+        // height: 194px;
         @media screen and (max-width: 560px){
           height: 117px; //сделать через переменную
         }
@@ -128,9 +129,10 @@
   .medium_vertical {
     grid-column: span 3;
     grid-row: span 2;
+    aspect-ratio: 0.86 !important;
 
     img {
-        height: 400px;
+        // height: 400px;
         @media screen and (max-width: 560px){
           height: 239px; //сделать через переменную
         }
@@ -142,7 +144,7 @@
     grid-row: span 1;
 
     img {
-        height: 194px;
+        // height: 194px;
         @media screen and (max-width: 560px){
           height: 117px; //сделать через переменную
         }
