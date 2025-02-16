@@ -1,4 +1,4 @@
-import { ReactElement } from "react"
+import { ReactElement, Suspense } from "react"
 import Header from "../modules/HeaderNew/Header"
 import Footer from "../modules/Footer/Footer"
 
@@ -8,7 +8,9 @@ interface ILayoutProps{
 const Layout = ({children}:ILayoutProps) =>{
     return(
         <>
-            <Header/>
+            <Suspense>
+                <Header/>
+            </Suspense>
                 <div className="container">
                     {children}
                 </div>
