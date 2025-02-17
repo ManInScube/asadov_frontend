@@ -57,34 +57,58 @@ const Project = () =>{
 
                 <div className={styles.project__row}>
                     <div>
-                        <div className={styles.info}>
-                            <span>Место нахождения</span>
-                            <span>{project?.place}</span>
-                        </div>
-                        <div className={styles.info}>
-                            <span>Клиент</span>
-                            <span>{project?.client}</span>
-                        </div>
-                        <div className={styles.info}>
-                            <span>Год</span>
-                            <span>{project?.year}</span>
-                        </div>       
+                        {project?.place&&  
+                            (
+                                <div className={styles.info}>
+                                    <span>Место нахождения</span>
+                                    <span>{project?.place}</span>
+                                </div>
+                            )
+                        }
+                        {project?.client&&  
+                            (
+                                <div className={styles.info}>
+                                    <span>Клиент</span>
+                                    <span>{project?.client}</span>
+                                </div>
+                            )
+                        }
+                        {project?.year&&  
+                            (
+                                <div className={styles.info}>
+                                    <span>Год</span>
+                                    <span>{project?.year}</span>
+                                </div>    
+                            )
+                        }
                     </div>
                     <div>
-                        <div className={styles.info}>
-                            <span>Команда</span>
-                            <span>{project?.team}</span>
-                        </div>    
+                        {project?.team&&  
+                            (
+                                <div className={styles.info}>
+                                    <span>Команда</span>
+                                    <span>{project?.team}</span>
+                                </div>   
+                            )
+                        }
                     </div>
                     <div>
-                        <div className={styles.info}>
-                            <span>Партнеры</span>
-                            <span>{project?.partners}</span>
-                        </div>
-                        <div className={styles.info}>
-                            <span>Показатели</span>
-                            <span>5000</span>
-                        </div>      
+                        {project?.partners&&  
+                            (
+                                <div className={styles.info}>
+                                    <span>Партнеры</span>
+                                    <span>{project?.partners}</span>
+                                </div>
+                            )
+                        }
+                        {project?.area &&  
+                            (
+                                <div className={styles.info}>
+                                    <span>Показатели</span>
+                                    <span>{project?.area}</span>
+                                </div>      
+                            )
+                        }
                     </div>
                 </div>
 

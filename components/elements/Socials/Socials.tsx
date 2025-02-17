@@ -2,7 +2,7 @@
 
 const Socials = () =>{
     return(
-        <ul style={{flexWrap:'nowrap'}}>
+        <ul style={{flexWrap:'nowrap', alignItems: 'center'}}>
         <li>
             <a>
                 <svg width="32" height="35" viewBox="0 0 32 35" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -34,10 +34,11 @@ const Socials = () =>{
         </li>
         <li>
             <a>
-            <svg width="32" className={'youtube'} height="35" viewBox="0 0 42 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg width="42" height="29" viewBox="0 0 42 29" fill="none" xmlns="http://www.w3.org/2000/svg">
 <rect x="1.41699" y="0.651855" width="39.796" height="27.4544" rx="5.5" stroke="#73A533"/>
 <path d="M26.9326 14.813C27.266 14.6206 27.266 14.1395 26.9326 13.947L18.8765 9.29583C18.5432 9.10338 18.1265 9.34394 18.1265 9.72884V19.0312C18.1265 19.4161 18.5432 19.6567 18.8765 19.4642L26.9326 14.813Z" stroke="black"/>
 </svg>
+
 
             </a>
         </li>

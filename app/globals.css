@@ -30,9 +30,17 @@ body {
 
 @media (min-width: 1440px) {
   body {
-    font-size: 16px; /* Для планшетов и небольших экранов */
+    font-size: 16px !important; /* Для планшетов и небольших экранов */
   }
 }
+
+
+@media (min-width: 1800px) {
+  body {
+    font-size: 21px !important;
+  }
+}
+
 
 body {
   font-size: 14px; /* Базовый размер */
