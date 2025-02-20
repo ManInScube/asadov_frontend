@@ -20,6 +20,20 @@ const size = new Map([
     [1, styles.small]
 ])
 
+async function checkImageExists(url) {
+    try {
+      const response = await fetch(url, { method: "HEAD" });
+      return response.ok; // true, если файл существует (статус 200)
+    } catch (error) {
+      return false; // Ошибка сети или сервер не отвечает
+    }
+  }
+  
+  // Пример использования:
+  checkImageExists("https://example.com/image.webp").then((exists) => {
+    console.log(exists ? "Изображение найдено" : "Изображение не существует");
+  });
+
 const Grid = ({items}: IGridProps) =>{
     const list = useAppSelector(state=>state.projectsSlice.list)
     const dispatch = useAppDispatch();
@@ -71,7 +85,7 @@ const Grid = ({items}: IGridProps) =>{
                 onClick={()=>dispatch(setCurrentProject(item.id))}
                 href={`/project/${item.documentId}`}
                 >
-                   <img src={`https://testinscube.ru${item.cover?.url}`}alt="" />
+                   <img src={`https://testinscube.ru${item.cover?.url.replace(/\.[^.]+$/, "")}.webp`} alt="" />
                    <div className={styles.gridItem__info}>
                    </div>
                    <span className={styles.gridItem__title}>{item.title}</span>
