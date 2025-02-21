@@ -28,6 +28,10 @@ const Header = () =>{
     const searchParams = useSearchParams();
     const categoryUrl = searchParams.get("category");
 
+    const underscoreRef = useRef(null);
+    const startingPointRef = useRef();  
+    const activeCategoryRef = useRef<{ [key: string]: HTMLLIElement | null }>({});
+
     const handleScroll = () => {
         setIsScrolled(window.scrollY > 10);
       };
@@ -63,6 +67,12 @@ const Header = () =>{
 
     const underlineRef = useRef(null);
 
+    useEffect(()=>{
+        const startingPointY = startingPointRef.current.getBoundingClientRect().right -50;
+        underscoreRef.current.style.left = `${startingPointY}px`;
+        console.log("Refs:", activeCategoryRef.current['education'].style);
+
+    }, [activeCategoryRef])
 
     useEffect(() => {
         if (categoryUrl) {
@@ -120,14 +130,44 @@ const Header = () =>{
       };
 //сделать сортировку по порядку мб или добавить опцию в меню
 useEffect(() => {
+
+
+    const positions = Object.keys(activeCategoryRef.current).map((key) => {
+        const el = activeCategoryRef.current[key];
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          return {
+            key,
+            left: rect.left,
+            top: rect.top,
+            width: rect.width,
+            height: rect.height,
+            right: rect.right,
+            bottom: rect.bottom,
+          };
+        }
+        return null;
+      });
+
     if (selectedCategories !== undefined) {
         hh();
+        const activeCategoryObj = positions.filter(item=>item.key==selectedCategories)
+        underscoreRef.current.style.left = `${activeCategoryObj[0].left}px`;
+        underscoreRef.current.style.width = `${activeCategoryObj[0].width}px`;
+
+        console.log("Координаты элементов:", activeCategoryObj[0].left);
     }
     if(!categoryUrl && !selectedCategories){
         getDefaultProjects()
     }
     //!categoryUrl
     handleType(type);
+    
+
+
+
+    // console.log("Координаты элементов:", positions.filter(Boolean));
+
 
 }, [type, status, selectedCategories]);
 
@@ -141,8 +181,9 @@ useEffect(() => {
     }
     return(
         <header className={`${styles.header} ${isScrolled && styles.header_scrolled}`}>
+            <span ref={underscoreRef} className={styles.underline}></span>
             <a className={styles.header__logo} href='/'>
-                <svg viewBox="0 0 1365 230" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg viewBox="0 0 1365 230" fill="none" xmlns="http://www.w3.org/2000/svg" ref={startingPointRef}>
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M0 212.62L58.6589 2.88916H129.873L188.738 212.62H146.75L135.018 168.986C133.372 164.047 129.667 160.959 126.374 160.959H62.9812C60.3055 160.959 55.3658 163.635 53.925 167.957L42.1933 212.62H0ZM65.8649 125.549H123.083L102.295 46.9252C100.443 40.3395 88.9168 40.3394 87.0644 46.9252L65.8649 125.549Z" fill="black"/>
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M368.422 213.435L427.081 3.70361H498.295L557.16 213.435H515.172L503.44 169.801C501.794 164.861 498.089 161.774 494.796 161.774H431.403C428.727 161.774 423.788 164.45 422.347 168.772L410.615 213.435H368.422ZM434.287 125.342H491.505L470.717 46.7181C468.865 40.1324 457.339 40.1323 455.486 46.7181L434.287 125.342Z" fill="black"/>
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M894.701 216.112C954.379 216.112 1002.76 167.733 1002.76 108.056C1002.76 48.3783 954.379 0 894.701 0C835.024 0 786.646 48.3783 786.646 108.056C786.646 167.733 835.024 216.112 894.701 216.112ZM894.704 174.127C931.193 174.127 960.772 144.547 960.772 108.058C960.772 71.5698 931.193 41.9899 894.704 41.9899C858.215 41.9899 828.636 71.5698 828.636 108.058C828.636 144.547 858.215 174.127 894.704 174.127Z" fill="black"/>
@@ -150,7 +191,7 @@ useEffect(() => {
                     <path d="M583.323 213.644H661.947V174.126L633.543 174.332C628.81 173.92 625.722 169.598 625.722 165.482V50.562C625.722 46.6514 629.633 43.6357 633.338 43.6357H661.947V4.11816H583.323V213.644Z" fill="black"/>
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M661.955 213.638C662.433 213.644 662.912 213.648 663.392 213.648C721.251 213.648 768.154 166.744 768.154 108.885C768.154 51.026 721.251 4.12207 663.392 4.12207C662.912 4.12207 662.433 4.1253 661.955 4.13173V43.6548C662.436 43.6444 662.918 43.6391 663.401 43.6391C699.435 43.6391 728.647 72.8504 728.647 108.884C728.647 144.918 699.435 174.129 663.401 174.129C662.918 174.129 662.436 174.124 661.955 174.114V213.638Z" fill="black"/>
                     <path d="M201.29 153.751H238.955V161.16C239.366 168.158 246.776 174.744 253.774 174.95H300.907C300.907 174.95 308.728 174.333 312.844 170.422C315.695 167.714 318.402 163.013 317.99 156.632C317.576 150.212 314.566 144.076 303.377 138.108C291.027 131.522 251.098 115.88 238.131 108.264C225.984 101.13 214.287 88.8411 209.728 79.2435C205.818 71.0107 201.105 54.1334 209.728 32.9339C216.52 16.2364 235.456 4.32471 246.776 4.32471H301.113C310.795 4.32457 318.335 7.61473 326.849 13.175C336.934 19.7613 346.608 33.3454 347.628 50.8402V59.6905H309.963V53.7217C309.963 47.9588 304.423 42.8133 298.446 41.9899H254.391C254.391 41.9899 251.51 42.0311 249.04 43.8423C245.953 46.1064 243.894 49.3995 243.483 54.7508C243.071 60.1022 244.521 65.8652 253.165 72.6573C262.196 79.7532 298.224 93.494 308.531 98.179C319.851 103.325 340.845 114.027 349.489 131.934C357.259 148.028 358.143 160.131 351.342 179.684C344.755 198.62 324.791 212.615 305.032 213.85H251.302C233.406 212.821 219.409 201.295 212.613 192.239C203.659 180.306 200.809 162.601 201.29 153.751Z" fill="black"/>
-                    <path d="M1197.46 221.462C1197.46 217.143 1200.96 213.641 1205.28 213.641H1365V229.283H1205.28C1200.96 229.283 1197.46 225.782 1197.46 221.462Z" fill="#73A533" className={`${test && styles.anim}`}/>
+                    {/* <path d="M1197.46 221.462C1197.46 217.143 1200.96 213.641 1205.28 213.641H1365V229.283H1205.28C1200.96 229.283 1197.46 225.782 1197.46 221.462Z" fill="#73A533" className={`${test && styles.anim}`}/> */}
                 </svg>
             </a>
             {!isMobile ?
@@ -201,6 +242,7 @@ useEffect(() => {
 
                 <ul onClick={()=>setTest(true)}>
                     {Object.keys(submenu).map((item:string, index: number)=>(
+                        <li key={item} ref={(el) => (activeCategoryRef.current[item] = el)} style={{listStyle:'none'}}>
                         <HeaderFilterItem 
                             key={item}
                             type={'radio'}
@@ -214,6 +256,7 @@ useEffect(() => {
                             onClick={()=>setActiveIndex(index)}
                             // ref={el => menuRefs.current[0] = el}
                         />
+                        </li>
                     ))}
                 </ul>
             </div>
@@ -295,15 +338,18 @@ useEffect(() => {
                         {Object.keys(categories)
                         .filter((item, index)=> index>5 && index < 10)
                         .map((item:string, index: number)=>(
-                            <HeaderFilterItem 
-                                key={item}
-                                type={'checkbox'}
-                                name={'category'}
-                                value={item}
-                                title={categories[item]} 
-                                isChecked={selectedCategories?.includes(item)}
-                                handler={handleCheckboxChange}
-                            />
+                            <li key={item} ref={(el) => (activeCategoryRef.current[item] = el)}>
+                                <HeaderFilterItem 
+                                    key={item}
+                                    type={'checkbox'}
+                                    name={'category'}
+                                    value={item}
+                                    title={categories[item]} 
+                                    isChecked={selectedCategories?.includes(item)}
+                                    handler={handleCheckboxChange}
+                                />
+                            </li>
+ 
                         ))}
                     </ul>
                     <ul
