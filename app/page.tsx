@@ -24,11 +24,11 @@ export default function Home() {
   }
 
   useEffect(()=>{
-    getList()
+    // getList()
   },[])
     return (
     <Layout>
-        <Grid items={list}/>
+        <Grid items={[]}/>
     </Layout>
     );
   }
