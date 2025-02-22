@@ -1,0 +1,31 @@
+.skeleton-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    padding: 16px;
+  }
+  
+  .skeleton-box {
+    height: 150px;
+    background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
+    background-size: 200% 100%;
+    animation: pulse 1.5s infinite ease-in-out;
+    border-radius: 12px;
+  }
+  
+  .skeleton-box.large {
+    grid-column: span 2;
+  }
+  
+  .loading-text {
+    grid-column: span 3;
+    text-align: center;
+    font-size: 18px;
+    color: #777;
+  }
+  
+  @keyframes pulse {
+    0% { background-position: 100% 0; }
+    100% { background-position: -100% 0; }
+  }
+  

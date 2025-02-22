@@ -2,6 +2,7 @@ import { useAppDispatch, useAppSelector } from '@/lib/hooks'
 import styles from './Grid.module.scss'
 import { useEffect, useState } from 'react'
 import { setCurrentProject } from '@/lib/features/projects'
+import GridSkeleton from '@/components/elements/GridSkeleton/GridSkeleton'
 
 
 type Item={
@@ -40,44 +41,18 @@ const Grid = ({items}: IGridProps) =>{
     const [visibleTiles, setVisibleTiles] = useState<any[]>([]);
     useEffect(() => {
         // Пошаговое добавление плиток
-        setVisibleTiles([])
+        // setVisibleTiles([])
         list.forEach((tile, index) => {
           setTimeout(() => {
             setVisibleTiles((prev) => [...prev, tile]);
-          }, index * 100); // Задержка 100ms между плитками
+          }, index * 500); // Задержка 100ms между плитками
         });
       }, [list]);
     // console.log(list)
     return(
-        // <div className={styles.gridContainer}>
-        //     {items&&items.map(item=>(
-        //         <div className={`${styles.gridItem} ${size.get(item.size)}`}>
-        //             {/* <h1>{item.title}</h1> */}
-        //             <img src={`http://localhost:1337/${item.cover?.url}`} alt="" />
-        //         </div>
-        //     ))}
 
-        // </div>
-            // <div className={styles.gridContainer}>
-            //     <div className={`${styles.gridItem} ${size.get(3)}`}>
-            //        <img src="http://localhost:1337//uploads/airport_243ca2e07a.png"alt="" />
-            //        <span className={styles.gridItem__title}>Title</span>
-            //        <span className={styles.gridItem__subtitle}>Subtitle</span>
-            //     </div>
-            //     <div className={`${styles.gridItem} ${size.get(3)}`}>
-            //        <img src="http://localhost:1337//uploads/airport_243ca2e07a.png"alt="" />
-            //     </div>
-            //     <div className={`${styles.gridItem} ${size.get(4)}`}>
-            //        <img src="http://localhost:1337//uploads/airport_243ca2e07a.png"alt="" />
-            //     </div>
-            //     <div className={`${styles.gridItem} ${size.get(1)}`}>
-            //        <img src="http://localhost:1337//uploads/airport_243ca2e07a.png"alt="" />
-            //     </div>
-            //     <div className={`${styles.gridItem} ${size.get(1)}`}>
-            //        <img src="http://localhost:1337//uploads/airport_243ca2e07a.png"alt="" />
-            //     </div>
-            // </div>
-
+        <>
+          {visibleTiles.length>0?
             <div className={styles.gridContainer}>
                 {list&&visibleTiles.map((item,index)=>(
                 <a key={item.documentId} className={`${styles.gridItem} ${size.get(item.size)}`}
@@ -93,6 +68,11 @@ const Grid = ({items}: IGridProps) =>{
                 </a>
                 ))}
             </div>
+            :
+            <GridSkeleton/>
+            }
+        </>
+
     )
 }
 
