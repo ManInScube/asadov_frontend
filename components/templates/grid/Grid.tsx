@@ -60,7 +60,7 @@ const Grid = ({items}: IGridProps) =>{
                 onClick={()=>dispatch(setCurrentProject(item.id))}
                 href={`/project/${item.documentId}`}
                 >
-                   <img src={`https://testinscube.ru${item.cover?.url.replace(/\.[^.]+$/, "")}.webp`} alt="" />
+                   <img src={`https://testinscube.ru${item.cover?.formats?.large?.url}`} alt="" />
                    <div className={styles.gridItem__info}>
                    </div>
                    <span className={styles.gridItem__title}>{item.title}</span>
