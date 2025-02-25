@@ -24,7 +24,7 @@ export default function Home() {
   }
 
   useEffect(()=>{
-    // getList()
+    getList()
   },[])
     return (
     <Layout>

@@ -41,7 +41,7 @@ const Grid = ({items}: IGridProps) =>{
     const [visibleTiles, setVisibleTiles] = useState<any[]>([]);
     useEffect(() => {
         // Пошаговое добавление плиток
-        // setVisibleTiles([])
+        setVisibleTiles([])
         list.forEach((tile, index) => {
           setTimeout(() => {
             setVisibleTiles((prev) => [...prev, tile]);

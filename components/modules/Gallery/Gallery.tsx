@@ -58,10 +58,17 @@ const Gallery = ({gallery}: IGalleryProps) =>{
               slidesPerView: 6,
               spaceBetween: 10,
             },
+            1800: { // Для экранов шириной от 1024px и выше
+              slidesPerView: 6,
+              spaceBetween: 10,
+              // autoHeight: true
+            },
           }}
         >
           {gallery&&gallery.map(item=>(
-            <SwiperSlide >
+            <SwiperSlide
+              className={styles.swiper__slide}
+            >
               <img src={`https://testinscube.ru${item.url}`} />
             </SwiperSlide>
           ))}
