@@ -26,6 +26,7 @@
         }
     }
     &>div>div{
+        margin-top: 5px;
         display: flex;
         flex-direction: row;
         gap: 40px;
@@ -58,7 +59,7 @@
     }
 
     h2{
-        font-size: 1.5em;
+        font-size: 2em;
         color: $black;
         font-weight: 300;
         @media screen and (max-width: 560px){

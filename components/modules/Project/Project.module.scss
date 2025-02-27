@@ -43,8 +43,9 @@
 
         &>div{
             // width: 33%;
-            max-width: 300px;
-            width: fit-content;
+            // max-width: 300px;
+            // width: fit-content;
+            width: 29%;
 
             @media screen and (max-width: 560px){
                 width: 100%;
