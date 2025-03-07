@@ -34,27 +34,50 @@ async function checkImageExists(url) {
   checkImageExists("https://example.com/image.webp").then((exists) => {
     console.log(exists ? "Изображение найдено" : "Изображение не существует");
   });
+  const ITEMS_PER_BATCH = 15;
 
 const Grid = ({items}: IGridProps) =>{
     const list = useAppSelector(state=>state.projectsSlice.list)
     const dispatch = useAppDispatch();
     const [visibleTiles, setVisibleTiles] = useState<any[]>([]);
+    const [batchIndex, setBatchIndex] = useState(0);
+  
     useEffect(() => {
-        // Пошаговое добавление плиток
-        setVisibleTiles([])
-        list.forEach((tile, index) => {
-          setTimeout(() => {
-            setVisibleTiles((prev) => [...prev, tile]);
-          }, index * 500); // Задержка 100ms между плитками
-        });
-      }, [list]);
-    // console.log(list)
+      setVisibleTiles([]);
+      setBatchIndex(0);
+    }, [list]);
+  
+    useEffect(() => {
+      if (batchIndex * ITEMS_PER_BATCH >= list.length) return;
+      
+      const batch = list.slice(0, (batchIndex + 1) * ITEMS_PER_BATCH);
+      batch.forEach((tile, index) => {
+        setTimeout(() => {
+          setVisibleTiles((prev) => [...prev, tile]);
+        }, index * 100);
+      });
+    }, [batchIndex, list]);
+  
+    useEffect(() => {
+      const handleScroll = () => {
+        if (
+          window.innerHeight + window.scrollY >= document.body.offsetHeight - 200 &&
+          visibleTiles.length < list.length
+        ) {
+          setBatchIndex((prev) => prev + 1);
+        }
+      };
+  
+      window.addEventListener("scroll", handleScroll);
+      return () => window.removeEventListener("scroll", handleScroll);
+    }, [visibleTiles, list]);
+
     return(
 
         <>
           {visibleTiles.length>0?
             <div className={styles.gridContainer}>
-                {list&&visibleTiles.map((item,index)=>(
+                {visibleTiles.map((item,index)=>(
                 <a key={item.documentId} className={`${styles.gridItem} ${size.get(item.size)}`}
                 style={{ animationDelay: `${index * 0.1}s` }} // Задержка для плавности
                 onClick={()=>dispatch(setCurrentProject(item.id))}

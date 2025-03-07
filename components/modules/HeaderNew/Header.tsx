@@ -68,7 +68,7 @@ const Header = () =>{
     const underlineRef = useRef(null);
 
     useEffect(()=>{
-        const startingPointY = startingPointRef.current.getBoundingClientRect().right -50;
+        const startingPointY = startingPointRef.current.getBoundingClientRect().right -20;
         underscoreRef.current.style.left = `${startingPointY}px`;
         console.log("Refs:", activeCategoryRef.current['education'].style);
 
@@ -96,7 +96,7 @@ const Header = () =>{
     }, [selectedCategories]);
     
     async function hh(){
-        await fetch(`https://testinscube.ru/api/projects?${type.map(item=>`filters[type][$in]=${item}`).join("&")}&${status.map(item=>`filters[state][$in]=${item}`).join("&")}&${selectedCategories&&`filters[category][$in]=${selectedCategories}`}&populate=*`)
+        await fetch(`https://testinscube.ru/api/projects?pagination[limit]=100&${type.map(item=>`filters[type][$in]=${item}`).join("&")}&${status.map(item=>`filters[state][$in]=${item}`).join("&")}&${selectedCategories&&`filters[category][$in]=${selectedCategories}`}&populate=*`)
         .then((response)=>{
             return response.json()
         })
@@ -111,7 +111,7 @@ const Header = () =>{
     }
 
     async function getDefaultProjects(){
-        await fetch(`https://testinscube.ru/api/projects?${type.map(item=>`filters[type][$in]=${item}`).join("&")}&populate=*`)
+        await fetch(`https://testinscube.ru/api/projects?pagination[limit]=100&${type.map(item=>`filters[type][$in]=${item}`).join("&")}&populate=*`)
         .then((response)=>{
             return response.json()
         })
@@ -202,6 +202,7 @@ useEffect(() => {
                             <input type="radio" name="type" id="architecture" value='architecture'/>
                             <span>АРХИТЕКТУРА</span>
                         </label>
+                        <label htmlFor="">/</label>
                         <label htmlFor="interior">
                             <input type="radio" name="type" id="interior" value='interior'/>
                             <span>ИНТЕРЬЕРЫ</span>

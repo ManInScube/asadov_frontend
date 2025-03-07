@@ -9,7 +9,9 @@ const Contacts = () =>{
     return(
         <div className={styles.contacts}>
             <h2>КОНТАКТЫ</h2>
-            <a>РОССИЯ, МОСКВА <br/>НОВОРЯЗАНСКАЯ УЛ. 8AC1</a>
+            <a>Россия, Москва <br/>Новорязанская ул. 8Aс1</a>
+            <a href="tel:+7 (495) 777 91 36">+7 (495) 777 91 36</a>
+            <a href="mailto:info@asadov.studio">info@asadov.studio</a>
             {!isMobile && <Socials/>}
         </div>
     )

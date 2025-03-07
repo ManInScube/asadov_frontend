@@ -56,11 +56,11 @@ const Project = () =>{
                 <h2 style={{marginTop:'10px'}}>{project?.title}</h2>
 
                 <div className={styles.project__row}>
-                    <div>
+               
                         {project?.place&&  
                             (
                                 <div className={styles.info}>
-                                    <span>Место нахождения</span>
+                                    <span>Местоположение</span>
                                     <span>{project?.place}</span>
                                 </div>
                             )
@@ -68,7 +68,7 @@ const Project = () =>{
                         {project?.client&&  
                             (
                                 <div className={styles.info}>
-                                    <span>Клиент</span>
+                                    <span>Заказчик</span>
                                     <span>{project?.client}</span>
                                 </div>
                             )
@@ -81,8 +81,7 @@ const Project = () =>{
                                 </div>    
                             )
                         }
-                    </div>
-                    <div>
+             
                         {project?.team&&  
                             (
                                 <div className={styles.info}>
@@ -91,8 +90,7 @@ const Project = () =>{
                                 </div>   
                             )
                         }
-                    </div>
-                    <div>
+             
                         {project?.partners&&  
                             (
                                 <div className={styles.info}>
@@ -109,22 +107,22 @@ const Project = () =>{
                                 </div>      
                             )
                         }
-                    </div>
                 </div>
 
-
-                <div className={styles.project__description}>
-      <p>
-        {isExpanded || project?.description?.length <= maxLength
-          ? project?.description
-          : `${project?.description?.slice(0, maxLength)}...`}
-      </p>
-      {project?.description?.length > maxLength && (
-        <button onClick={toggleExpand} className={styles.expandButton}>
-          {isExpanded ? "Свернуть" : "Читать далее"}
-        </button>
-      )}
-    </div>
+                {project?.description &&
+                    <div className={styles.project__description}>
+                        <p>
+                            {isExpanded || project?.description?.length <= maxLength
+                            ? project?.description
+                            : `${project?.description?.slice(0, maxLength)}...`}
+                        </p>
+                        {project?.description?.length > maxLength && (
+                            <button onClick={toggleExpand} className={styles.expandButton}>
+                            {isExpanded ? "Свернуть" : "Читать далее"}
+                            </button>
+                        )}
+                    </div>
+                }
             <svg width="49" height="51" viewBox="0 0 49 51" fill="none" xmlns="http://www.w3.org/2000/svg" style={{marginTop:'3em'}}>
                 <path d="M33.9054 25.1319C33.7018 21.5004 32.9951 18.6398 31.5476 16.7388C30.1257 14.8715 27.9287 13.8546 24.5328 14.0421C17.8393 14.4117 13.6818 20.3126 14.0771 27.471C14.278 31.1091 15.0429 33.9761 16.5521 35.8799C18.035 37.7505 20.2972 38.7652 23.6943 38.5776C27.2196 38.3829 29.4905 37.9112 31.0313 36.1531C32.5976 34.3661 33.5061 31.1452 33.9054 25.1319Z" stroke="#73A533"/>
                 <path d="M43.3767 12.6818C44.9873 11.9383 46.1121 11.1236 46.6819 10.1824C47.2296 9.27775 47.3114 8.17504 46.6366 6.70669C45.328 3.85938 42.0349 3.02153 38.9059 4.4595C37.2878 5.20315 36.1658 6.04645 35.6033 7.01771C35.0621 7.95234 34.9935 9.08699 35.6689 10.5564C36.3978 12.1426 36.9895 13.0057 37.9681 13.3563C38.9834 13.7201 40.5494 13.584 43.3767 12.6818Z" stroke="#73A533"/>
