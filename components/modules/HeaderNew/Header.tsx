@@ -68,7 +68,7 @@ const Header = () =>{
     const underlineRef = useRef(null);
 
     useEffect(()=>{
-        const startingPointY = startingPointRef.current.getBoundingClientRect().right -20;
+        const startingPointY = startingPointRef.current.getBoundingClientRect().right -35;
         underscoreRef.current.style.left = `${startingPointY}px`;
         console.log("Refs:", activeCategoryRef.current['education'].style);
 

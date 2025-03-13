@@ -18,6 +18,7 @@
     &__slide{
         cursor: pointer;
         filter: grayscale(1);
+        height: auto !important;
         &:hover{
             filter: grayscale(0);
         }

@@ -41,21 +41,20 @@ const Footer = () =>{
                     </ul> */}
                     <div>
                     <ul>
-                        <li>МАСТЕРПЛАНЫ</li>
-                        <li>ГОСТИНИЦЫ</li>
-                        <li>ЖИЛЬЕ</li>
-                        <li>ПОСЕЛКИ/ВИЛЛЫ</li>
-                        <li>ОФИСЫ</li>
-                        <li>КУЛЬТУРА</li>
+                        <li><a href="/?category=masterplan">МАСТЕРПЛАНЫ</a></li>
+                        <li><a href="/?category=hotel">ГОСТИНИЦЫ</a></li>
+                        <li><a href="/?category=living">ЖИЛЬЕ</a></li>
+                        <li><a href="/?category=villas">ПОСЕЛКИ/ВИЛЛЫ</a></li>
+                        <li><a href="/?category=offices">ОФИСЫ</a></li>
+                        <li><a href="/?category=culture">КУЛЬТУР</a>А</li>
                     </ul>
                     <ul>
-                    <li>МЕДИЦИНА</li>
-    
-                        <li>ОБРАЗОВАНИЕ</li>
-                        <li>СПОРТ</li>
-                        <li>ТОРГОВЛЯ</li>
-                        <li>ТРАНСПОРТ</li>
-                        <li>БЛАГОУСТРОЙСТВО</li>
+                        <li><a href="/?category=med">МЕДИЦИНА</a></li>
+                        <li><a href="/?category=education">ОБРАЗОВАНИЕ</a></li>
+                        <li><a href="/?category=sport">СПОРТ</a></li>
+                        <li><a href="/?category=market">ТОРГОВЛЯ</a></li>
+                        <li><a href="/?category=transport">ТРАНСПОРТ</a></li>
+                        <li><a href="/?category=improvement">БЛАГОУСТРОЙСТВО</a></li>
     
                     </ul>
                     </div>
