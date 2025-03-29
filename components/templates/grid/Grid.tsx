@@ -49,11 +49,14 @@ const Grid = ({items}: IGridProps) =>{
   
     useEffect(() => {
       if (batchIndex * ITEMS_PER_BATCH >= list.length) return;
-      
-      const batch = list.slice(0, (batchIndex + 1) * ITEMS_PER_BATCH);
+    
+      const start = batchIndex * ITEMS_PER_BATCH;
+      const end = start + ITEMS_PER_BATCH;
+      const batch = list.slice(start, end); // Берем только новую партию
+    
       batch.forEach((tile, index) => {
         setTimeout(() => {
-          setVisibleTiles((prev) => [...prev, tile]);
+          setVisibleTiles((prev) => [...prev, tile]); // Добавляем только новые элементы
         }, index * 100);
       });
     }, [batchIndex, list]);

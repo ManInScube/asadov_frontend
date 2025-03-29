@@ -61,9 +61,7 @@ const Header = () =>{
     //тест полоска
     const [activeIndex, setActiveIndex] = useState(0); // Состояние активного пункта
 
-    const [underlineStyle, setUnderlineStyle] = useState({});
     const menuRefs = useRef([]);
-
 
     const underlineRef = useRef(null);
 
@@ -111,18 +109,27 @@ const Header = () =>{
     }
 
     async function getDefaultProjects(){
-        await fetch(`https://testinscube.ru/api/projects?pagination[limit]=100&${type.map(item=>`filters[type][$in]=${item}`).join("&")}&populate=*`)
-        .then((response)=>{
-            return response.json()
-        })
-        .then((data)=>{
-            const sortedProjects = data.data.sort((a, b)=>{
-                if(!a.order) return 1;
-                if(!b.order) return -1;
-                return a.order-b.order;
-            })
-            dispatch(addProjects(sortedProjects))
-        })
+        console.log('REQUEST');
+        try {
+            const projectsResponse = await fetch(`https://testinscube.ru/api/projects?pagination[limit]=100&${type.map(item=>`filters[type][$in]=${item}`).join("&")}&${status.map(item=>`filters[state][$in]=${item}`).join("&")}&${selectedCategories&&`filters[category][$in]=${selectedCategories}`}&populate=*`)
+            const projectsData = await projectsResponse.json();
+
+            const articlesResponse = await fetch(`https://testinscube.ru/api/articles?populate=*`);
+            const articlesData = await articlesResponse.json();
+
+            const combinedData = [...projectsData.data, ...articlesData.data];
+            // Сортируем
+            const sortedProjects = combinedData.sort((a, b) => {
+                if (!a.order) return 1;
+                if (!b.order) return -1;
+                return a.order - b.order;
+            });
+
+            // Диспатчим в store
+            dispatch(addProjects(sortedProjects));
+        } catch (error) {
+            console.error("Ошибка при загрузке данных:", error);
+        }
     }
 
     const handleCheckboxChange = (category:any) => {

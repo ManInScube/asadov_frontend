@@ -33,6 +33,9 @@
         @media screen and (min-width: 1600px){
             max-height: 1600px;
         }
+        @media screen and (min-width: 2000px){
+            max-height: 700px;
+        }
         @media screen and (max-width: 560px){
             height: auto;
         }

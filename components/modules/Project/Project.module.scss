@@ -24,6 +24,7 @@
 
         @media screen and (max-width: 560px){
             width: 100%;
+            padding: 0 20px;
         }
 
         h2{
@@ -72,6 +73,9 @@
         margin: 0 auto;
         margin-top: 10px;
 
+        @media screen and (max-width: 560px){
+            width: 100%;
+        }
     }
 }
 

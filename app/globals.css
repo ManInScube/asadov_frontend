@@ -52,12 +52,6 @@ body {
   }
 }
 
-@media (max-width: 768px) {
-  body {
-    font-size: 14px; /* Для планшетов и небольших экранов */
-  }
-}
-
 @media (max-width: 480px) {
   body {
     font-size: 12px; /* Для смартфонов */
@@ -78,6 +72,11 @@ a {
 .container{
   /* margin-top: 40px; */
   padding: 0 60px;
+
+  @media (max-width: 560px) {
+    padding: 0;
+
+  }
 }
 
 /* @media (prefers-color-scheme: dark) {

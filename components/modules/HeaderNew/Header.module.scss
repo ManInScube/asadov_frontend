@@ -7,6 +7,10 @@
     z-index: 1001;
     position: relative;
     width: 100%;
+
+    @media (max-width: 560px) {
+        padding: 20px 20px;
+    }
     
     &__switch{
         // font-size: 0.6em

@@ -160,6 +160,9 @@
             color: $black !important;
 
         }
+        &>a{
+            padding-right: 0;
+        }
         // div:not(:last-of-type){
         //     border-right: 1px solid $black;
         //     padding-right:0 25px;

@@ -2,6 +2,7 @@ import { useAppSelector } from "@/lib/hooks"
 import { useEffect, useState } from "react"
 import styles from './Project.module.scss'
 import Gallery from "../Gallery/Gallery";
+import RichTextRenderer from "../RichTextRenderer/RichTextRenderer";
 
 
 const Project = () =>{
@@ -40,7 +41,8 @@ const Project = () =>{
     return(
         <main className={styles.project}>
             <div className={styles.project__banner}>
-                <img src={`https://testinscube.ru${project?.cover.url.replace(/\.[^.]+$/, "")}.webp`} alt="" />
+                {/* <img src={`https://testinscube.ru${project?.cover.url.replace(/\.[^.]+$/, "")}.webp`} alt="" /> */}
+                <img src={`https://testinscube.ru${project?.cover.url}`} alt="" />
                 <button id="scroll-down" className={styles.scrollBtn} onClick={scrollDown}>
                     <svg fill="#fff" height="40px" width="40px" version="1.1" id="Layer_1" viewBox="0 0 330 330" >
                         <path id="XMLID_225_" d="M325.607,79.393c-5.857-5.857-15.355-5.858-21.213,0.001l-139.39,139.393L25.607,79.393  c-5.857-5.857-15.355-5.858-21.213,0.001c-5.858,5.858-5.858,15.355,0,21.213l150.004,150c2.813,2.813,6.628,4.393,10.606,4.393  s7.794-1.581,10.606-4.394l149.996-150C331.465,94.749,331.465,85.251,325.607,79.393z"/>
@@ -108,21 +110,28 @@ const Project = () =>{
                             )
                         }
                 </div>
-
-                {project?.description &&
-                    <div className={styles.project__description}>
-                        <p>
-                            {isExpanded || project?.description?.length <= maxLength
-                            ? project?.description
-                            : `${project?.description?.slice(0, maxLength)}...`}
-                        </p>
-                        {project?.description?.length > maxLength && (
-                            <button onClick={toggleExpand} className={styles.expandButton}>
-                            {isExpanded ? "Свернуть" : "Читать далее"}
-                            </button>
-                        )}
-                    </div>
+                
+                { project?.richDescription !== null ?
+                    <RichTextRenderer content={project?.richDescription}/>
+                    :
+                    <>
+                        {project?.description &&
+                            <div className={styles.project__description}>
+                                <p>
+                                    {isExpanded || project?.description?.length <= maxLength
+                                    ? project?.description
+                                    : `${project?.description?.slice(0, maxLength)}...`}
+                                </p>
+                                {project?.description?.length > maxLength && (
+                                    <button onClick={toggleExpand} className={styles.expandButton}>
+                                    {isExpanded ? "Свернуть" : "Читать далее"}
+                                    </button>
+                                )}
+                            </div>
+                        }
+                    </>
                 }
+
             <svg width="49" height="51" viewBox="0 0 49 51" fill="none" xmlns="http://www.w3.org/2000/svg" style={{marginTop:'3em'}}>
                 <path d="M33.9054 25.1319C33.7018 21.5004 32.9951 18.6398 31.5476 16.7388C30.1257 14.8715 27.9287 13.8546 24.5328 14.0421C17.8393 14.4117 13.6818 20.3126 14.0771 27.471C14.278 31.1091 15.0429 33.9761 16.5521 35.8799C18.035 37.7505 20.2972 38.7652 23.6943 38.5776C27.2196 38.3829 29.4905 37.9112 31.0313 36.1531C32.5976 34.3661 33.5061 31.1452 33.9054 25.1319Z" stroke="#73A533"/>
                 <path d="M43.3767 12.6818C44.9873 11.9383 46.1121 11.1236 46.6819 10.1824C47.2296 9.27775 47.3114 8.17504 46.6366 6.70669C45.328 3.85938 42.0349 3.02153 38.9059 4.4595C37.2878 5.20315 36.1658 6.04645 35.6033 7.01771C35.0621 7.95234 34.9935 9.08699 35.6689 10.5564C36.3978 12.1426 36.9895 13.0057 37.9681 13.3563C38.9834 13.7201 40.5494 13.584 43.3767 12.6818Z" stroke="#73A533"/>
