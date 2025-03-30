@@ -94,24 +94,31 @@ const Header = () =>{
     }, [selectedCategories]);
     
     async function hh(){
-        await fetch(`https://testinscube.ru/api/projects?pagination[limit]=100&${type.map(item=>`filters[type][$in]=${item}`).join("&")}&${status.map(item=>`filters[state][$in]=${item}`).join("&")}&${selectedCategories&&`filters[category][$in]=${selectedCategories}`}&populate=*`)
-        .then((response)=>{
-            return response.json()
-        })
-        .then((data)=>{
-            const sortedProjects = data.data.sort((a, b)=>{
-                if(!a.order) return 1;
-                if(!b.order) return -1;
-                return a.order-b.order;
-            })
-            dispatch(addProjects(sortedProjects))
-        })
+        try {
+            const projectsResponse = await fetch(`https://testinscube.ru/api/projects?pagination[limit]=100&${type.map(item=>`filters[type][$in]=${item}`).join("&")}&${status.map(item=>`filters[state][$in]=${item}`).join("&")}&${selectedCategories&&`filters[category][$in]=${selectedCategories}`}&populate=*`)
+            const projectsData = await projectsResponse.json();
+
+            const articlesResponse = await fetch(`https://testinscube.ru/api/articles?${selectedCategories&&`filters[category][$in]=${selectedCategories}`}&populate=*`);
+            const articlesData = await articlesResponse.json();
+
+            const combinedData = [...projectsData.data, ...articlesData.data];
+            // Сортируем
+            const sortedProjects = combinedData.sort((a, b) => {
+                if (!a.order) return 1;
+                if (!b.order) return -1;
+                return a.order - b.order;
+            });
+
+            // Диспатчим в store
+            dispatch(addProjects(sortedProjects));
+        } catch (error) {
+            console.error("Ошибка при загрузке данных:", error);
+        }
     }
 
     async function getDefaultProjects(){
-        console.log('REQUEST');
         try {
-            const projectsResponse = await fetch(`https://testinscube.ru/api/projects?pagination[limit]=100&${type.map(item=>`filters[type][$in]=${item}`).join("&")}&${status.map(item=>`filters[state][$in]=${item}`).join("&")}&${selectedCategories&&`filters[category][$in]=${selectedCategories}`}&populate=*`)
+            const projectsResponse = await fetch(`https://testinscube.ru/api/projects?pagination[limit]=100&${type.map(item => `filters[type][$in]=${item}`).join("&")}&populate=*`)
             const projectsData = await projectsResponse.json();
 
             const articlesResponse = await fetch(`https://testinscube.ru/api/articles?populate=*`);
