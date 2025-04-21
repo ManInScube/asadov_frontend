@@ -1,7 +1,18 @@
 .richTextRenderer{
-    margin-top: 40px;
+    // margin-top: 40px;
+    font-family: $font-light;
+    color: #262626;
+
     h1{
         font-size: 1.5em;
     }
-    font-family: $font-light;
+
+    h3{
+        margin-top: 10px;
+    }
+
+
+    p{
+        margin-top: 10px;
+    }
 }

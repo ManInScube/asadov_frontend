@@ -73,9 +73,12 @@ a {
   /* margin-top: 40px; */
   padding: 0 60px;
 
+  @media (max-width: 768px) {
+    padding: 0 20px;
+  }
+
   @media (max-width: 560px) {
     padding: 0;
-
   }
 }
 

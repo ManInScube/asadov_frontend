@@ -78,7 +78,7 @@ const Project = () =>{
                         {project?.year&&  
                             (
                                 <div className={styles.info}>
-                                    <span>Год</span>
+                                    <span>Год постройки/проекта</span>
                                     <span>{project?.year}</span>
                                 </div>    
                             )
@@ -92,7 +92,25 @@ const Project = () =>{
                                 </div>   
                             )
                         }
-             
+
+                        {project?.category&&  
+                            (
+                                <div className={styles.info}>
+                                    <span>Направление</span>
+                                    <span>{project?.category}</span>
+                                </div>   
+                            )
+                        }
+                        
+                        {project?.projectStatus&&  
+                            (
+                                <div className={styles.info}>
+                                    <span>Статус</span>
+                                    <span>{project?.projectStatus}</span>
+                                </div>   
+                            )
+                        }
+
                         {project?.partners&&  
                             (
                                 <div className={styles.info}>
@@ -112,7 +130,9 @@ const Project = () =>{
                 </div>
                 
                 { project?.richDescription !== null ?
-                    <RichTextRenderer content={project?.richDescription}/>
+                    <div style={{marginTop: 40}}>
+                        <RichTextRenderer content={project?.richDescription}/>
+                    </div>
                     :
                     <>
                         {project?.description &&

@@ -1,0 +1,166 @@
+.about{
+
+    h2, h3{
+        font-weight: 300;
+        font-family: $font-light;
+        color: #262626;
+    }
+
+    h2{
+        font-size: 2.5em;
+        margin-top: 25px;
+    }
+
+    h3{
+        font-size: 2em;
+    }
+
+    &__container{
+        width: 65%;
+        margin: 0 auto;
+    }
+    &__banner{
+        width: 100%;
+        // height: 100vh;
+        position: relative;
+        aspect-ratio: 1.721;
+        overflow: hidden;
+        img{
+            width: 100%;
+            // height: 100%;
+        }
+
+        &Item{
+            position: absolute;
+        }
+
+        &Collage{
+            // position: absolute;
+
+            z-index: 5;
+        }
+        &Asadovs{
+            bottom: 0%;
+            left: 27%;
+            width: 42%;
+            z-index: 3;
+        }
+        &Hadji{
+            bottom: -2%;
+            left: 0;
+            width: 20%;
+            z-index: 2;
+        }
+        &Osman{
+            bottom: 0px;
+            left: 15%;
+            width:18%;
+            z-index: 3;
+        }
+        &Kopylov{
+            bottom: 20%;
+            right: 0%;
+            width: 40%;
+            z-index: 4;
+        }
+        &Eugen{
+            bottom: 0%;
+            left: 5%;
+            width:22%;
+            z-index: 1;
+        }
+        &Olga{
+            bottom: 0%;
+            right: 13%;
+            width:18%;
+            z-index: 1;
+        }
+    }
+
+    &__management{
+        margin-top: 40px;
+    }
+
+    &__info{
+        margin-top: 40px;
+        p{
+            font-size: 1em;
+            font-weight: 300;
+            font-family: $font-light;
+            color: #262626;
+        }
+    }
+
+    &__infographics{
+        margin-top: 100px;
+        &Item{
+            position: relative;
+            font-family: $font-light;
+
+            p{
+                margin-top: 12px;
+            }
+        }
+
+        &Item::before{
+            position: absolute;
+            left: -100px;
+        }
+
+        &Efficiency::before{
+            content: url('./src/infographics1.svg');
+        }
+        &Creativity::before{
+            content: url('./src/infographics2.svg');
+        }
+        &Partnership::before{
+            content: url('./src/infographics3.svg');
+            left: -125px;
+        }
+
+        &Gap{
+            height: 83px;
+        }
+
+        &Gap::before{
+            content: "";
+            position: absolute;
+            left: -100px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background-color: #73A533;
+            height: 83px;
+        }
+    }
+
+    &__subbanner{
+        margin-top: 50px;
+        img{
+            width: 100%;
+        }
+    }
+
+    &__teamRow{
+        display: flex;
+        flex-direction: row;
+        // justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 0.625em;
+        margin-top: 30px;
+    }
+
+    &__clients{
+        margin-top: 100px;
+    }
+
+    &__careers{
+        margin-top: 40px;
+        &Row{
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+            margin-top: 20px;
+        }
+    }
+}

@@ -1,0 +1,58 @@
+.position{
+    flex: 1 1 50%;
+    position: relative;
+    border: 1px solid #000000;
+    // height: 338px;
+    height: 21em;
+    overflow: hidden;
+    aspect-ratio: 1.73;
+
+    &__arrow{
+        position: relative;
+        height: 2px;
+        background-color: black;
+        width: 150px;
+        margin-top: 20px;
+    }
+
+    &__arrow::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%) rotate(45deg);
+        width: 10px;
+        height: 10px;
+        border-top: 2px solid black;
+        border-right: 2px solid black;
+      }
+
+    &__img{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 100%;
+
+
+        img{
+            width: 100%;
+            // height: 100%;
+        }
+    }
+
+    &__title{
+        position: absolute;
+        right: 26px;
+        top: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+    }
+
+    p{
+        font-size: 1.5em;
+        font-weight: 300;
+        font-family: $font-black;
+        color: #73A533;
+    }
+}

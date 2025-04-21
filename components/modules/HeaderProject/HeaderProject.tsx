@@ -108,13 +108,14 @@ const HeaderProject = () =>{
                             <input type="radio" name="type" id="architecture" value='architecture'/>
                             <span>АРХИТЕКТУРА</span>
                         </label>
+                        <label htmlFor="">/</label>
                         <label htmlFor="interior">
                             <input type="radio" name="type" id="interior" value='interior'/>
                             <span>ИНТЕРЬЕРЫ</span>
                         </label>
                     </div>
                     <a href="https://asadov.studio/about_ru/">О БЮРО</a>
-                    {/* <div onChange={(e)=>handleState(e.target.value)} className={styles.header__switch}> 
+                    <div onChange={(e)=>handleState(e.target.value)} className={styles.header__switch}> 
                         <label htmlFor="project">
                             <input type="radio" name="status" id="project" value='all'/>
                             <span>ВСЕ</span> 
@@ -124,7 +125,7 @@ const HeaderProject = () =>{
                             <input type="radio" name="status" id="release" value="realisation"/>
                             <span>РЕАЛИЗАЦИЯ</span>
                         </label>
-                    </div> */}
+                    </div>
                     {/* <div className={styles.header__icons}>
                         <a>
                             <svg width="28" height="27" viewBox="0 0 27 28" fill="none" xmlns="http://www.w3.org/2000/svg">

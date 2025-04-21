@@ -1,0 +1,47 @@
+.vacancy{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-top: 50px;
+
+
+    &__left{
+        display: flex;
+        flex-direction: column;
+        max-width: 100px;
+        width: 100%;
+        border-right: 1px solid #262626;
+    }
+    &__right{
+        display: flex;
+        flex-direction: column;
+
+        &>div{
+            padding-left: 30px;
+        }
+    }
+
+    &__index{
+        border-bottom: 1px solid #262626;
+        height: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 2.5em;
+        font-family: $font-light;
+    }
+    &__title{
+        border-bottom: 1px solid #262626;
+        font-family: $font-black;
+        color: #73A533;
+        font-size: 2.5em;
+        height: 60px;
+        display: flex;
+        align-items: center;
+    }
+
+    &__description{
+        padding-top: 15px;
+        font-family: $font-light;
+    }
+}

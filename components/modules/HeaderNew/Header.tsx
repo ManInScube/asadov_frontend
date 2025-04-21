@@ -222,7 +222,7 @@ useEffect(() => {
                             <span>ИНТЕРЬЕРЫ</span>
                         </label>
                     </div>
-                    <a href="https://asadov.studio/about_ru/">О БЮРО</a>
+                    <a href="/about">О БЮРО</a>
                     <div onChange={(e)=>handleState(e.target.value)} className={styles.header__switch}> 
                         <label htmlFor="project">
                             <input type="radio" name="status" id="project" value='all'/>
