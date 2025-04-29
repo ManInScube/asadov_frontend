@@ -382,7 +382,7 @@ const About = () =>{
             </div>
             <div className={styles.about__contacts}>
                 <div className={styles.about__container}>
-                    <CustomMap/>
+                    {/* <CustomMap/> */}
                 </div>
             </div>
         </main>
