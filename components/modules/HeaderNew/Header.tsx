@@ -335,8 +335,8 @@ useEffect(() => {
                                 <input type="radio" name="type" id="interior" value='interior'/>
                                 <span>ИНТЕРЬЕРЫ</span>
                             </label>
+                            <a href="https://asadov.studio/about_ru/">О БЮРО</a>
                         </div>
-                        <a href="https://asadov.studio/about_ru/">О БЮРО</a>
 
                         {/* <div onChange={(e)=>setStatus([e.target.value])}>
                             <label htmlFor="project">
@@ -353,7 +353,7 @@ useEffect(() => {
                         className={styles.header__mobileList}
                     >
                         {Object.keys(categories)
-                        .filter((item, index)=> index<5)
+                        // .filter((item, index)=> index<4)
                         .map((item:string, index: number)=>(
                             <HeaderFilterItem 
                                 key={item}
@@ -366,11 +366,11 @@ useEffect(() => {
                             />
                         ))}
                     </ul>
-                    <ul
+                    {/* <ul
                         className={styles.header__mobileList}
                     >
                         {Object.keys(categories)
-                        .filter((item, index)=> index>5 && index < 10)
+                        .filter((item, index)=> index>4 && index < 9)
                         .map((item:string, index: number)=>(
                             // <li key={item} ref={(el) => (activeCategoryRef.current[item] = el)}>
                                 <HeaderFilterItem 
@@ -390,7 +390,7 @@ useEffect(() => {
                         className={styles.header__mobileList}
                     >
                         {Object.keys(categories)
-                        .filter((item, index)=> index > 10)
+                        .filter((item, index)=> index > 9)
                         .map((item:string, index: number)=>(
                             <HeaderFilterItem 
                                 key={item}
@@ -402,7 +402,7 @@ useEffect(() => {
                                 handler={handleCheckboxChange}
                             />
                         ))}
-                    </ul>
+                    </ul> */}
                 </div>
 
             </div>
