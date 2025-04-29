@@ -25,55 +25,196 @@
         position: relative;
         aspect-ratio: 1.721;
         overflow: hidden;
+        margin-top: 40px;
         img{
             width: 100%;
             // height: 100%;
+            z-index: 5;
         }
 
         &Item{
             position: absolute;
+            transition: all 0.2s ease;
+            &:hover{
+                transform: translateY(-30px);
+            }
         }
 
         &Collage{
             // position: absolute;
-
+            position: relative;
             z-index: 5;
         }
         &Asadovs{
             bottom: 0%;
             left: 27%;
-            width: 42%;
-            z-index: 3;
+            width: 40%;
+            z-index: 5;
         }
         &Hadji{
             bottom: -2%;
             left: 0;
-            width: 20%;
+            width: 10%;
             z-index: 2;
         }
         &Osman{
-            bottom: 0px;
-            left: 15%;
+            bottom: 0%;
+            left: 19%;
             width:18%;
-            z-index: 3;
+            z-index: 5;
         }
         &Kopylov{
-            bottom: 20%;
-            right: 0%;
+            bottom: 25%;
+            right: 5%;
             width: 40%;
-            z-index: 4;
+            z-index: 2;
         }
         &Eugen{
             bottom: 0%;
-            left: 5%;
-            width:22%;
-            z-index: 1;
+            left: 8%;
+            width:25%;
+            z-index: 6;
         }
         &Olga{
             bottom: 0%;
             right: 13%;
             width:18%;
             z-index: 1;
+        }
+        &Kucherov{
+            bottom: 25%;
+            right: 5%;
+            width: 17%;
+            z-index: 4;
+        }
+        &Erdenko{
+            bottom: -5%;
+            right: 0%;
+            width: 17%;
+            z-index: 6;
+        }
+        &Tolokonov{
+            bottom: 10%;
+            right: 10%;
+            width: 14%;
+            z-index: 4;
+        }
+        &Sobolev{
+            bottom: 25%;
+            right: 15%;
+            width: 16%;
+            z-index: 3;
+            transform: rotate(15deg);
+        }
+        &Archakov{
+            bottom: 8%;
+            right: 22%;
+            width: 18%;
+            z-index: 4;
+            transform: rotate(15deg);
+
+        }
+        &Vinogradova{
+            bottom: -2%;
+            right: 20%;
+            width: 27%;
+            z-index: 3;
+        }
+        &Konovalova{
+            bottom: 40%;
+            right: 27%;
+            width: 20%;
+            z-index: 2;
+        }
+        &Chernova{
+            bottom: 53%;
+            right: 33%;
+            width: 20%;
+            z-index: 1;
+        }
+        &Grigoryeva{
+            bottom: 50%;
+            right: 42%;
+            width: 20%;
+            z-index: 1;
+        }
+        &Andreev{
+            bottom: 38%;
+            left: 20%;
+            width: 20%;
+            z-index: 1;
+        }
+        &Sergeeva{
+            bottom: 22%;
+            left: 4%;
+            width: 22%;
+            z-index: 3;
+        }
+        &Efremkina{
+            bottom: 13%;
+            left: 18%;
+            width: 17%;
+            z-index: 3;
+        }
+        &Borisovna{
+            bottom: 41%;
+            left: 8%;
+            width: 17%;
+            z-index: 2;
+        }
+        &Stulova{
+            bottom: 17%;
+            left: -6%;
+            width: 27%;
+            z-index: 1;
+        }
+        &Sysoev{
+            bottom: 25%;
+            left: 4%;
+            width: 27%;
+            z-index: 0;
+        }
+        &Medvedev{
+            bottom: 60%;
+            left:17%;
+            width: 13%;
+            z-index: -1;
+        }
+        &Borodin{
+            bottom: 58%;
+            left:25%;
+            width: 17%;
+            z-index: -2;
+        }
+        &Salyukov{
+            bottom: 65%;
+            left: 35%;
+            width: 15%;
+            z-index: -2;
+        }
+        &Afanasyeva{
+            bottom: 63%;
+            right: 42%;
+            width: 14%;
+            z-index: -3;
+        }
+        &Kosmachenko{
+            bottom: 60%;
+            right: 30%;
+            width: 14%;
+            z-index: -3;
+        }
+        &Zimuldinova{
+            bottom: 45%;
+            right: 17%;
+            width: 25%;
+            z-index: -3;
+        }
+        &Polyanskaya{
+            bottom: 45%;
+            right: 10%;
+            width: 15%;
+            z-index: -3;
         }
     }
 
@@ -175,6 +316,7 @@
 
         &Info{
             margin-top: 25px;
+            min-height: 20px;
             li{
                 list-style: none;
                 font-family: $font-light;

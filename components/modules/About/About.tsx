@@ -6,7 +6,35 @@ import collage from './src/collage.png';
 import asadovs from './src/asadovs.png'
 import eugen from './src/eugen.png'
 import olga from './src/olga.png'
+import osman from './src/osman.png'
+import hadji from './src/hadji.png'
+import kopylov from './src/kopylov.png'
+import borisovna from './src/borisovna.png'
+import kucherov from './src/kucherov.png'
+import erdenko from './src/erdenko.png'
+import tolokonov from './src/tolokonov.png'
+import bessonov from './src/bessonov.png'
+import sobolev from './src/sobolev.png'
+import vinogradova from './src/vinogradova.png'
+import sysoev from './src/sysoev.png'
+import zimuldinova from './src/zimuldinova.png'
+import stulova from './src/stulova.png'
+import sergeeva from './src/sergeeva.png'
+import salyukov from './src/salyukov.png'
+import archakov from './src/archakov.png'
+import konovalova from './src/konovalova.png'
+import kosmachenko from './src/kosmachenko.png'
+import medvedev from './src/medvedev.png'
+import grigoryeva from './src/grigoryeva.png'
+import chernova from './src/chernova.png'
+import andreev from './src/andreev.png'
+import efremkina from './src/efremkina.png'
+import borodin from './src/borodin.png'
+import afanasyeva from './src/afanasyeva.png'
+import polyanskaya from './src/polyanskaya.png'
+
 import subbanner from './src/subbanner.png'
+import CustomMap from '../CustomMap/CustomMap';
 
 type Award = {
     year: string;
@@ -124,8 +152,80 @@ const About = () =>{
                 <div className={`${styles.about__bannerItem} ${styles.about__bannerEugen}`}>
                     <img src={eugen.src} alt="" />
                 </div>
-                <div className={`${styles.about__bannerItem} ${styles.about__bannerOlga}`}>
-                    <img src={olga.src} alt="" />
+                <div className={`${styles.about__bannerItem} ${styles.about__bannerOsman}`}>
+                    <img src={osman.src} alt="" />
+                </div>
+                <div className={`${styles.about__bannerItem} ${styles.about__bannerBorisovna}`}>
+                    <img src={borisovna.src} alt="" />
+                </div>
+                <div className={`${styles.about__bannerItem} ${styles.about__bannerKopylov}`}>
+                    <img src={kopylov.src} alt="" />
+                </div>
+                <div className={`${styles.about__bannerItem} ${styles.about__bannerKucherov}`}>
+                    <img src={kucherov.src} alt="" />
+                </div>
+                <div className={`${styles.about__bannerItem} ${styles.about__bannerErdenko}`}>
+                    <img src={erdenko.src} alt="" />
+                </div>
+                <div className={`${styles.about__bannerItem} ${styles.about__bannerTolokonov}`}>
+                    <img src={tolokonov.src} alt="" />
+                </div>
+                <div className={`${styles.about__bannerItem} ${styles.about__bannerSobolev}`}>
+                    <img src={sobolev.src} alt="" />
+                </div>
+                <div className={`${styles.about__bannerItem} ${styles.about__bannerArchakov}`}>
+                    <img src={archakov.src} alt="" />
+                </div>
+                <div className={`${styles.about__bannerItem} ${styles.about__bannerVinogradova}`}>
+                    <img src={vinogradova.src} alt="" />
+                </div>
+                <div className={`${styles.about__bannerItem} ${styles.about__bannerKonovalova}`}>
+                    <img src={konovalova.src} alt="" />
+                </div>
+                <div className={`${styles.about__bannerItem} ${styles.about__bannerChernova}`}>
+                    <img src={chernova.src} alt="" />
+                </div>
+                <div className={`${styles.about__bannerItem} ${styles.about__bannerGrigoryeva}`}>
+                    <img src={grigoryeva.src} alt="" />
+                </div>
+                <div className={`${styles.about__bannerItem} ${styles.about__bannerAndreev}`}>
+                    <img src={andreev.src} alt="" />
+                </div>
+                <div className={`${styles.about__bannerItem} ${styles.about__bannerSergeeva}`}>
+                    <img src={sergeeva.src} alt="" />
+                </div>
+                <div className={`${styles.about__bannerItem} ${styles.about__bannerEfremkina}`}>
+                    <img src={efremkina.src} alt="" />
+                </div>
+                <div className={`${styles.about__bannerItem} ${styles.about__bannerBorisovna}`}>
+                    <img src={borisovna.src} alt="" />
+                </div>
+                <div className={`${styles.about__bannerItem} ${styles.about__bannerStulova}`}>
+                    <img src={stulova.src} alt="" />
+                </div>
+                <div className={`${styles.about__bannerItem} ${styles.about__bannerSysoev}`}>
+                    <img src={sysoev.src} alt="" />
+                </div>
+                <div className={`${styles.about__bannerItem} ${styles.about__bannerMedvedev}`}>
+                    <img src={medvedev.src} alt="" />
+                </div>
+                <div className={`${styles.about__bannerItem} ${styles.about__bannerBorodin}`}>
+                    <img src={borodin.src} alt="" />
+                </div>
+                <div className={`${styles.about__bannerItem} ${styles.about__bannerSalyukov}`}>
+                    <img src={salyukov.src} alt="" />
+                </div>
+                <div className={`${styles.about__bannerItem} ${styles.about__bannerAfanasyeva}`}>
+                    <img src={afanasyeva.src} alt="" />
+                </div>
+                <div className={`${styles.about__bannerItem} ${styles.about__bannerKosmachenko}`}>
+                    <img src={kosmachenko.src} alt="" />
+                </div>
+                <div className={`${styles.about__bannerItem} ${styles.about__bannerZimuldinova}`}>
+                    <img src={zimuldinova.src} alt="" />
+                </div>
+                <div className={`${styles.about__bannerItem} ${styles.about__bannerPolyanskaya}`}>
+                    <img src={polyanskaya.src} alt="" />
                 </div>
             </div>
             <div className={styles.about__info}>
@@ -280,7 +380,11 @@ const About = () =>{
                     ))}
                 </div>
             </div>
-            <div className={styles.about__contacts}></div>
+            <div className={styles.about__contacts}>
+                <div className={styles.about__container}>
+                    <CustomMap/>
+                </div>
+            </div>
         </main>
     )
 }
