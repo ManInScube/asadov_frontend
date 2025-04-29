@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import styles from './Project.module.scss'
 import Gallery from "../Gallery/Gallery";
 import RichTextRenderer from "../RichTextRenderer/RichTextRenderer";
+import { categories } from "../HeaderNew";
 
 
 const Project = () =>{
@@ -78,7 +79,7 @@ const Project = () =>{
                         {project?.year&&  
                             (
                                 <div className={styles.info}>
-                                    <span>Год постройки/проекта</span>
+                                    <span>Год {project?.project === 'project' ? 'проекта' : 'постройки'}</span>
                                     <span>{project?.year}</span>
                                 </div>    
                             )
@@ -97,7 +98,7 @@ const Project = () =>{
                             (
                                 <div className={styles.info}>
                                     <span>Направление</span>
-                                    <span>{project?.category}</span>
+                                    <span>{categories[project?.category]}</span>
                                 </div>   
                             )
                         }
