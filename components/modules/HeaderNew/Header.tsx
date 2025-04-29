@@ -4,7 +4,7 @@ import { useGetProjectsQuery } from '@/lib/services/projectApi'
 import styles from './Header.module.scss'
 import HeaderFilterItem from '@/components/elements/HeaderFilterItem/HeaderFilterItem'
 import { categories, categories2 } from '.'
-import { useAppDispatch } from '@/lib/hooks'
+import { useAppDispatch, useAppSelector } from '@/lib/hooks'
 import { addProjects } from '@/lib/features/projects'
 import useMediaQuery from '@/hooks/useMediaQuery'
 import { useSearchParams } from "next/navigation";
@@ -24,6 +24,7 @@ const Header = () =>{
     const [test, setTest] = useState(false);
     const [submenu, setSubmenu] = useState<Object>(categories)
     // const menuRefs = useRef([]); // Массив для хранения рефов каждого пункта меню
+    const language = useAppSelector(state=>state.projectsSlice.language)
 
     const searchParams = useSearchParams();
     const categoryUrl = searchParams.get("category");
@@ -193,6 +194,11 @@ useEffect(() => {
         }
         setSubmenu(categories2)
     }
+
+    const toggleLanguage = (e) => {
+        dispatch(toggleLanguage(e.target.value === 'EN' ? 'RU' : 'EN'))
+    };
+
     return(
         <header className={`${styles.header} ${isScrolled && styles.header_scrolled}`}>
             {!isMobile&&<span ref={underscoreRef} className={styles.underline}></span>}
@@ -253,6 +259,19 @@ useEffect(() => {
                             </svg>
                         </a>
                     </div> */}
+                        {/* <div
+                           
+                            className={styles.language__toggle}
+                            >
+                            <label htmlFor=""  >
+                                <input type="radio"  value='EN' onChange={(e)=>toggleLanguage(e)}/>
+                                <span>EN</span>
+                            </label>
+                            <label htmlFor=""  >
+                                <input type="radio" defaultChecked  value='RU' onChange={(e)=>toggleLanguage(e)}/>
+                                <span>РУ</span>
+                            </label>
+                        </div> */}
                 </nav>
 
                 <ul onClick={()=>setTest(true)}>

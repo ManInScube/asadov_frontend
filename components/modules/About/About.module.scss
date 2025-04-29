@@ -35,6 +35,7 @@
         &Item{
             position: absolute;
             transition: all 0.2s ease;
+            cursor: pointer;
             &:hover{
                 transform: translateY(-30px);
             }
@@ -46,7 +47,7 @@
             z-index: 5;
         }
         &Asadovs{
-            bottom: 0%;
+            bottom: -2%;
             left: 27%;
             width: 40%;
             z-index: 5;
@@ -58,7 +59,7 @@
             z-index: 2;
         }
         &Osman{
-            bottom: 0%;
+            bottom: -2%;
             left: 19%;
             width:18%;
             z-index: 5;
@@ -70,7 +71,7 @@
             z-index: 2;
         }
         &Eugen{
-            bottom: 0%;
+            bottom: -2%;
             left: 8%;
             width:25%;
             z-index: 6;
