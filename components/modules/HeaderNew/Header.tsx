@@ -36,10 +36,6 @@ const Header = () =>{
     const handleScroll = () => {
         setIsScrolled(window.scrollY > 10);
       };
-    
-      const handleUpButton = () => {
-        window.scrollTo(0, 0);
-      };
 
       const handleState = (str:string) =>{
         if(str==='all'){
