@@ -1,6 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const savedLanguage = localStorage.getItem('language') || 'RU';
+let savedLanguage;
+if (typeof window !== "undefined") {
+    savedLanguage = localStorage.getItem('language') || 'RU';
+  }
+
 
 const initialState = {
     list: [],
