@@ -7,7 +7,7 @@
     padding: 25px 10px;
     flex-wrap: wrap;
     @media screen and (max-width: 560px){
-        justify-content: space-between;
+        justify-content: space-around;
     }
 
     &__socials{

@@ -12,6 +12,8 @@ const Project = () =>{
     const id = url.substring(url.lastIndexOf("/") + 1); // Извлекаем цифру после последнего "/"
 
     const [isExpanded, setIsExpanded] = useState(false);
+    const language = useAppSelector(state=>state.projectsSlice.language)
+    
     const maxLength = 200;
 
     const toggleExpand = () => {
@@ -24,7 +26,7 @@ const Project = () =>{
 
     const projectId = useAppSelector(state=>state.projectsSlice.currentProject)
         async function getProject(){
-            await fetch(`https://testinscube.ru/api/projects?filters[documentId][$eq]=${id}&populate=*`)
+            await fetch(`https://testinscube.ru/api/projects?filters[documentId][$eq]=${id}&locale=${language.toLowerCase()}&populate=*`)
             .then((response)=>{
                 return response.json()
             })

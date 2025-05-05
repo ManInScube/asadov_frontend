@@ -5,7 +5,7 @@ import styles from './Header.module.scss'
 import HeaderFilterItem from '@/components/elements/HeaderFilterItem/HeaderFilterItem'
 import { categories, categories2 } from '.'
 import { useAppDispatch, useAppSelector } from '@/lib/hooks'
-import { addProjects } from '@/lib/features/projects'
+import { addProjects, toggleLanguage } from '@/lib/features/projects'
 import useMediaQuery from '@/hooks/useMediaQuery'
 import { useSearchParams } from "next/navigation";
 
@@ -96,10 +96,10 @@ const Header = () =>{
     
     async function hh(){
         try {
-            const projectsResponse = await fetch(`https://testinscube.ru/api/projects?pagination[limit]=100&${type.map(item=>`filters[type][$in]=${item}`).join("&")}&${status.map(item=>`filters[state][$in]=${item}`).join("&")}&${selectedCategories&&`filters[category][$in]=${selectedCategories}`}&populate=*`)
+            const projectsResponse = await fetch(`https://testinscube.ru/api/projects?pagination[limit]=100&${type.map(item=>`filters[type][$in]=${item}`).join("&")}&${status.map(item=>`filters[state][$in]=${item}`).join("&")}&${selectedCategories&&`filters[category][$in]=${selectedCategories}`}&locale=${language ? 'ru' : language.toLowerCase()}&populate=*`)
             const projectsData = await projectsResponse.json();
 
-            const articlesResponse = await fetch(`https://testinscube.ru/api/articles?${selectedCategories&&`filters[category][$in]=${selectedCategories}`}&populate=*`);
+            const articlesResponse = await fetch(`https://testinscube.ru/api/articles?${selectedCategories&&`filters[category][$in]=${selectedCategories}`}&locale=${language ? 'ru' : language.toLowerCase()}&populate=*`);
             const articlesData = await articlesResponse.json();
 
             const combinedData = [...projectsData.data, ...articlesData.data];
@@ -119,10 +119,10 @@ const Header = () =>{
 
     async function getDefaultProjects(){
         try {
-            const projectsResponse = await fetch(`https://testinscube.ru/api/projects?pagination[limit]=100&${type.map(item => `filters[type][$in]=${item}`).join("&")}&populate=*`)
+            const projectsResponse = await fetch(`https://testinscube.ru/api/projects?pagination[limit]=100&${type.map(item => `filters[type][$in]=${item}`).join("&")}&locale=${language ? 'ru' : language.toLowerCase()}&populate=*`)
             const projectsData = await projectsResponse.json();
 
-            const articlesResponse = await fetch(`https://testinscube.ru/api/articles?populate=*`);
+            const articlesResponse = await fetch(`https://testinscube.ru/api/articles?locale=${language ? 'ru' : language.toLowerCase()}?populate=*`);
             const articlesData = await articlesResponse.json();
 
             const combinedData = [...projectsData.data, ...articlesData.data];
@@ -195,8 +195,9 @@ useEffect(() => {
         setSubmenu(categories2)
     }
 
-    const toggleLanguage = (e) => {
-        dispatch(toggleLanguage(e.target.value === 'EN' ? 'RU' : 'EN'))
+    const toggleLanguageHandler = (value) => {
+        dispatch(toggleLanguage(value));
+        console.log(language)
     };
 
     return(
@@ -259,19 +260,28 @@ useEffect(() => {
                             </svg>
                         </a>
                     </div> */}
-                        {/* <div
-                           
-                            className={styles.language__toggle}
-                            >
-                            <label htmlFor=""  >
-                                <input type="radio"  value='EN' onChange={(e)=>toggleLanguage(e)}/>
-                                <span>EN</span>
-                            </label>
-                            <label htmlFor=""  >
-                                <input type="radio" defaultChecked  value='RU' onChange={(e)=>toggleLanguage(e)}/>
-                                <span>РУ</span>
-                            </label>
-                        </div> */}
+                    <div className={styles.language__toggle}>
+                        <label>
+                            <input
+                                type="radio"
+                                name="language"
+                                value="EN"
+                                checked={language === 'EN'}
+                                onChange={() => toggleLanguageHandler('EN')}
+                            />
+                            <span>EN</span>
+                        </label>
+                        <label>
+                            <input
+                                type="radio"
+                                name="language"
+                                value="RU"
+                                checked={language === 'RU'}
+                                onChange={() => toggleLanguageHandler('RU')}
+                            />
+                            <span>РУ</span>
+                        </label>
+                    </div>
                 </nav>
 
                 <ul onClick={()=>setTest(true)}>

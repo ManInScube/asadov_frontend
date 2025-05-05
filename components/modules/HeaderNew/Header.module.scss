@@ -296,19 +296,22 @@
 }
 
 .language__toggle {
-    border: 2px solid #4CAF50;
+    border: 2px solid #73A533;
     display: flex;
     flex-direction: row;
     align-items: center;
     width: 63px;
     height: 20px;
+    border-radius: 30px;
+    overflow: hidden;
 
 
     label{
         position: relative;
         height: 100%;
-        width: 100%;
+        width: 50%;
         display: block;
+        padding: 0;
         cursor: pointer;
         input{
             opacity: 0;
@@ -318,7 +321,6 @@
         span{
             position: absolute;
             top: 0;
-            background: #34353F;
             width: 100%;
             height: 100%;
             display: flex;
@@ -326,9 +328,6 @@
             justify-content: center;
             line-height: normal;
             font-size: 12px;
-            border-radius: 10px;
-            border: 1px solid #4B4B59;
-            color: #B3B7CE;
         }
 
         input:checked ~ span{

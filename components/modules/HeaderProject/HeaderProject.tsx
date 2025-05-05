@@ -4,8 +4,8 @@ import { useGetProjectsQuery } from '@/lib/services/projectApi'
 import styles from './Header.module.scss'
 import HeaderFilterItem from '@/components/elements/HeaderFilterItem/HeaderFilterItem'
 import { categories, categories2 } from '.'
-import { useAppDispatch } from '@/lib/hooks'
-import { addProjects } from '@/lib/features/projects'
+import { useAppDispatch, useAppSelector } from '@/lib/hooks'
+import { addProjects, toggleLanguage } from '@/lib/features/projects'
 import useMediaQuery from '@/hooks/useMediaQuery'
 import { useRouter } from 'next/navigation'
 
@@ -25,6 +25,7 @@ const HeaderProject = () =>{
     const [isScrolled, setIsScrolled] = useState(false);
     const [test, setTest] = useState(false);
     const [submenu, setSubmenu] = useState<Object>(categories)
+    const language = useAppSelector(state=>state.projectsSlice.language)
 
     const handleScroll = () => {
         setIsScrolled(window.scrollY > 10);
@@ -52,7 +53,7 @@ const HeaderProject = () =>{
     
     
     async function hh(){
-        await fetch(`https://testinscube.ru/api/projects?${type.map(item=>`filters[type][$in]=${item}`).join("&")}&${status.map(item=>`filters[state][$in]=${item}`).join("&")}&${selectedCategories&&`filters[category][$in]=${selectedCategories}`}&populate=*`)
+        await fetch(`https://testinscube.ru/api/projects?${type.map(item=>`filters[type][$in]=${item}`).join("&")}&${status.map(item=>`filters[state][$in]=${item}`).join("&")}&${selectedCategories&&`filters[category][$in]=${selectedCategories}`}&locale=${language.toLowerCase()}&populate=*`)
         .then((response)=>{
             return response.json()
         })
@@ -67,16 +68,22 @@ const HeaderProject = () =>{
         })
     }
 
+    
+        const toggleLanguageHandler = (value) => {
+            dispatch(toggleLanguage(value));
+            console.log(language)
+        };
+
     const handleCheckboxChange = (category:any) => {
         setSelectedCategories(category);
         router.push(`/?category=${category}`);
 
       };
 //сделать сортировку по порядку мб или добавить опцию в меню
-    useEffect(()=>{
-        hh()
-        handleType(type)
-    },[type, status, selectedCategories])
+    // useEffect(()=>{
+    //     hh()
+    //     handleType(type)
+    // },[type, status, selectedCategories])
 
     const handleType = (type: any) =>{
         setType(type);
@@ -86,6 +93,7 @@ const HeaderProject = () =>{
         }
         setSubmenu(categories2)
     }
+    console.log(language)
     return(
         <header className={`${styles.header} ${isScrolled && styles.header_scrolled}`}>
             <a className={styles.header__logo} href='/'>
@@ -145,6 +153,29 @@ const HeaderProject = () =>{
                             </svg>
                         </a>
                     </div> */}
+
+                    <div className={styles.language__toggle}>
+                        <label>
+                            <input
+                                type="radio"
+                                name="language"
+                                value="EN"
+                                checked={language === 'EN'}
+                                onChange={() => toggleLanguageHandler('EN')}
+                            />
+                            <span>EN</span>
+                        </label>
+                        <label>
+                            <input
+                                type="radio"
+                                name="language"
+                                value="RU"
+                                checked={language === 'RU'}
+                                onChange={() => toggleLanguageHandler('RU')}
+                            />
+                            <span>РУ</span>
+                        </label>
+                    </div>
                 </nav>
                 
                 {/* <ul onChange={(e)=>setCategory(e.target.value)}>
