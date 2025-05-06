@@ -26,14 +26,23 @@ const Project = () =>{
 
     const projectId = useAppSelector(state=>state.projectsSlice.currentProject)
         async function getProject(){
-            await fetch(`https://testinscube.ru/api/projects?filters[documentId][$eq]=${id}&locale=${language.toLowerCase()}&populate=*`)
+            await fetch(`https://testinscube.ru/api/projects?filters[documentId][$eq]=${id}&locale=${language?.toLowerCase()}&populate=*`)
             .then((response)=>{
                 return response.json()
             })
             .then((data)=>{
                 console.log(data)
+                if(!data.data[0].length)
+                {
+                    setProject(data.data[0])
+                    return;
+                }
+                fetch(`https://testinscube.ru/api/projects?filters[documentId][$eq]=${id}&populate=*`)
+            })
+            .then((data)=>{
                 setProject(data.data[0])
             })
+            
         }
         const scrollDown = () => {
             window.scrollBy({

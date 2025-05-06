@@ -20,20 +20,7 @@ const size = new Map([
     [2, styles.medium_horizontal],
     [1, styles.small]
 ])
-
-async function checkImageExists(url) {
-    try {
-      const response = await fetch(url, { method: "HEAD" });
-      return response.ok; // true, если файл существует (статус 200)
-    } catch (error) {
-      return false; // Ошибка сети или сервер не отвечает
-    }
-  }
   
-  // Пример использования:
-  checkImageExists("https://example.com/image.webp").then((exists) => {
-    console.log(exists ? "Изображение найдено" : "Изображение не существует");
-  });
   const ITEMS_PER_BATCH = 15;
 
 const Grid = ({items}: IGridProps) =>{
@@ -78,7 +65,7 @@ const Grid = ({items}: IGridProps) =>{
     return(
 
         <>
-          {visibleTiles.length>0?
+          {visibleTiles?.length>0?
             <div className={styles.gridContainer}>
                 {visibleTiles.map((item,index)=>(
                 <a key={item.documentId} className={`${styles.gridItem} ${size.get(item.size)}`}
