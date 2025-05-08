@@ -71,12 +71,14 @@ const Gallery = ({ gallery }: IGalleryProps) => {
           {/* Модальное окно */}
           {selectedImage && (
               <div className={styles.modal} onClick={() => setSelectedImage(null)}>
-                  <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
-                      <span className={styles.close} onClick={() => setSelectedImage(null)}>
-                          &times;
-                      </span>
-                      <img src={selectedImage} alt="Full Size" />
-                  </div>
+                <div className={styles.modalContainer}>
+                    <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+                        <span className={styles.close} onClick={() => setSelectedImage(null)}>
+                            &times;
+                        </span>
+                        <img src={selectedImage} alt="Full Size" />
+                    </div>
+                </div>
               </div>
           )}
       </>
