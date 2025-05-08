@@ -1,8 +1,8 @@
 export const categories = {
     masterplan:'МАСТЕРПЛАНЫ',
-    hotel:'ГОСТИНИЦЫ',
-    living:'ЖИЛЬЕ',
-    villas:'ПОСЕЛКИ/ВИЛЛЫ',
+    hotel:'ГОСТИНИЧНЫЕ КОМПЛЕСЫ',
+    living:'ГОРОДСКОЕ ЖИЛЬЕ',
+    villas:'ЗАГОРОДНОЕ ЖИЛЬЕ',
     offices:'ОФИСЫ',
     culture:'КУЛЬТУРА',
     med:'МЕДИЦИНА',

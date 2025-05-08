@@ -25,25 +25,31 @@ const Project = () =>{
     },[])
 
     const projectId = useAppSelector(state=>state.projectsSlice.currentProject)
-        async function getProject(){
-            await fetch(`https://testinscube.ru/api/projects?filters[documentId][$eq]=${id}&locale=${language?.toLowerCase()}&populate=*`)
-            .then((response)=>{
-                return response.json()
-            })
-            .then((data)=>{
-                console.log(data)
-                if(!data.data[0].length)
-                {
-                    setProject(data.data[0])
-                    return;
-                }
-                fetch(`https://testinscube.ru/api/projects?filters[documentId][$eq]=${id}&populate=*`)
-            })
-            .then((data)=>{
-                setProject(data.data[0])
-            })
-            
+    async function getProject() {
+        try {
+            const primaryResponse = await fetch(`https://testinscube.ru/api/projects?filters[documentId][$eq]=${id}&locale=${language?.toLowerCase()}&populate=*`);
+            const primaryData = await primaryResponse.json();
+    
+            if (primaryData.data && primaryData.data.length > 0) {
+                setProject(primaryData.data[0]);
+                return;
+            }
+    
+            const fallbackResponse = await fetch(`https://testinscube.ru/api/projects?filters[documentId][$eq]=${id}&populate=*`);
+            const fallbackData = await fallbackResponse.json();
+    
+            if (fallbackData.data) {
+                console.log(fallbackData.data[0])
+                setProject(fallbackData.data[0]);
+            } else {
+                setProject(null); // или показать ошибку
+            }
+    
+        } catch (error) {
+            console.error("Ошибка при получении проекта:", error);
         }
+    }
+    
         const scrollDown = () => {
             window.scrollBy({
               top: window.innerHeight,
@@ -54,7 +60,7 @@ const Project = () =>{
         <main className={styles.project}>
             <div className={styles.project__banner}>
                 {/* <img src={`https://testinscube.ru${project?.cover.url.replace(/\.[^.]+$/, "")}.webp`} alt="" /> */}
-                <img src={`https://testinscube.ru${project?.cover.url}`} alt="" />
+                <img src={`https://testinscube.ru${project?.cover?.url}`} alt="" />
                 <button id="scroll-down" className={styles.scrollBtn} onClick={scrollDown}>
                     <svg fill="#fff" height="40px" width="40px" version="1.1" id="Layer_1" viewBox="0 0 330 330" >
                         <path id="XMLID_225_" d="M325.607,79.393c-5.857-5.857-15.355-5.858-21.213,0.001l-139.39,139.393L25.607,79.393  c-5.857-5.857-15.355-5.858-21.213,0.001c-5.858,5.858-5.858,15.355,0,21.213l150.004,150c2.813,2.813,6.628,4.393,10.606,4.393  s7.794-1.581,10.606-4.394l149.996-150C331.465,94.749,331.465,85.251,325.607,79.393z"/>
