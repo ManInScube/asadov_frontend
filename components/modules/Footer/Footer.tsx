@@ -3,12 +3,21 @@ import Contacts from '@/components/elements/Contacts/Contacts'
 import styles from './Footer.module.scss'
 import useMediaQuery from '@/hooks/useMediaQuery';
 import Socials from '@/components/elements/Socials/Socials';
-import { categories } from '../Header';
+// import { categories } from '../Header';
+import { categories, categories2 } from '../HeaderNew/index'
+import { useAppSelector } from '@/lib/hooks';
 
 
 const Footer = () =>{
     const isMobile = useMediaQuery('(max-width: 768px)');
+    const language = useAppSelector(state=>state.projectsSlice.language)
 
+
+    const currentLanguage = language === 'RU' || language === 'EN' ? language : 'RU';
+    const currentCategories = categories[currentLanguage];
+    const currentCategories2 = categories2[currentLanguage];
+
+    console.log(currentCategories)
     return(
         <>
         {!isMobile ?
@@ -33,7 +42,7 @@ const Footer = () =>{
                 <div>
                     <h2>ПРОЕКТЫ</h2>
                     {/* <ul>
-                        {Object.keys(categories).map((item:string)=>(
+                        {Object.keys(currentCategories).map((item: string, index: number)=>(
                             <li>
                                 <a>{categories[item]}</a>
                             </li>
@@ -60,6 +69,17 @@ const Footer = () =>{
                     </div>
     
                 </div>
+                {/* <div>
+                    <h2>ПРОЕКТЫ</h2>
+                    <ul>
+                        {Object.keys(currentCategories2).map((item:string)=>(
+                            <li>
+                                <a>{categories[item]}</a>
+                            </li>
+                        ))}
+                    </ul>
+                
+                </div> */}
                 {!isMobile && <Contacts/>}
                 {isMobile &&
                     <div className={styles.footer__socials}>

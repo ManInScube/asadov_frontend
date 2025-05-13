@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useGetProjectsQuery } from '@/lib/services/projectApi'
 import styles from './Header.module.scss'
 import HeaderFilterItem from '@/components/elements/HeaderFilterItem/HeaderFilterItem'
@@ -23,6 +23,8 @@ const Header = () =>{
     const [isScrolled, setIsScrolled] = useState(false);
     const [test, setTest] = useState(false);
     const [submenu, setSubmenu] = useState<Object>(categories)
+    const [menu, setMenu] = useState<Object|null>(null)
+
     // const menuRefs = useRef([]); // Массив для хранения рефов каждого пункта меню
     const language = useAppSelector(state=>state.projectsSlice.language)
 
@@ -74,6 +76,12 @@ const Header = () =>{
             setSelectedCategories(categoryUrl);
         }
     }, [categoryUrl]);
+
+    useEffect(() => {
+        if (categories) {
+            setMenu(submenu[language])
+        }
+    }, [language]);
 
     useEffect(() => {
         // Обновляем позицию и ширину подчеркивания
@@ -196,6 +204,13 @@ useEffect(() => {
         console.log(language)
     };
 
+    const currentCategories = useMemo(() => {
+        if (submenu && typeof submenu === 'object' && submenu[language]) {
+            return submenu[language];
+        }
+        return submenu['RU'] || {}; // fallback на RU, если язык не найден
+    }, [submenu, language]);
+
     return(
         <header className={`${styles.header} ${isScrolled && styles.header_scrolled}`}>
             {!isMobile&&<span ref={underscoreRef} className={styles.underline}></span>}
@@ -217,24 +232,24 @@ useEffect(() => {
                     <div onChange={(e)=>setType([e.target.value])}>
                         <label htmlFor="architecture">
                             <input type="radio" name="type" id="architecture" value='architecture'/>
-                            <span>АРХИТЕКТУРА</span>
+                            <span>{language==='RU' ? 'АРХИТЕКТУРА' : 'ARCHITECTURE'}</span>
                         </label>
                         <label htmlFor="">/</label>
                         <label htmlFor="interior">
                             <input type="radio" name="type" id="interior" value='interior'/>
-                            <span>ИНТЕРЬЕРЫ</span>
+                            <span>{language==='RU' ? 'ИНТЕРЬЕРЫ' : 'INTERIORS'}</span>
                         </label>
                     </div>
-                    <a href="/about">О БЮРО</a>
+                    <a href="/about">{language==='RU' ? 'О БЮРО' : 'ABOUT'}</a>
                     <div onChange={(e)=>handleState(e.target.value)} className={styles.header__switch}> 
                         <label htmlFor="project">
                             <input type="radio" name="status" id="project" value='all'/>
-                            <span>ВСЕ</span> 
+                            <span>{language==='RU' ? 'ВСЕ' : 'ALL'}</span> 
                         </label>
                         <label htmlFor="">/</label>
                         <label htmlFor="release">
                             <input type="radio" name="status" id="release" value="realisation"/>
-                            <span>РЕАЛИЗАЦИЯ</span>
+                            <span>{language==='RU' ? 'РЕАЛИЗАЦИЯ' : 'REALIZATION'}</span>
                         </label>
                     </div>
                     {/* <div className={styles.header__icons}>
@@ -280,25 +295,23 @@ useEffect(() => {
                     </div>
                 </nav>
 
-                <ul onClick={()=>setTest(true)}>
-                    {Object.keys(submenu).map((item:string, index: number)=>(
-                        <li key={item} ref={(el) => (activeCategoryRef.current[item] = el)} style={{listStyle:'none'}}>
-                        <HeaderFilterItem 
+                <ul onClick={() => setTest(true)}>
+                { Object.keys(currentCategories).map((item: string, index: number) => (
+                    <li key={item} ref={(el) => (activeCategoryRef.current[item] = el)} style={{ listStyle: 'none' }}>
+                        <HeaderFilterItem
                             key={item}
                             type={'radio'}
                             name={'category'}
                             value={item}
-                            title={categories[item]} 
+                            title={currentCategories[item]}
                             isChecked={selectedCategories?.includes(item)}
                             handler={handleCheckboxChange}
                             ref={(el) => (menuRefs.current[index] = el)} // Присваиваем рефы элементам
-                            // onClick={handleMenuClick(index)} 
-                            onClick={()=>setActiveIndex(index)}
-                            // ref={el => menuRefs.current[0] = el}
+                            onClick={() => setActiveIndex(index)}
                         />
-                        </li>
-                    ))}
-                </ul>
+                    </li>
+                ))}
+            </ul>
             </div>
             :
             <div className={styles.header__icons}>
@@ -358,7 +371,7 @@ useEffect(() => {
                     <ul
                         className={styles.header__mobileList}
                     >
-                        {Object.keys(categories)
+                        {Object.keys(menu)
                         // .filter((item, index)=> index<4)
                         .map((item:string, index: number)=>(
                             <HeaderFilterItem 
