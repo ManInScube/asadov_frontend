@@ -100,10 +100,10 @@ const Header = () =>{
     
     async function hh(){
         try {
-            const projectsResponse = await fetch(`https://testinscube.ru/api/projects?pagination[limit]=100&${type.map(item=>`filters[type][$in]=${item}`).join("&")}&${status.map(item=>`filters[state][$in]=${item}`).join("&")}&${selectedCategories&&`filters[category][$in]=${selectedCategories}`}&locale=${language ? 'ru' : language.toLowerCase()}&populate=*`)
+            const projectsResponse = await fetch(`https://testinscube.ru/api/projects?pagination[limit]=100&${type.map(item=>`filters[type][$in]=${item}`).join("&")}&${status.map(item=>`filters[state][$in]=${item}`).join("&")}&${selectedCategories&&`filters[category][$in]=${selectedCategories}`}&locale=${language ? 'ru' : language?.toLowerCase()}&populate=*`)
             const projectsData = await projectsResponse.json();
 
-            const articlesResponse = await fetch(`https://testinscube.ru/api/articles?${selectedCategories&&`filters[category][$in]=${selectedCategories}`}&locale=${language ? 'ru' : language.toLowerCase()}&populate=*`);
+            const articlesResponse = await fetch(`https://testinscube.ru/api/articles?${selectedCategories&&`filters[category][$in]=${selectedCategories}`}&locale=${language ? 'ru' : language?.toLowerCase()}&populate=*`);
             const articlesData = await articlesResponse.json();
 
             const combinedData = [...projectsData.data, ...articlesData.data];
@@ -123,10 +123,10 @@ const Header = () =>{
 
     async function getDefaultProjects(){
         try {
-            const projectsResponse = await fetch(`https://testinscube.ru/api/projects?pagination[limit]=100&${type.map(item => `filters[type][$in]=${item}`).join("&")}&locale=${language ? 'ru' : language.toLowerCase()}&populate=*`)
+            const projectsResponse = await fetch(`https://testinscube.ru/api/projects?pagination[limit]=100&${type.map(item => `filters[type][$in]=${item}`).join("&")}&locale=${language ? 'ru' : language?.toLowerCase()}&populate=*`)
             const projectsData = await projectsResponse.json();
 
-            const articlesResponse = await fetch(`https://testinscube.ru/api/articles?locale=${language ? 'ru' : language.toLowerCase()}?populate=*`);
+            const articlesResponse = await fetch(`https://testinscube.ru/api/articles?locale=${language ? 'ru' : language?.toLowerCase()}?populate=*`);
             const articlesData = await articlesResponse.json();
 
             const combinedData = [...projectsData.data, ...articlesData.data];
