@@ -186,6 +186,11 @@
             svg{
                 height: 23px;
                 margin-top: 3px;
+                transition: all 0.3s ease;
+            }
+
+            &_rotate{
+                transform: rotate(90deg);
             }
         }
 

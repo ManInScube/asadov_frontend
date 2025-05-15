@@ -336,7 +336,7 @@ useEffect(() => {
                         <path d="M8.36328 15.9128C11.3954 15.0763 17.5225 11.9605 17.7734 6.18896" stroke="#73A533"/>
                     </svg>
                 </a>
-                <a onClick={()=>setMenuOpened(!menuOpened)} className={styles.header__menuBtn}>
+                <a onClick={()=>setMenuOpened(!menuOpened)} className={`${styles.header__menuBtn} ${ menuOpened &&styles.header__menuBtn_rotate}`}>
                     <svg viewBox="0 0 33 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M0 0H30.5C31.8807 0 33 1.11929 33 2.5C33 3.88071 31.8807 5 30.5 5H0V0Z" fill="#73A533"/>
                         <path d="M0 10H30.5C31.8807 10 33 11.1193 33 12.5C33 13.8807 31.8807 15 30.5 15H0V10Z" fill="#73A533"/>
