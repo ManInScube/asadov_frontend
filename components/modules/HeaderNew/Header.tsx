@@ -170,11 +170,15 @@ useEffect(() => {
 
     if (selectedCategories !== undefined) {
         hh();
+        setMenuOpened(false)
+        if(!isMobile){
         const activeCategoryObj = positions.filter(item=>item.key==selectedCategories)
         underscoreRef.current.style.left = `${activeCategoryObj[0].left}px`;
         underscoreRef.current.style.width = `${activeCategoryObj[0].width}px`;
 
         console.log("Координаты элементов:", activeCategoryObj[0].left);
+        }
+
     }
     if(!categoryUrl && !selectedCategories){
         getDefaultProjects()

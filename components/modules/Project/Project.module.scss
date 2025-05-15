@@ -103,6 +103,9 @@
     span:last-of-type{
         font-family: $font-light;
         font-size: 1em;
+        @media screen and (max-width: 560px){
+           text-align: left;
+        }
     }
 }
 
