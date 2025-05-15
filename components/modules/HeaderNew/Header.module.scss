@@ -91,6 +91,27 @@
             width: 100%;
         }
 
+        .mobile__langToggle{
+            margin-top: 40px;
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+
+            span{
+                margin-right: 4px;
+            }
+        }
+
+        .header__switch{
+            margin-top: 100px;
+            font-size: 2em !important;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+        }
+
         &__nav{
             margin-top: 30px;
             display: flex;
@@ -102,7 +123,8 @@
             &>div{
                 width: 100%;
                 display: flex;
-                justify-content: space-between;
+                justify-content: center;
+                flex-wrap: wrap;
                 margin-top: 21px;
                 a{
                     font-size: 1.4em;

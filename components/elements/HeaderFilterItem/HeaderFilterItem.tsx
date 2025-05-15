@@ -14,7 +14,7 @@ const HeaderFilterItem = ({type, name, value, title, isChecked, handler, ref, on
     return(
         <label htmlFor={value} ref={ref} onClick={()=>onClick}>
             <input type={type} checked={isChecked} name={name} id={value} value={value}  onChange={()=>handler(value)}/>
-            <span>{title.toUpperCase()}</span>
+            <span>{title?.toUpperCase()}</span>
             <span className="border"></span>
         </label>
     )

@@ -348,85 +348,56 @@ useEffect(() => {
                         <div onChange={(e)=>setType([e.target.value])}>
                             <label htmlFor="architecture">
                                 <input type="radio" name="type" id="architecture" value='architecture'/>
-                                <span>АРХИТЕКТУРА</span>
+                                <span>{language==='RU' ? 'АРХИТЕКТУРА' : 'ARCHITECTURE'}</span>
                             </label>
                             <label htmlFor="interior">
                                 <input type="radio" name="type" id="interior" value='interior'/>
-                                <span>ИНТЕРЬЕРЫ</span>
+                                <span>{language==='RU' ? 'ИНТЕРЬЕРЫ' : 'INTERIORS'}</span>
                             </label>
-                            <a href="https://asadov.studio/about_ru/">О БЮРО</a>
-                        </div>
-
-                        {/* <div onChange={(e)=>setStatus([e.target.value])}>
-                            <label htmlFor="project">
-                                <input type="radio" name="status" id="project" value="project"/>
-                                <span>ПРОЕКТ</span> 
-                            </label>
-                            <label htmlFor="release">
-                                <input type="radio" name="status" id="release" value="release"/>
-                                <span>РЕАЛИЗАЦИЯ</span>
-                            </label>
-                        </div> */}
+                            <a href="/about">{language==='RU' ? 'О БЮРО' : 'ABOUT'}</a>
+                            </div>
                     </nav>
                     <ul
                         className={styles.header__mobileList}
                     >
-                        {Object.keys(menu)
-                        // .filter((item, index)=> index<4)
-                        .map((item:string, index: number)=>(
-                            <HeaderFilterItem 
+                    { Object.keys(currentCategories).map((item: string, index: number) => (
+                        <li key={item} ref={(el) => (activeCategoryRef.current[item] = el)} style={{ listStyle: 'none' }}>
+                            <HeaderFilterItem
                                 key={item}
-                                type={'checkbox'}
+                                type={'radio'}
                                 name={'category'}
                                 value={item}
-                                title={categories[item]} 
+                                title={currentCategories[item]}
                                 isChecked={selectedCategories?.includes(item)}
                                 handler={handleCheckboxChange}
+                                ref={(el) => (menuRefs.current[index] = el)} // Присваиваем рефы элементам
+                                onClick={() => setActiveIndex(index)}
                             />
-                        ))}
+                        </li>
+                    ))}
                     </ul>
-                    {/* <ul
-                        className={styles.header__mobileList}
-                    >
-                        {Object.keys(categories)
-                        .filter((item, index)=> index>4 && index < 9)
-                        .map((item:string, index: number)=>(
-                            // <li key={item} ref={(el) => (activeCategoryRef.current[item] = el)}>
-                                <HeaderFilterItem 
-                                    key={item}
-                                    type={'checkbox'}
-                                    name={'category'}
-                                    value={item}
-                                    title={categories[item]} 
-                                    isChecked={selectedCategories?.includes(item)}
-                                    handler={handleCheckboxChange}
-                                />
-                            // </li>
- 
-                        ))}
-                    </ul>
-                    <ul
-                        className={styles.header__mobileList}
-                    >
-                        {Object.keys(categories)
-                        .filter((item, index)=> index > 9)
-                        .map((item:string, index: number)=>(
-                            <HeaderFilterItem 
-                                key={item}
-                                type={'checkbox'}
-                                name={'category'}
-                                value={item}
-                                title={categories[item]} 
-                                isChecked={selectedCategories?.includes(item)}
-                                handler={handleCheckboxChange}
-                            />
-                        ))}
-                    </ul> */}
+                 <div onChange={(e)=>handleState(e.target.value)} className={styles.header__switch}> 
+                        <label htmlFor="project">
+                            <input type="radio" name="status" id="project" value='all'/>
+                            <span>{language==='RU' ? 'ВСЕ' : 'ALL'}</span> 
+                        </label>
+                        <label htmlFor="">/</label>
+                        <label htmlFor="release">
+                            <input type="radio" name="status" id="release" value="realisation"/>
+                            <span>{language==='RU' ? 'РЕАЛИЗАЦИЯ' : 'REALIZATION'}</span>
+                        </label>
+                    </div>
                 </div>
+                <a className={styles.mobile__langToggle} onClick={()=>toggleLanguageHandler(language === 'RU' ? 'EN' : 'RU')}>
+                    <span>{language === 'RU' ? 'EN' : 'RU'}</span>
+                <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M1 10L5 5.5L1 1" stroke="#73A533"/>
+</svg>
+
+                </a>
 
             </div>
         }
-        {/* <div className={styles.underline} style={underlineStyle}></div> */}
         </header>
     )
 }
