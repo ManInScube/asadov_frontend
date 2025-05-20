@@ -305,9 +305,15 @@
             overflow-x: auto;
             white-space: nowrap;
             display: flex;
-            gap: 80px; /* Отступ между годами */
+            gap: 5em; /* Отступ между годами */
             background: #73A533;
+            -ms-overflow-style: none;  /* IE и Edge */
+            scrollbar-width: none;     /* Firefox */
         }
+
+        &:Scroll::-webkit-scrollbar {
+            display: none;             /* Chrome, Safari и Opera */
+          }
 
         &Year{
             color: white;  
@@ -317,8 +323,12 @@
         }
 
         &Info{
-            margin-top: 25px;
             min-height: 20px;
+            border-left: 1px solid black;
+            padding-top: 25px;
+            padding-bottom: 25px;
+            padding-left: 15px;
+
             li{
                 list-style: none;
                 font-family: $font-light;
@@ -358,6 +368,7 @@
         &Row{
             display: flex;
             flex-direction: row;
+            justify-content: center;
             gap: 10px;
             margin-top: 20px;
         }
@@ -365,5 +376,25 @@
 
     &__contacts{
         margin-top: 100px;
+        
+        &Row{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            margin: 30px 0;
+        }
+        &Item{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            font-family: $font-light;
+            font-size: 1.25em;
+            width: 30%;
+
+            svg{
+                margin-right: 1em;
+            }
+        }
     }
 }

@@ -100,10 +100,10 @@ const Header = () =>{
     
     async function hh(){
         try {
-            const projectsResponse = await fetch(`https://testinscube.ru/api/projects?pagination[limit]=100&${type.map(item=>`filters[type][$in]=${item}`).join("&")}&${status.map(item=>`filters[state][$in]=${item}`).join("&")}&${selectedCategories&&`filters[category][$in]=${selectedCategories}`}&locale=${language ? 'ru' : language?.toLowerCase()}&populate=*`)
+            const projectsResponse = await fetch(`https://testinscube.ru/api/projects?pagination[limit]=100&${type.map(item=>`filters[type][$in]=${item}`).join("&")}&${status.map(item=>`filters[state][$in]=${item}`).join("&")}&${selectedCategories&&`filters[category][$in]=${selectedCategories}`}&locale=${language ? language?.toLowerCase() : 'ru' }&populate=*`)
             const projectsData = await projectsResponse.json();
 
-            const articlesResponse = await fetch(`https://testinscube.ru/api/articles?${selectedCategories&&`filters[category][$in]=${selectedCategories}`}&locale=${language ? 'ru' : language?.toLowerCase()}&populate=*`);
+            const articlesResponse = await fetch(`https://testinscube.ru/api/articles?${selectedCategories&&`filters[category][$in]=${selectedCategories}`}&locale=${language ? language?.toLowerCase() : 'ru'}&populate=*`);
             const articlesData = await articlesResponse.json();
 
             const combinedData = [...projectsData.data, ...articlesData.data];
@@ -123,10 +123,10 @@ const Header = () =>{
 
     async function getDefaultProjects(){
         try {
-            const projectsResponse = await fetch(`https://testinscube.ru/api/projects?pagination[limit]=100&${type.map(item => `filters[type][$in]=${item}`).join("&")}&locale=${language ? 'ru' : language?.toLowerCase()}&populate=*`)
+            const projectsResponse = await fetch(`https://testinscube.ru/api/projects?pagination[limit]=100&${type.map(item => `filters[type][$in]=${item}`).join("&")}&locale=${language ? language?.toLowerCase() : 'ru'}&populate=*`)
             const projectsData = await projectsResponse.json();
 
-            const articlesResponse = await fetch(`https://testinscube.ru/api/articles?locale=${language ? 'ru' : language?.toLowerCase()}?populate=*`);
+            const articlesResponse = await fetch(`https://testinscube.ru/api/articles?locale=${language ? language?.toLowerCase() : 'ru'}?populate=*`);
             const articlesData = await articlesResponse.json();
 
             const combinedData = [...projectsData.data, ...articlesData.data];
@@ -233,6 +233,7 @@ useEffect(() => {
             {!isMobile ?
             <div className={styles.header__menu}>
                 <nav className={styles.header__nav}>
+                    <a href="/about">{language==='RU' ? 'О БЮРО' : 'ABOUT'}</a>
                     <div onChange={(e)=>setType([e.target.value])}>
                         <label htmlFor="architecture">
                             <input type="radio" name="type" id="architecture" value='architecture'/>
@@ -244,7 +245,7 @@ useEffect(() => {
                             <span>{language==='RU' ? 'ИНТЕРЬЕРЫ' : 'INTERIORS'}</span>
                         </label>
                     </div>
-                    <a href="/about">{language==='RU' ? 'О БЮРО' : 'ABOUT'}</a>
+
                     <div onChange={(e)=>handleState(e.target.value)} className={styles.header__switch}> 
                         <label htmlFor="project">
                             <input type="radio" name="status" id="project" value='all'/>
@@ -392,11 +393,36 @@ useEffect(() => {
                         </label>
                     </div>
                 </div>
-                <a className={styles.mobile__langToggle} onClick={()=>toggleLanguageHandler(language === 'RU' ? 'EN' : 'RU')}>
-                    <span>{language === 'RU' ? 'EN' : 'RU'}</span>
-                <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M1 10L5 5.5L1 1" stroke="#73A533"/>
-</svg>
+                <a className={styles.mobile__langToggle} 
+                // onClick={()=>toggleLanguageHandler(language === 'RU' ? 'EN' : 'RU')}
+                >
+                    {/* <span>{language === 'RU' ? 'EN' : 'RU'}</span>
+                    <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 10L5 5.5L1 1" stroke="#73A533"/>
+                    </svg> */}
+
+<div className={styles.language__toggle}>
+                        <label>
+                            <input
+                                type="radio"
+                                name="language"
+                                value="EN"
+                                checked={language === 'EN'}
+                                onChange={() => toggleLanguageHandler('EN')}
+                            />
+                            <span>EN</span>
+                        </label>
+                        <label>
+                            <input
+                                type="radio"
+                                name="language"
+                                value="RU"
+                                checked={language === 'RU'}
+                                onChange={() => toggleLanguageHandler('RU')}
+                            />
+                            <span>РУ</span>
+                        </label>
+                    </div>
 
                 </a>
 

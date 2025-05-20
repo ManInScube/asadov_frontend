@@ -6,6 +6,7 @@
     height: 21em;
     overflow: hidden;
     aspect-ratio: 1.73;
+    max-width: 580px;
 
     &__arrow{
         position: relative;
@@ -31,7 +32,8 @@
         position: absolute;
         bottom: 0;
         left: 0;
-        height: 100%;
+        height: inherit;
+        // height: 100%;
 
 
         img{

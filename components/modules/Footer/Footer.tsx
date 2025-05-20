@@ -6,6 +6,7 @@ import Socials from '@/components/elements/Socials/Socials';
 // import { categories } from '../Header';
 import { categories, categories2 } from '../HeaderNew/index'
 import { useAppSelector } from '@/lib/hooks';
+import { useState } from 'react';
 
 
 const Footer = () =>{
@@ -16,8 +17,11 @@ const Footer = () =>{
     const currentLanguage = language === 'RU' || language === 'EN' ? language : 'RU';
     const currentCategories = categories[currentLanguage];
     const currentCategories2 = categories2[currentLanguage];
+    const [openSection, setOpenSection] = useState(null);
 
-    console.log(currentCategories)
+    const toggleSection = (section) => {
+        setOpenSection(openSection === section ? null : section);
+      };
     return(
         <>
         {!isMobile ?
@@ -39,47 +43,26 @@ const Footer = () =>{
                     </div>
                     {isMobile && <Contacts/>}
                 </div>
-                <div>
-                    <h2>ПРОЕКТЫ</h2>
-                    {/* <ul>
-                        {Object.keys(currentCategories).map((item: string, index: number)=>(
+                <div className={styles.footer__typology}>
+                    <h2>АРХИТЕКТУРА</h2>
+                    <ul>
+                        {Object.entries(currentCategories).map(([key, value], index: number)=>(
                             <li>
-                                <a>{categories[item]}</a>
+                                <a href={`/?category=${key}`}>{value}</a>
                             </li>
                         ))}
-                    </ul> */}
-                    <div>
-                    <ul>
-                        <li><a href="/?category=masterplan">МАСТЕРПЛАНЫ</a></li>
-                        <li><a href="/?category=hotel">ГОСТИНИЦЫ</a></li>
-                        <li><a href="/?category=living">ЖИЛЬЕ</a></li>
-                        <li><a href="/?category=villas">ПОСЕЛКИ/ВИЛЛЫ</a></li>
-                        <li><a href="/?category=offices">ОФИСЫ</a></li>
-                        <li><a href="/?category=culture">КУЛЬТУР</a>А</li>
                     </ul>
-                    <ul>
-                        <li><a href="/?category=med">МЕДИЦИНА</a></li>
-                        <li><a href="/?category=education">ОБРАЗОВАНИЕ</a></li>
-                        <li><a href="/?category=sport">СПОРТ</a></li>
-                        <li><a href="/?category=market">ТОРГОВЛЯ</a></li>
-                        <li><a href="/?category=transport">ТРАНСПОРТ</a></li>
-                        <li><a href="/?category=improvement">БЛАГОУСТРОЙСТВО</a></li>
-    
-                    </ul>
-                    </div>
-    
                 </div>
-                {/* <div>
-                    <h2>ПРОЕКТЫ</h2>
+                <div className={styles.footer__typology}>
+                    <h2>ИНТЕРЬЕРЫ</h2>
                     <ul>
-                        {Object.keys(currentCategories2).map((item:string)=>(
+                        {Object.entries(currentCategories2).map(([key, value], index: number)=>(
                             <li>
-                                <a>{categories[item]}</a>
+                                <a href={`/?category=${key}`}>{value}</a>
                             </li>
                         ))}
                     </ul>
-                
-                </div> */}
+                </div>
                 {!isMobile && <Contacts/>}
                 {isMobile &&
                     <div className={styles.footer__socials}>
@@ -104,33 +87,47 @@ const Footer = () =>{
                 </div>
                 {isMobile && <Contacts/>}
             </div>
+            {isMobile && 
             <div>
-                <h2>ПРОЕКТЫ</h2>
-                {/* <ul>
-                    {Object.keys(categories).map((item:string)=>(
-                        <li>
-                            <a>{categories[item]}</a>
+                <div className={styles.footer__typology}>
+                    <h2 onClick={() => toggleSection("architecture")} className={styles.title}>
+                    АРХИТЕКТУРА <span>
+                        {/* {openSection === "architecture" ? "▲" : "▼"} */}
+                            <svg width="11" height="6" viewBox="0 0 11 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1 1L5.5 5L10 1" stroke="#73A533"/>
+                            </svg>
+
+                        </span>
+                    </h2>
+                    <ul className={`${styles.list} ${openSection === "architecture" ? styles.open : styles.closed}`}>
+                    {Object.entries(currentCategories).map(([key, value], index) => (
+                        <li key={index}>
+                        <a href={`/?category=${key}`}>{value}</a>
                         </li>
                     ))}
-                </ul> */}
-                <div>
-                <ul>
-                    <li>МАСТЕРПЛАНЫ</li>
-                    <li>ГОСТИНИЦЫ</li>
-                    <li>ЖИЛЬЕ</li>
-                    <li>ПОСЕЛКИ/ВИЛЛЫ</li>
-                    <li>ОФИСЫ</li>
-                    <li>КУЛЬТУРА</li>
-                    <li>МЕДИЦИНА</li>
-                    <li>ОБРАЗОВАНИЕ</li>
-                    <li>СПОРТ</li>
-                    <li>ТОРГОВЛЯ</li>
-                    <li>ТРАНСПОРТ</li>
-                    <li>БЛАГОУСТРОЙСТВО</li>
-                </ul>
+                    </ul>
                 </div>
 
+                {/* ИНТЕРЬЕРЫ */}
+                <div className={styles.footer__typology}>
+                    <h2 onClick={() => toggleSection("interior")} className={styles.title}>
+                    ИНТЕРЬЕРЫ <span>
+                        {/* {openSection === "interior" ? "▲" : "▼"} */}
+                        <svg width="11" height="6" viewBox="0 0 11 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1 1L5.5 5L10 1" stroke="#73A533"/>
+                            </svg>
+                        </span>
+                    </h2>
+                    <ul className={`${styles.list} ${openSection === "interior" ? styles.open : styles.closed}`}>
+                    {Object.entries(currentCategories2).map(([key, value], index) => (
+                        <li key={index}>
+                        <a href={`/?category=${key}`}>{value}</a>
+                        </li>
+                    ))}
+                    </ul>
+                </div>
             </div>
+            }
             {!isMobile && <Contacts/>}
             {isMobile &&
                 <div className={styles.footer__socials}>

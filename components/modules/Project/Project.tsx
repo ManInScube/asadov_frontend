@@ -4,6 +4,7 @@ import styles from './Project.module.scss'
 import Gallery from "../Gallery/Gallery";
 import RichTextRenderer from "../RichTextRenderer/RichTextRenderer";
 import { categories } from "../HeaderNew";
+import useMediaQuery from "@/hooks/useMediaQuery";
 
 
 const Project = () =>{
@@ -13,7 +14,8 @@ const Project = () =>{
 
     const [isExpanded, setIsExpanded] = useState(false);
     const language = useAppSelector(state=>state.projectsSlice.language)
-    
+    const isMobile = useMediaQuery('(max-width: 768px)');
+
     const maxLength = 200;
 
     const toggleExpand = () => {
@@ -155,12 +157,14 @@ const Project = () =>{
                     <>
                         {project?.description &&
                             <div className={styles.project__description}>
-                                <p>
-                                    {isExpanded || project?.description?.length <= maxLength
+                                {isMobile ? <p>
+                                    {(isExpanded || project?.description?.length) <= maxLength
                                     ? project?.description
                                     : `${project?.description?.slice(0, maxLength)}...`}
                                 </p>
-                                {project?.description?.length > maxLength && (
+                                : project?.description
+                                }
+                                {(project?.description?.length > maxLength && isMobile) && (
                                     <button onClick={toggleExpand} className={styles.expandButton}>
                                     {isExpanded ? "Свернуть" : "Читать далее"}
                                     </button>
