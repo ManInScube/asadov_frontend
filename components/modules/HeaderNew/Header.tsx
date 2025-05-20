@@ -276,26 +276,15 @@ useEffect(() => {
                             </svg>
                         </a>
                     </div> */}
-                    <div className={styles.language__toggle}>
+                    <div className={styles.language__toggle_new}>
                         <label>
-                            <input
-                                type="radio"
-                                name="language"
-                                value="EN"
-                                checked={language === 'EN'}
-                                onChange={() => toggleLanguageHandler('EN')}
-                            />
-                            <span>EN</span>
-                        </label>
-                        <label>
-                            <input
-                                type="radio"
-                                name="language"
-                                value="RU"
-                                checked={language === 'RU'}
-                                onChange={() => toggleLanguageHandler('RU')}
-                            />
-                            <span>РУ</span>
+              
+                            <a
+                            onClick={() => toggleLanguageHandler(language ==='RU' ? 'EN' : 'RU')}
+                            >{language ==='RU' ? 'RU' : 'EN'}</a>
+                            <svg width="11" height="6" viewBox="0 0 11 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1 1L5.5 5L10 1" stroke="#73A533"/>
+                            </svg>
                         </label>
                     </div>
                 </nav>
