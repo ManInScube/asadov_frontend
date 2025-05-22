@@ -110,6 +110,15 @@
         }
     }
 
+    &__switch{
+        // font-size: 0.6em
+        label{
+            padding: 0 3px !important;
+            font-size: 0.6em;
+            line-height: 1.2em;
+        }
+    }
+
     &__menu{
         display: flex;
         flex-direction: column;
@@ -162,6 +171,7 @@
             text-decoration: none;
             padding: 0 12px;
             color: $black !important;
+            font-size: 0.8em;
         }
         &>a{
             padding-right: 0;
@@ -220,6 +230,19 @@
         }
 
 
+    }
+}
+
+.language__toggle_new {
+    display: flex;
+    align-items: center;
+    a{
+        font-size: 11px !important;
+        line-height: 1.4em;
+        border: none;
+        font-family: $font-light;
+        padding: 0 !important;
+        margin-right: 2px;
     }
 }
 

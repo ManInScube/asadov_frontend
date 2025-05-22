@@ -281,7 +281,7 @@ const toggleYear = (year: string) => {
                         </svg>
                     </span>
                     <h2>_О НАС</h2>
-                    <div>
+                    <div className={styles.about__infoText}>
                         <p>Архитектурное Бюро ASADOV c 1989 года разрабатывает проекты, различные по сложности и функциональному назначению — градостроительные комплексы, общественные, культурные и спортивные сооружения, многоэтажную и загородную жилую застройку, интерьеры и благоустройство.</p>
 
                         <p>История компании началась в 1989, когда Александр Асадов основал одну из первых персональных архитектурных мастерских. Сейчас он выполняет роль творческого руководителя. Директором Бюро является его сын, Андрей Асадов. На данный момент, Бюро имеет партнерские представительства в ОАЭ, Китае и других странах. Число постоянных сотрудников составляет около 90 человек.</p>
@@ -305,7 +305,7 @@ const toggleYear = (year: string) => {
                     </div>
                     <div className={styles.about__infographicsGap}>
 
-</div>
+                    </div>
                     <div className={`${styles.about__infographicsItem} ${styles.about__infographicsPartnership}`}>
                         <h3>Творчество_</h3>
                         <p>В основе нашей работы - эффективная организация пространства и использование BIM-технологий. 35-летний опыт работы и слаженная команда позволяет добиваться необходимых результатов в сжатые сроки</p>
@@ -368,18 +368,20 @@ const toggleYear = (year: string) => {
                 </div>
 
                 </div>
-                <div ref={scrollContainerRef} className={styles.about__awardsScroll}>
-                {awards.map(({ year }) => (
-                        <div
-                        style={{color: selectedYear === year && '#000'}}
-                        key={year}
-                        ref={(el) => (yearRefs.current[year] = el)}
-                        className={styles.about__awardsYear}
-                        onClick={() => toggleYear(year)}
-                    >
-                        {year}
+                <div className={styles.about__awardsWrapper}>
+                    <div ref={scrollContainerRef} className={styles.about__awardsScroll}>
+                    {awards.map(({ year }) => (
+                            <div
+                            style={{color: selectedYear === year && '#000'}}
+                            key={year}
+                            ref={(el) => (yearRefs.current[year] = el)}
+                            className={styles.about__awardsYear}
+                            onClick={() => toggleYear(year)}
+                        >
+                            {year}
+                        </div>
+                        ))}
                     </div>
-                    ))}
                 </div>
                 {selectedYear && <div className={styles.about__awardsInfo}>
                     {awards

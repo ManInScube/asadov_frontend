@@ -93,7 +93,7 @@ const HeaderProject = () =>{
         }
         setSubmenu(categories2)
     }
-    console.log(language)
+    
     return(
         <header className={`${styles.header} ${isScrolled && styles.header_scrolled}`}>
             <a className={styles.header__logo} href='/'>
@@ -113,25 +113,27 @@ const HeaderProject = () =>{
                 <nav className={styles.header__nav}>
                     <div onChange={(e)=>setType([e.target.value])}>
                         <label htmlFor="architecture">
+                            <a href="/about">{language==='RU' ? 'О БЮРО' : 'ABOUT'}</a>
+                        </label>
+                        <label htmlFor="architecture">
                             <input type="radio" name="type" id="architecture" value='architecture'/>
-                            <span>АРХИТЕКТУРА</span>
+                            <span>{language==='RU' ? 'АРХИТЕКТУРА' : 'ARCHITECTURE'}</span>
                         </label>
                         <label htmlFor="">/</label>
                         <label htmlFor="interior">
                             <input type="radio" name="type" id="interior" value='interior'/>
-                            <span>ИНТЕРЬЕРЫ</span>
+                            <span>{language==='RU' ? 'ИНТЕРЬЕРЫ' : 'INTERIORS'}</span>
                         </label>
                     </div>
-                    <a href="https://asadov.studio/about_ru/">О БЮРО</a>
                     <div onChange={(e)=>handleState(e.target.value)} className={styles.header__switch}> 
                         <label htmlFor="project">
                             <input type="radio" name="status" id="project" value='all'/>
-                            <span>ВСЕ</span> 
+                            <span>{language==='RU' ? 'ВСЕ' : 'ALL'}</span> 
                         </label>
                         <label htmlFor="">/</label>
                         <label htmlFor="release">
                             <input type="radio" name="status" id="release" value="realisation"/>
-                            <span>РЕАЛИЗАЦИЯ</span>
+                            <span>{language==='RU' ? 'РЕАЛИЗАЦИЯ' : 'REALIZATION'}</span>
                         </label>
                     </div>
                     {/* <div className={styles.header__icons}>
@@ -154,26 +156,15 @@ const HeaderProject = () =>{
                         </a>
                     </div> */}
 
-                    <div className={styles.language__toggle}>
+                    <div className={styles.language__toggle_new}>
                         <label>
-                            <input
-                                type="radio"
-                                name="language"
-                                value="EN"
-                                checked={language === 'EN'}
-                                onChange={() => toggleLanguageHandler('EN')}
-                            />
-                            <span>EN</span>
-                        </label>
-                        <label>
-                            <input
-                                type="radio"
-                                name="language"
-                                value="RU"
-                                checked={language === 'RU'}
-                                onChange={() => toggleLanguageHandler('RU')}
-                            />
-                            <span>РУ</span>
+              
+                            <a
+                            onClick={() => toggleLanguageHandler(language ==='RU' ? 'EN' : 'RU')}
+                            >{language ==='RU' ? 'RU' : 'EN'}</a>
+                            <svg width="11" height="6" viewBox="0 0 11 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1 1L5.5 5L10 1" stroke="#73A533"/>
+                            </svg>
                         </label>
                     </div>
                 </nav>

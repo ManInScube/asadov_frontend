@@ -233,8 +233,10 @@ useEffect(() => {
             {!isMobile ?
             <div className={styles.header__menu}>
                 <nav className={styles.header__nav}>
-                    <a href="/about">{language==='RU' ? 'О БЮРО' : 'ABOUT'}</a>
                     <div onChange={(e)=>setType([e.target.value])}>
+                        <label htmlFor="architecture">
+                            <a href="/about">{language==='RU' ? 'О БЮРО' : 'ABOUT'}</a>
+                        </label>
                         <label htmlFor="architecture">
                             <input type="radio" name="type" id="architecture" value='architecture'/>
                             <span>{language==='RU' ? 'АРХИТЕКТУРА' : 'ARCHITECTURE'}</span>

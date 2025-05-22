@@ -10,6 +10,9 @@
     "test": "jest"
   },
   "dependencies": {
+    "@bem-react/classname": "^1.6.0",
+    "@bem-react/core": "^5.1.0",
+    "@bem-react/di": "^5.0.0",
     "@react-google-maps/api": "^2.20.6",
     "@reduxjs/toolkit": "^2.3.0",
     "axios": "^1.7.7",
