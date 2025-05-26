@@ -1,0 +1,24 @@
+.widget{
+    position: relative;
+    .widgetBlock{
+        content: '';
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        width: 130px;
+
+        &__text{
+            background: white;
+            padding: 1px 4px;
+
+        }
+        span{
+            height: 18px;
+            font-family: $font-black;
+        }
+        img{
+            position: relative;
+            width: 100%;
+        }
+    }
+}
