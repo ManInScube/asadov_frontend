@@ -109,31 +109,6 @@
     }
 }
 
-.expandButton{
-    background: none;
-    font-family: $font-black;
-    font-size: 1em;
-    border: none;
-    position: relative;
-    cursor: pointer;
-    display: inline-block;
-    margin-top: 20px;
-}
-
-
-.expandButton::after {
-    content: '';
-    position: absolute;
-    bottom: -4px; /* Расстояние от текста до подчеркивания */
-    left: 0;
-    width: 100%;
-    height: 4px; /* Толщина подчеркивания */
-    background-color: #6fb24c; /* Цвет подчеркивания */
-    border-radius: 4px 0 0 4px; /* Закругленные края */
-    transition: transform 0.3s ease;
-    transform-origin: left;
-  }
-
  .scrollBtn{
     position: absolute;
     bottom: 100px;

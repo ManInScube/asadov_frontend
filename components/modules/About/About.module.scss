@@ -227,6 +227,25 @@
 
     &__management{
         margin-top: 40px;
+
+        .about__teamRow{
+            // background-image: url('./managment.svg');
+            // background-repeat: no-repeat;
+            // background-size: cover;
+            // background-position: -50px -50px;
+            position: relative;
+            overflow:visible;
+            svg{
+                width: calc(100% + 100px);
+                position: absolute;
+                left: -50px;
+                top: -100px;
+                z-index: 1;
+            }
+        }
+
+
+
     }
 
     &__info{
@@ -413,7 +432,7 @@
             margin-top: 40px;
 
             a{
-                width: 5em;
+                width: 5.5em;
                 cursor: pointer;
                 filter: grayscale(1);
 

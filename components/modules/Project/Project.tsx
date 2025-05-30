@@ -5,6 +5,7 @@ import Gallery from "../Gallery/Gallery";
 import RichTextRenderer from "../RichTextRenderer/RichTextRenderer";
 import { categories } from "../HeaderNew";
 import useMediaQuery from "@/hooks/useMediaQuery";
+import ExpandButton from "@/components/elements/ExpandButton/ExpandButton";
 
 
 const Project = () =>{
@@ -164,11 +165,9 @@ const Project = () =>{
                                 </p>
                                 : project?.description
                                 }
-                                {(project?.description?.length > maxLength && isMobile) && (
-                                    <button onClick={toggleExpand} className={styles.expandButton}>
-                                    {isExpanded ? "Свернуть" : "Читать далее"}
-                                    </button>
-                                )}
+                                {(project?.description?.length > maxLength && isMobile) &&
+                                    <ExpandButton handler={toggleExpand} isExpanded={isExpanded} collapseTest="свернуть" expandText="читать далее"/>
+                                }
                             </div>
                         }
                     </>

@@ -327,11 +327,15 @@ const toggleYear = (year: string) => {
                     </span>
                     <h2>_РУКОВОДИТЕЛИ</h2>
                     <div className={styles.about__teamRow}>
+                    <svg viewBox="0 0 1034 305" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M29.4975 292.553C8.33088 281.219 -21.3025 250.853 29.4975 220.053C92.9975 181.553 359.537 179.885 410.997 173.553C475.997 165.554 551.997 150.053 540.497 69.5533C528.997 -10.9467 454.497 -14.9466 476.997 28.5534C499.497 72.0535 633.997 133.553 853.997 186.054C1013 223.998 1078.95 314.5 997.948 302.5" stroke="#73A533"/>
+                    </svg>
+
                         {
                             employees&&employees
                             .filter((item)=>item.isManager===true)
-                            .map((item)=>(
-                                <Employee avatarPath={`https://testinscube.ru${item.avatar?.url}`} name={item.name} position={item.position} />
+                            .map((item, index)=>(
+                                <Employee key={`${index}`} avatarPath={`https://testinscube.ru${item.avatar?.url}`} name={item?.name} position={item.position} isManager={item?.isManager} info={item?.info}/>
                             ))
                         }
                         
