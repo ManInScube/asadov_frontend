@@ -335,7 +335,7 @@ const toggleYear = (year: string) => {
                             employees&&employees
                             .filter((item)=>item.isManager===true)
                             .map((item, index)=>(
-                                <Employee key={`${index}`} avatarPath={`https://testinscube.ru${item.avatar?.url}`} name={item?.name} position={item.position} isManager={item?.isManager} info={item?.info}/>
+                                <Employee key={`${index}`} avatarPath={item.avatar!==null ? `https://testinscube.ru${item.avatar?.url}` : null} name={item?.name} position={item.position} isManager={item?.isManager} info={item?.info}/>
                             ))
                         }
                         

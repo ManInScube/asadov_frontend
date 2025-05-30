@@ -226,7 +226,7 @@
     }
 
     &__management{
-        margin-top: 40px;
+        margin-top: 6.25em;
 
         .about__teamRow{
             // background-image: url('./managment.svg');
@@ -248,8 +248,13 @@
 
     }
 
+    &__team{
+        margin-top: 6.25em;
+
+    }
+
     &__info{
-        margin-top: 40px;
+        margin-top: 6.25em;
 
         &Text{
             margin-top: 30px;
@@ -329,7 +334,7 @@
     }
 
     &__subbanner{
-        margin-top: 50px;
+        margin-top: 6.25em;
         img{
             width: 100%;
         }
@@ -381,6 +386,8 @@
             margin-left: -80px;
             margin-right: -80px;
             z-index: 1;
+            // width: 65%;
+            // margin: 0 auto;
 
             &::before {
                 content: "";

@@ -19,7 +19,7 @@ const Employee = ({avatarPath,name,position, isManager, info}:IEmployee) =>{
 
     return(
         <div className={styles.employee}>
-            <img src={avatarPath ?? '/avatar.png'} alt="" />
+            <img src={avatarPath !==null ? avatarPath : '/avatar.png'} alt="" />
             <p>{name}</p>
             <p>{position}</p>
             {isExpanded && info}
