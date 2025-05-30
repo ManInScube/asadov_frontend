@@ -47,6 +47,12 @@ body {
   }
 }
 
+@media (min-width: 2400px) {
+  body {
+    font-size: 28px !important;
+  }
+}
+
 
 body {
   font-size: 14px; /* Базовый размер */
