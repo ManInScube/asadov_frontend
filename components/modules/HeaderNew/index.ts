@@ -1,7 +1,7 @@
 export const categories = {
     RU: {
         masterplan:'МАСТЕРПЛАНЫ',
-        hotel:'ГОСТИНИЧНЫЕ КОМПЛЕСЫ',
+        hotel:'ГОСТИНИЦЫ',
         living:'ЖИЛЬЕ',
         villas:'ПОСЕЛКИ/ВИЛЛЫ',
         offices:'ОФИСЫ',
@@ -31,7 +31,7 @@ export const categories = {
 
 export const categories2 = {
     RU: {
-        social:'МОП  и общественные',
+        social:'МОП и общественные',
         living:'ЖИЛЬЕ',
         horeca:'HoReCa',
         offices:'ОФИСЫ',

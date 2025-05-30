@@ -9,7 +9,7 @@ interface IEmployee{
 const Employee = ({avatarPath,name,position}:IEmployee) =>{
     return(
         <div className={styles.employee}>
-            <img src={avatarPath} alt="" />
+            <img src={avatarPath ?? '/avatar.png'} alt="" />
             <p>{name}</p>
             <p>{position}</p>
         </div>

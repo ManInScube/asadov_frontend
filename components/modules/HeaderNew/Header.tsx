@@ -233,7 +233,7 @@ useEffect(() => {
             {!isMobile ?
             <div className={styles.header__menu}>
                 <nav className={styles.header__nav}>
-                    <div onChange={(e)=>setType([e.target.value])}>
+                    <div onChange={(e)=>setType([e.target.value])} className={styles.header__pages}>
                         <label htmlFor="architecture">
                             <a href="/about">{language==='RU' ? 'О БЮРО' : 'ABOUT'}</a>
                         </label>

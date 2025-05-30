@@ -8,6 +8,10 @@
     position: relative;
     width: 100%;
 
+    &__pages{
+        font-size: 1.5em;
+    }
+
     &__menu{
         width: 75%;
     }
@@ -20,7 +24,7 @@
         // font-size: 0.6em
         label{
             padding: 0 3px !important;
-            font-size: 0.6em;
+            font-size: 0.8em;
             line-height: 1.2em;
         }
     }
@@ -220,13 +224,13 @@
     }
 
     &__nav{
-        font-size: 1.5em;
+        // font-size: 1.5em;
         font-family: $font-light;
         display: flex;
-        align-items: flex-end;
+        align-items: baseline;
         // justify-content: space-between;
         justify-content: flex-end;
-        line-height: 1em;
+        // line-height: 1em;
         a{
             text-decoration: none;
             padding: 0 12px;

@@ -244,7 +244,7 @@
     }
 
     &__infographics{
-        margin-top: 100px;
+        margin-top: 6.25em;
 
         @media (max-width: 560px) {
             padding-left: 50px;
@@ -330,7 +330,7 @@
     }
     
     &__awards{
-        margin-top: 100px;
+        margin-top: 6.25em;
 
         &Wrapper{
             position: relative;
@@ -354,7 +354,7 @@
             overflow-x: auto;
             white-space: nowrap;
             display: flex;
-            gap: 5em; /* Отступ между годами */
+            gap: 7em; /* Отступ между годами */
             background: #73A533;
             -ms-overflow-style: none;  /* IE и Edge */
             scrollbar-width: none;     /* Firefox */
@@ -401,7 +401,7 @@
     }
 
     &__clients{
-        margin-top: 100px;
+        margin-top: 6.25em;
 
         &Row{
             display: flex;
@@ -409,7 +409,7 @@
             justify-content: flex-start;
             flex-wrap: wrap;
             align-items: center;
-            gap: 20px;
+            gap: 2.5em;
             margin-top: 40px;
 
             a{
@@ -429,19 +429,21 @@
     }
 
     &__careers{
-        margin-top: 40px;
+        margin-top: 6.25em;
         &Row{
             display: flex;
             flex-direction: row;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 20px;
+            gap: 12px;
+            width: 82%;
+            margin: 0 auto;
+            margin-top: 2em;
         }
     }
 
     &__contacts{
-        margin-top: 100px;
+        margin-top: 6.25em;
         
         &Row{
             display: flex;

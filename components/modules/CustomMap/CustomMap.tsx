@@ -6,7 +6,8 @@ import { useCallback, useRef } from 'react';
 
 const containerStyle = {
   width: '100%',
-  height: '600px'
+  height: 'calc(100vh * 0.45)',
+  minHeight: '544px',
 };
 
 

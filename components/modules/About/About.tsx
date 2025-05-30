@@ -293,7 +293,7 @@ const toggleYear = (year: string) => {
             
                 <div className={styles.about__infographics}>
                     <div className={`${styles.about__infographicsItem} ${styles.about__infographicsEfficiency}`}>
-                        <h3>Эффетивность_</h3>
+                        <h3>Эффективность_</h3>
                         <p>В основе нашей работы - эффективная организация пространства и использование BIM-технологий. 35-летний опыт работы и слаженная команда позволяет добиваться необходимых результатов в сжатые сроки</p>
                     </div>
                     <div className={styles.about__infographicsGap}>
@@ -301,14 +301,14 @@ const toggleYear = (year: string) => {
                     </div>
                     <div className={`${styles.about__infographicsItem} ${styles.about__infographicsCreativity}`}>
                         <h3>Творчество_</h3>
-                        <p>В основе нашей работы - эффективная организация пространства и использование BIM-технологий. 35-летний опыт работы и слаженная команда позволяет добиваться необходимых результатов в сжатые сроки</p>
+                        <p>Мы считаем, что любой проект, будь то жилой комплекс или новый аэропорт, помимо эффективных решений, должен обладать ярким, запоминающимся образом, формирующим лицо города</p>
                     </div>
                     <div className={styles.about__infographicsGap}>
 
                     </div>
                     <div className={`${styles.about__infographicsItem} ${styles.about__infographicsPartnership}`}>
-                        <h3>Творчество_</h3>
-                        <p>В основе нашей работы - эффективная организация пространства и использование BIM-технологий. 35-летний опыт работы и слаженная команда позволяет добиваться необходимых результатов в сжатые сроки</p>
+                        <h3>Партнерство_</h3>
+                        <p>Кооперация и взаимодействие с различными экспертами и проектными компаниями - конструкторами, инженерами, экономистами, социологами - позволяет решать одновременно ряд крупных проектных задач, а также выступать в роли генерального проектировщика</p>
                     </div>
                 </div>
             </div>
@@ -347,7 +347,7 @@ const toggleYear = (year: string) => {
                             employees&&employees
                             .filter((item)=>item.isManager===false)
                             .map((item)=>(
-                                <Employee avatarPath={`https://testinscube.ru${item.avatar?.url}`} name={item.name} position={item.position} />
+                                <Employee avatarPath={item.avatar !==null ? `https://testinscube.ru${item.avatar?.url}` : false} name={item.name} position={item.position} />
                             ))
                         }
                     

@@ -29,13 +29,14 @@
     animation: slideIn 0.5s ease forwards; /* Анимация плавного появления */
     cursor: pointer;
     aspect-ratio: 1.75;
+    filter: contrast(1.2) grayscale(1) brightness(0.9);
 
 
     &__title, &__subtitle{
         display: block;
         position: absolute;
         font-size: 1.625em;
-        font-family: $font-black;
+        font-family: $font-light;
         color: white;
         z-index: 100;
         transition: all 1s ease-out;
@@ -62,6 +63,10 @@
     // &__subtitle{
     //   display: none;
     // }
+
+    &:hover{
+      filter: none;
+    }
     
 
     &:hover &__info{
