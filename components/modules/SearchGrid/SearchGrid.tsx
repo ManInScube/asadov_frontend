@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from '@/lib/hooks'
-import styles from '../../templates/Grid/Grid.module.scss'
+import styles from '@/components/templates/grid/Grid.module.scss'
 import { useEffect, useState } from 'react'
 import { setCurrentProject } from '@/lib/features/projects'
 import GridSkeleton from '@/components/elements/GridSkeleton/GridSkeleton'

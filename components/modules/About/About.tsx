@@ -177,7 +177,7 @@ const toggleYear = (year: string) => {
     }, [])
 
     useEffect(()=>{
-        fetch('https://testinscube.ru/api/klienties?populate=*')
+        fetch('https://testinscube.ru/api/klienties?pagination[limit]=100&&populate=*')
         .then((response)=>{
             return response.json()
         })
@@ -426,11 +426,11 @@ const toggleYear = (year: string) => {
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M43.0675 52.3507L33.2774 37.207L34.1172 36.6641L43.9073 51.8078L43.0675 52.3507Z" fill="#73A533"/>
                     </svg>
                     <h2>_ВАКАНСИИ</h2>
-                </div>
-                <div className={styles.about__careersRow}>
+                    <div className={styles.about__careersRow}>
                     {vacancies&&vacancies?.map((item,index)=>(
                         <Position url={`/#${item?.id}`} image={'/'} title={item?.title} id={item?.id}/>
                     ))}
+                </div>
                 </div>
             </div>
             <div className={styles.about__contacts}>

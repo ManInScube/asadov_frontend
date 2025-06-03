@@ -157,6 +157,14 @@
     }
   }
 
+  .arrowUp{
+    cursor: pointer;
+    position: fixed;
+    bottom: 1em;
+    right: 5em;
+    z-index: 10;
+  }
+
   @keyframes slideIn {
     from {
       opacity: 0;
