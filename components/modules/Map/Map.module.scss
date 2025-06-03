@@ -5,7 +5,7 @@
         position: absolute;
         display: flex;
         flex-direction: column;
-        width: 130px;
+        width: 260px;
 
         &__text{
             background: white;
@@ -14,7 +14,8 @@
         }
         span{
             height: 18px;
-            font-family: $font-black;
+            font-size: 2em;
+            font-family: $font-light;
         }
         img{
             position: relative;

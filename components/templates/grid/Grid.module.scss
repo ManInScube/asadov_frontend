@@ -29,7 +29,7 @@
     animation: slideIn 0.5s ease forwards; /* Анимация плавного появления */
     cursor: pointer;
     aspect-ratio: 1.75;
-    filter: contrast(1.2) grayscale(1) brightness(0.9);
+    // filter: contrast(1.2) grayscale(1) brightness(0.9);
 
 
     &__title, &__subtitle{
