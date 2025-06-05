@@ -13,13 +13,13 @@ const Vacancy = ({index,title,description, id}:IVacancy) =>{
         <div className={styles.vacancy} id={id}>
             <div className={styles.vacancy__left}>
                 <div className={styles.vacancy__index}>
-                    [{`0${index + 1}`}]
+                    <span>[{`0${index + 1}`}]</span>
                 </div>
                 <div>
                 </div>
             </div>
             <div className={styles.vacancy__right}>
-                <div className={styles.vacancy__title}>{title}</div>
+                <div className={styles.vacancy__title}><span>{title}</span></div>
                 <div className={styles.vacancy__description}>
                     <RichTextRenderer content={description}/>
                 </div>

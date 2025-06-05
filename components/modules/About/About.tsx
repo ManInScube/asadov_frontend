@@ -12,9 +12,11 @@ import kopylov from './src/kopylov.png'
 import borisovna from './src/borisovna.png'
 import kucherov from './src/kucherov.png'
 import erdenko from './src/erdenko.png'
+import erdenkoM from './src/erdenkoM.png'
 import tolokonov from './src/tolokonov.png'
 import bessonov from './src/bessonov.png'
 import sobolev from './src/sobolev.png'
+import schkuro from './src/schkuro.png'
 import vinogradova from './src/vinogradova.png'
 import sysoev from './src/sysoev.png'
 import zimuldinova from './src/zimuldinova.png'
@@ -200,6 +202,9 @@ const toggleYear = (year: string) => {
                 <div className={`${styles.about__bannerItem} ${styles.about__bannerOsman}`}>
                     <img src={osman.src} alt="" />
                 </div>
+                <div className={`${styles.about__bannerItem} ${styles.about__bannerHadji}`}>
+                    <img src={hadji.src} alt="" />
+                </div>
                 <div className={`${styles.about__bannerItem} ${styles.about__bannerBorisovna}`}>
                     <img src={borisovna.src} alt="" />
                 </div>
@@ -212,8 +217,14 @@ const toggleYear = (year: string) => {
                 <div className={`${styles.about__bannerItem} ${styles.about__bannerErdenko}`}>
                     <img src={erdenko.src} alt="" />
                 </div>
+                <div className={`${styles.about__bannerItem} ${styles.about__bannerErdenkoM}`}>
+                    <img src={erdenkoM.src} alt="" />
+                </div>
                 <div className={`${styles.about__bannerItem} ${styles.about__bannerTolokonov}`}>
                     <img src={tolokonov.src} alt="" />
+                </div>
+                <div className={`${styles.about__bannerItem} ${styles.about__bannerSchkuro}`}>
+                    <img src={schkuro.src} alt="" />
                 </div>
                 <div className={`${styles.about__bannerItem} ${styles.about__bannerSobolev}`}>
                     <img src={sobolev.src} alt="" />
@@ -408,7 +419,7 @@ const toggleYear = (year: string) => {
                         <path d="M47.4346 51.4912C48.6693 46.3051 53.6578 35.933 60.7702 32.9695C69.6605 29.2652 82.0264 29.4069 85.5892 32.9696C90.4048 37.7851 90.7752 43.7122 91.8865 51.4912" stroke="#73A533"/>
                     </svg>
 
-                    <h2>_КЛИЕНТЫ</h2>
+                    <h2>_КЛИЕНТЫ И ПАРТНЕРЫ</h2>
                 </div>
                 <div className={styles.about__clientsRow}>
                     {clients?.map(item => (

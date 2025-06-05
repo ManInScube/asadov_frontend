@@ -77,8 +77,12 @@ const HeaderProject = () =>{
     const handleCheckboxChange = (category:any) => {
         setSelectedCategories(category);
         router.push(`/?category=${category}`);
+    };
 
-      };
+    const handleTypeChange = (type:any) => {
+        // setType(e);
+        router.push(`/?type=${type}`);
+    };
 //сделать сортировку по порядку мб или добавить опцию в меню
     // useEffect(()=>{
     //     hh()
@@ -111,7 +115,7 @@ const HeaderProject = () =>{
             {!isMobile ?
             <div className={styles.header__menu}>
                 <nav className={styles.header__nav}>
-                    <div onChange={(e)=>setType([e.target.value])}>
+                    <div onChange={(e)=>handleTypeChange([e.target.value])}>
                         <label htmlFor="architecture">
                             <a href="/about">{language==='RU' ? 'О БЮРО' : 'ABOUT'}</a>
                         </label>

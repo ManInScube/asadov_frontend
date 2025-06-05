@@ -2,6 +2,7 @@ import { useAppSelector } from '@/lib/hooks';
 import {AdvancedMarker, APIProvider, Map, Marker} from '@vis.gl/react-google-maps';
 import { useEffect, useState } from 'react';
 import styles from './Map.module.scss'
+import {ColorScheme} from '@vis.gl/react-google-maps';
 
 const containerStyle = {
     width: '100%',

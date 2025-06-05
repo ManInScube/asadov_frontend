@@ -11,7 +11,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 
 
 const all = ['project', 'realisation'];
-const Header = () =>{
+const HeaderAbout = () =>{
     const [type, setType] = useState<string[]>(['architecture', 'interior'])
     const [status, setStatus] = useState<string[]>(['project', 'realisation'])
     const [selectedCategories, setSelectedCategories] = useState<string>()
@@ -458,4 +458,4 @@ useEffect(() => {
     )
 }
 
-export default Header
+export default HeaderAbout

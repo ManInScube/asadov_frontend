@@ -32,6 +32,7 @@ const Header = () =>{
 
     const searchParams = useSearchParams();
     const categoryUrl = searchParams.get("category");
+    const typeUrl = searchParams.get("type");
 
     const underscoreRef = useRef(null);
     const startingPointRef = useRef();  
@@ -74,10 +75,14 @@ const Header = () =>{
     }, [activeCategoryRef])
 
     useEffect(() => {
+        if(typeUrl)
+        {
+            setType([typeUrl])
+        }
         if (categoryUrl) {
             setSelectedCategories(categoryUrl);
         }
-    }, [categoryUrl]);
+    }, [categoryUrl, typeUrl]);
 
     useEffect(() => {
         if (categories) {
