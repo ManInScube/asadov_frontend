@@ -34,6 +34,8 @@ import efremkina from './src/efremkina.png'
 import borodin from './src/borodin.png'
 import afanasyeva from './src/afanasyeva.png'
 import polyanskaya from './src/polyanskaya.png'
+import margarita from './src/margarita.png'
+
 
 import subbanner from './src/subbanner.png'
 import CustomMap from '../CustomMap/CustomMap';
@@ -282,6 +284,12 @@ const toggleYear = (year: string) => {
                 </div>
                 <div className={`${styles.about__bannerItem} ${styles.about__bannerPolyanskaya}`}>
                     <img src={polyanskaya.src} alt="" />
+                </div>
+                <div className={`${styles.about__bannerItem} ${styles.about__bannerBessonov}`}>
+                    <img src={bessonov.src} alt="" />
+                </div>
+                <div className={`${styles.about__bannerItem} ${styles.about__bannerMargarita}`}>
+                    <img src={margarita.src} alt="" />
                 </div>
             </div>
             <div className={styles.about__info}>
