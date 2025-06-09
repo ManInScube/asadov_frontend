@@ -280,9 +280,10 @@
 
     ul{
         display: flex;
-        justify-content: space-between;
+        justify-content: flex-end;
         margin: 0;
         padding: 0;
+        gap: 20px;
         label input:checked ~ span{
             border: none;
         }
@@ -293,18 +294,6 @@
             // margin: 0 10px;
             // padding: 0 12px;
         }
-        
-            
-        // label input:checked ~ span:last-of-type{
-        //         position: absolute;
-        //         height: 3px;
-        //         width: 90%;
-        //         left: 6px;
-        //         bottom: -5px;
-        //         background-color: #73A533;
-        //         border-radius: 2px;
-        //     }
-        
 
         a{
             cursor: pointer;

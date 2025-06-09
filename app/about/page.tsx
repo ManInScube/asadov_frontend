@@ -1,14 +1,19 @@
 'use client'
 
-import Layout from "@/components/layout/Layout"
-import ProjectLayout from "@/components/layout/ProjectLayout"
+import AboutLayout from "@/components/layout/AboutLayout"
 import About from "@/components/modules/About/About"
-import Project from "@/components/modules/Project/Project"
+import { useEffect, useRef } from "react"
 
 export default function AboutPage(){
+    const sectionsRef = useRef<{ [key: string]: HTMLElement | null }>({});
+
+    const scrollToSection = (section) =>{
+        sectionsRef.current[section]?.scrollIntoView({behavior: 'smooth'})
+    }
+
     return(
-        <ProjectLayout>
-            <About />
-        </ProjectLayout>
+        <AboutLayout scrollHandler={scrollToSection}>
+            <About sectionsRef={sectionsRef} />
+        </AboutLayout>
     )
 }

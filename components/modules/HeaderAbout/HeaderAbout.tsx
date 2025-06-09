@@ -9,9 +9,12 @@ import { addProjects, toggleLanguage } from '@/lib/features/projects'
 import useMediaQuery from '@/hooks/useMediaQuery'
 import { useRouter, useSearchParams } from "next/navigation";
 
+interface IHeaderAbout{
+    scrollHandler: (args)=>void
+}
 
 const all = ['project', 'realisation'];
-const HeaderAbout = () =>{
+const HeaderAbout = ({scrollHandler}:IHeaderAbout) =>{
     const [type, setType] = useState<string[]>(['architecture', 'interior'])
     const [status, setStatus] = useState<string[]>(['project', 'realisation'])
     const [selectedCategories, setSelectedCategories] = useState<string>()
@@ -69,8 +72,6 @@ const HeaderAbout = () =>{
     useEffect(()=>{
         const startingPointY = startingPointRef.current.getBoundingClientRect().right -35;
         underscoreRef.current.style.left = `${startingPointY}px`;
-        console.log("Refs:", activeCategoryRef.current['education'].style);
-
     }, [activeCategoryRef])
 
     useEffect(() => {
@@ -94,11 +95,7 @@ const HeaderAbout = () =>{
 
           console.log(underlineRef.current.style);
         }
-      }, [activeIndex]);
-
-      useEffect(() => {
-        console.log("Selected Category:", selectedCategories); // Должно меняться при обновлении URL
-    }, [selectedCategories]);
+    }, [activeIndex]);
     
     async function hh(){
         try {
@@ -151,8 +148,6 @@ const HeaderAbout = () =>{
       };
 //сделать сортировку по порядку мб или добавить опцию в меню
 useEffect(() => {
-
-
     const positions = Object.keys(activeCategoryRef.current).map((key) => {
         const el = activeCategoryRef.current[key];
         if (el) {
@@ -178,7 +173,6 @@ useEffect(() => {
         underscoreRef.current.style.left = `${activeCategoryObj[0].left}px`;
         underscoreRef.current.style.width = `${activeCategoryObj[0].width}px`;
 
-        console.log("Координаты элементов:", activeCategoryObj[0].left);
         }
 
     }
@@ -187,11 +181,6 @@ useEffect(() => {
     }
     //!categoryUrl
     handleType(type);
-    
-
-
-
-    // console.log("Координаты элементов:", positions.filter(Boolean));
 
 
 }, [type, status, selectedCategories]);
@@ -326,7 +315,7 @@ useEffect(() => {
                     :
                     <ul onClick={() => setTest(true)}>
                         { Object.keys(currentCategories).map((item: string, index: number) => (
-                            <li key={item} ref={(el) => (activeCategoryRef.current[item] = el)} style={{ listStyle: 'none' }}>
+                            <li key={item} onClick={()=>scrollHandler(item)} ref={(el) => (activeCategoryRef.current[item] = el)} style={{ listStyle: 'none' }}>
                                 <HeaderFilterItem
                                     key={item}
                                     type={'radio'}
@@ -392,7 +381,7 @@ useEffect(() => {
                         className={styles.header__mobileList}
                     >
                     { Object.keys(currentCategories).map((item: string, index: number) => (
-                        <li key={item} ref={(el) => (activeCategoryRef.current[item] = el)} style={{ listStyle: 'none' }}>
+                        <a key={item} onClick={()=>scrollHandler(item)} ref={(el) => (activeCategoryRef.current[item] = el)} style={{ listStyle: 'none' }}>
                             <HeaderFilterItem
                                 key={item}
                                 type={'radio'}
@@ -404,7 +393,7 @@ useEffect(() => {
                                 ref={(el) => (menuRefs.current[index] = el)} // Присваиваем рефы элементам
                                 onClick={() => setActiveIndex(index)}
                             />
-                        </li>
+                        </a>
                     ))}
                     </ul>
                  <div onChange={(e)=>handleState(e.target.value)} className={styles.header__switch}> 

@@ -127,7 +127,7 @@ type Award = {
   ];
   
 
-const About = () =>{
+const About = ({sectionsRef}:{sectionsRef:any}) =>{
     const [employees, setEmployees] = useState<[]>();
     const [vacancies, setVacancies] = useState<[]>();
     const [clients, setClients] = useState<[]>();
@@ -292,7 +292,7 @@ const toggleYear = (year: string) => {
                     <img src={margarita.src} alt="" />
                 </div>
             </div>
-            <div className={styles.about__info}>
+            <div className={styles.about__info} id="about" ref={(el) => (sectionsRef.current['about'] = el)}>
                 <div className={styles.about__container}>
                     <span>
                         <svg width="50" height="62" viewBox="0 0 50 62" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -308,8 +308,6 @@ const toggleYear = (year: string) => {
                 </div>
             </div> 
             <div className={styles.about__container}>
-
-            
                 <div className={styles.about__infographics}>
                     <div className={`${styles.about__infographicsItem} ${styles.about__infographicsEfficiency}`}>
                         <h3>Эффективность_</h3>
@@ -361,7 +359,7 @@ const toggleYear = (year: string) => {
                     </div>
                 </div>
             </div>
-            <div className={styles.about__team}>
+            <div className={styles.about__team} id="team" ref={(el) => (sectionsRef.current['team'] = el)}>
             <div className={styles.about__container}>
                 <h2>_КОМАНДА</h2>
             </div>
@@ -376,7 +374,7 @@ const toggleYear = (year: string) => {
                     
                     </div>
             </div>
-            <div className={styles.about__awards}>
+            <div className={styles.about__awards} id="awards" ref={(el) => (sectionsRef.current['awards'] = el)}>
                 <div className={styles.about__container}>
                     <svg width="41" height="43" viewBox="0 0 41 43" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M24.5726 13.0047C24.5695 11.5537 24.3466 10.457 23.8533 9.73094C23.384 9.0402 22.6162 8.60924 21.305 8.60924C18.781 8.60924 17.0459 10.7301 17.0459 13.5275C17.0459 14.9857 17.2909 16.0917 17.8092 16.8234C18.3033 17.5208 19.1003 17.9531 20.4127 17.9531C21.8531 17.9531 22.6688 17.8051 23.2408 17.2224C23.8397 16.6123 24.275 15.4246 24.5726 13.0047Z" stroke="#73A533"/>
@@ -417,7 +415,7 @@ const toggleYear = (year: string) => {
                         </ul>
                     ))}
                 </div>}
-            <div className={styles.about__clients}>
+            <div className={styles.about__clients} id="clients" ref={(el) => (sectionsRef.current['clients'] = el)}>
                 <div className={styles.about__container}>
                     <svg width="93" height="53" viewBox="0 0 93 53" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M21.2082 13.7539C21.2113 17.3591 21.7544 20.2279 23.0825 22.1874C24.3868 24.112 26.5042 25.2381 29.8746 25.2381C36.5169 25.2381 40.9531 19.6274 40.9531 12.5223C40.9531 8.91065 40.3527 6.0322 38.9638 4.06648C37.5993 2.13533 35.4171 1.00781 32.0456 1.00781C28.5456 1.00781 26.2739 1.35074 24.6541 3.00518C23.0073 4.6872 21.9321 7.82406 21.2082 13.7539Z" stroke="#73A533"/>
@@ -437,7 +435,7 @@ const toggleYear = (year: string) => {
                     ))}
                 </div>
             </div>
-            <div className={styles.about__careers}>
+            <div className={styles.about__careers} id="carees" ref={(el) => (sectionsRef.current['careers'] = el)}>
                 <div className={styles.about__container}>
                 <svg width="57" height="53" viewBox="0 0 57 53" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M38.426 12.6187C26.8033 -2.05844 21.8657 -1.46032 12.5416 4.23956C3.21741 9.93944 3.84294 18.1927 9.79117 27.9231C15.7394 37.6536 26.673 41.8056 35.9972 36.1057C45.3213 30.4058 44.3742 22.3491 38.426 12.6187ZM41.9398 25.8267C42.1101 22.2013 40.5269 17.9844 37.6043 13.1919C31.8108 5.88332 27.8632 2.6374 24.377 1.75733C20.9659 0.896194 17.7301 2.23982 13.0631 5.09277C8.61528 7.81175 6.6766 11.0354 6.43702 14.6363C6.19182 18.3217 7.70973 22.6009 10.6444 27.4016C16.3905 36.8013 26.7519 40.5853 35.4756 35.2525C39.9214 32.5348 41.7735 29.3673 41.9398 25.8267Z" fill="#73A533"/>
@@ -452,7 +450,7 @@ const toggleYear = (year: string) => {
                 </div>
                 </div>
             </div>
-            <div className={styles.about__contacts}>
+            <div className={styles.about__contacts} ref={(el) => (sectionsRef.current['contacts'] = el)}>
                 <div className={styles.about__container}>
                     <svg width="56" height="61" viewBox="0 0 56 61" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M33.541 14.166C31.0703 14.166 29.5259 14.4116 28.4297 15.5312C27.3067 16.6783 26.5519 18.8423 26.041 23.0195C26.0437 25.5519 26.4265 27.538 27.3379 28.8828C28.2251 30.1917 29.6678 30.9707 32.0088 30.9707C36.5926 30.9707 39.6797 27.1015 39.6797 22.1445C39.6797 19.6071 39.2567 17.6129 38.3027 16.2627C37.3731 14.947 35.8832 14.1661 33.541 14.166Z" stroke="black"/>
