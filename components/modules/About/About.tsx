@@ -255,9 +255,6 @@ const toggleYear = (year: string) => {
                 <div className={`${styles.about__bannerItem} ${styles.about__bannerEfremkina}`}>
                     <img src={efremkina.src} alt="" />
                 </div>
-                <div className={`${styles.about__bannerItem} ${styles.about__bannerBorisovna}`}>
-                    <img src={borisovna.src} alt="" />
-                </div>
                 <div className={`${styles.about__bannerItem} ${styles.about__bannerStulova}`}>
                     <img src={stulova.src} alt="" />
                 </div>

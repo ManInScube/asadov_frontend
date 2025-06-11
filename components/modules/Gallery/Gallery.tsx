@@ -6,7 +6,7 @@ import 'swiper/css/free-mode';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
 import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
-import { CSSProperties, useState } from 'react';
+import { CSSProperties, useEffect, useRef, useState } from 'react';
 import styles from './Gallery.module.scss'
 
 interface IGalleryProps{
@@ -15,9 +15,22 @@ interface IGalleryProps{
 const Gallery = ({ gallery }: IGalleryProps) => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
   const [selectedImage, setSelectedImage] = useState<string | null>(null); // Храним ссылку на активное изображение
-
+  const prevRef = useRef(null);
+  const nextRef = useRef(null);
+  const [swiperInstance, setSwiperInstance] = useState(null);
+  useEffect(() => {
+    if (swiperInstance && prevRef.current && nextRef.current) {
+      // Привязка кнопок к Swiper navigation
+      swiperInstance.params.navigation.prevEl = prevRef.current;
+      swiperInstance.params.navigation.nextEl = nextRef.current;
+      swiperInstance.navigation.init();
+      swiperInstance.navigation.update();
+    }
+  }, [swiperInstance]);
   return (
-      <>
+      <div className={styles.gallery}>
+
+
           {/* Главная галерея */}
           <Swiper
               style={
@@ -26,6 +39,7 @@ const Gallery = ({ gallery }: IGalleryProps) => {
                       "--swiper-pagination-color": "#fff",
                   } as CSSProperties
               }
+              onSwiper={setSwiperInstance}
               spaceBetween={10}
               navigation={true}
               thumbs={{ swiper: thumbsSwiper }}
@@ -60,6 +74,17 @@ const Gallery = ({ gallery }: IGalleryProps) => {
                   1800: { slidesPerView: 6, spaceBetween: 10 },
               }}
           >
+            <a ref={prevRef} className={`${styles.arrow} ${styles.arrow__left}`}>
+                <svg width="18" height="31" viewBox="0 0 18 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M16.4746 1L1.99271 15.4819L16.4746 29.9638" stroke="white" stroke-width="2"/>
+                </svg>
+            </a>
+            <a ref={nextRef} className={`${styles.arrow} ${styles.arrow__right}`}>
+                <svg width="18" height="31" viewBox="0 0 18 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1.48242 1L15.9643 15.4819L1.48242 29.9638" stroke="white" stroke-width="2"/>
+                </svg>
+            </a>
+
               {gallery &&
                   gallery.map((item, index) => (
                       <SwiperSlide key={index} className={styles.swiper__slide}>
@@ -81,7 +106,7 @@ const Gallery = ({ gallery }: IGalleryProps) => {
                 </div>
               </div>
           )}
-      </>
+      </div>
   );
 };
 

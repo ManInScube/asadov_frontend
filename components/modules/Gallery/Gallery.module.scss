@@ -6,6 +6,10 @@
 }
 
 .swiper{
+    button{
+        position: absolute;
+        left: 0;
+    }
     &__row{
         // height: 150px;
         margin-top: 10px;
@@ -42,6 +46,35 @@
         img{
             width: 100%;
         }
+    }
+}
+
+.gallery{
+    position: relative;
+}
+
+.arrow{
+    position: absolute;
+    width: 2em;
+    height: 2em;
+    background: #73A533;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    bottom: calc(50% - 1em);
+    z-index: 11;
+    cursor: pointer;
+    svg{
+        height: 1.5em;
+    }
+
+    &__left{
+        left: 0;
+
+    }
+    &__right{
+        right: 0;
     }
 }
 
