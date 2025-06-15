@@ -247,6 +247,7 @@ useEffect(() => {
                 </svg>
             </a>
             {!isMobile ?
+            //DESKTOP BLOCK
             <div className={styles.header__menu}>
                 <nav className={styles.header__nav}>
                     <div onChange={(e)=>setType([e.target.value])} className={styles.header__pages}>
@@ -350,6 +351,7 @@ useEffect(() => {
 
             </div>
             :
+            //MOBILE BLOCK
             <div className={styles.header__icons}>
                 <a>
                     <svg viewBox="0 0 27 28" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -432,7 +434,8 @@ useEffect(() => {
                     <path d="M1 10L5 5.5L1 1" stroke="#73A533"/>
                     </svg> */}
 
-<div className={styles.language__toggle}>
+                    
+                    <div className={styles.language__toggle}>
                         <label>
                             <input
                                 type="radio"
