@@ -2,7 +2,7 @@
 
 import AboutLayout from "@/components/layout/AboutLayout"
 import About from "@/components/modules/About/About"
-import { useEffect, useRef } from "react"
+import { Suspense, useEffect, useRef } from "react"
 
 export default function AboutPage(){
     const sectionsRef = useRef<{ [key: string]: HTMLElement | null }>({});
@@ -12,8 +12,10 @@ export default function AboutPage(){
     }
 
     return(
-        <AboutLayout scrollHandler={scrollToSection}>
-            <About sectionsRef={sectionsRef} />
-        </AboutLayout>
+        <Suspense fallback={<div>Loading...</div>}>
+            <AboutLayout scrollHandler={scrollToSection}>
+                <About sectionsRef={sectionsRef} />
+            </AboutLayout>
+        </Suspense>
     )
 }
