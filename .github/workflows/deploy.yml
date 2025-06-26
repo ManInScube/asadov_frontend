@@ -11,29 +11,41 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
-    - name: Install dependencies
-      run: npm install
-
-    - name: Build Next.js app
+    - name: Install and build
       run: |
+        npm ci
         npm run build
-        ls -la .next  # Проверка что сборка создана
+        echo "New BUILD_ID: $(cat .next/BUILD_ID)"
 
-    - name: Deploy built files
-      uses: appleboy/scp-action@v0.1.3
+    - name: Secure cleanup (only .next and node_modules)
+      uses: appleboy/ssh-action@v1
       with:
         host: ${{ secrets.YC_HOST }}
         username: ${{ secrets.YC_USER }}
         key: ${{ secrets.YC_SSH_KEY }}
-        source: ".next/*,public/*,package.json"
-        target: "/var/www/testinscube"
-        overwrite: true
-        strip_components: 0
+        script: |
+          rm -rf /var/www/testinscube/.next
+          rm -rf /var/www/testinscube/node_modules
 
-    - name: Install production deps and restart
-      uses: appleboy/ssh-action@master
+    - name: Deploy with rsync (точная синхронизация)
+      uses: burnett01/rsync-deployments@v5
+      with:
+        switches: -avz --delete
+        path: ./
+        remote_path: /var/www/testinscube/
+        remote_host: ${{ secrets.YC_HOST }}
+        remote_user: ${{ secrets.YC_USER }}
+        remote_key: ${{ secrets.YC_SSH_KEY }}
+        exclude: |
+          .git
+          .github
+          .gitignore
+          README.md
+
+    - name: Install and restart
+      uses: appleboy/ssh-action@v1
       with:
         host: ${{ secrets.YC_HOST }}
         username: ${{ secrets.YC_USER }}
@@ -41,4 +53,6 @@ jobs:
         script: |
           cd /var/www/testinscube
           npm ci --production
-          pm2 restart test-next-app || pm2 start npm --name "test-next-app" -- start
+          pm2 delete test-next-app || true
+          pm2 start npm --name "test-next-app" -- start
+          echo "Active BUILD_ID: $(cat /var/www/testinscube/.next/BUILD_ID)"
