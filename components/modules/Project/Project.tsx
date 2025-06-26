@@ -59,6 +59,33 @@ const Project = () =>{
               behavior: "smooth",
             });
           };
+
+    const title = {
+        ru: {
+            location: 'Местоположение',
+            project: 'проекта',
+            building: 'постройки',
+            year: 'Год',
+            status: 'Статус',
+            team: 'Команда',
+            area: 'Показатели',
+            client: 'Заказчик',
+            field: 'Направление',
+            partners: 'Партнеры',
+        },
+        en: {
+            location: 'Location',
+            project: 'of project',
+            building: 'of building',
+            year: 'Year',
+            status: 'Status',
+            team: 'Team',
+            area: 'Area',
+            client: 'Client',
+            field: 'Field',
+            partners: 'Partners',
+        }
+    }      
     return(
         <main className={styles.project}>
             <div className={styles.project__banner}>
@@ -83,7 +110,7 @@ const Project = () =>{
                         {project?.place&&  
                             (
                                 <div className={styles.info}>
-                                    <span>Местоположение</span>
+                                    <span>{title[language].location}</span>
                                     <span>{project?.place}</span>
                                 </div>
                             )
@@ -91,7 +118,7 @@ const Project = () =>{
                         {project?.client&&  
                             (
                                 <div className={styles.info}>
-                                    <span>Заказчик</span>
+                                    <span>{title[language].client}</span>
                                     <span>{project?.client}</span>
                                 </div>
                             )
@@ -99,7 +126,7 @@ const Project = () =>{
                         {project?.year&&  
                             (
                                 <div className={styles.info}>
-                                    <span>Год {project?.project === 'project' ? 'проекта' : 'постройки'}</span>
+                                    <span>{title[language].year} {project?.project === 'project' ? title[language].project : title[language].building}</span>
                                     <span>{project?.year}</span>
                                 </div>    
                             )
@@ -108,7 +135,7 @@ const Project = () =>{
                         {project?.team&&  
                             (
                                 <div className={styles.info}>
-                                    <span>Команда</span>
+                                    <span>{title[language].team}</span>
                                     <span>{project?.team}</span>
                                 </div>   
                             )
@@ -117,7 +144,7 @@ const Project = () =>{
                         {project?.category&&  
                             (
                                 <div className={styles.info}>
-                                    <span>Направление</span>
+                                    <span>{title[language].field}</span>
                                     <span>{categories[project?.category]}</span>
                                 </div>   
                             )
@@ -126,7 +153,7 @@ const Project = () =>{
                         {project?.projectStatus&&  
                             (
                                 <div className={styles.info}>
-                                    <span>Статус</span>
+                                    <span>{title[language].status}</span>
                                     <span>{project?.projectStatus}</span>
                                 </div>   
                             )
@@ -135,7 +162,7 @@ const Project = () =>{
                         {project?.partners&&  
                             (
                                 <div className={styles.info}>
-                                    <span>Партнеры</span>
+                                    <span>{title[language].partners}</span>
                                     <span>{project?.partners}</span>
                                 </div>
                             )
@@ -143,7 +170,7 @@ const Project = () =>{
                         {project?.area &&  
                             (
                                 <div className={styles.info}>
-                                    <span>Показатели</span>
+                                    <span>{title[language].area}</span>
                                     <span>{project?.area}</span>
                                 </div>      
                             )
