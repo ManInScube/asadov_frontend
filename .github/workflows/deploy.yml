@@ -13,36 +13,56 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+
     - name: Install and build
       run: |
         npm ci
         npm run build
         echo "New BUILD_ID: $(cat .next/BUILD_ID)"
 
-    - name: Secure cleanup (only .next and node_modules)
+    - name: Prepare server (safe cleanup)
       uses: appleboy/ssh-action@v1
       with:
         host: ${{ secrets.YC_HOST }}
         username: ${{ secrets.YC_USER }}
         key: ${{ secrets.YC_SSH_KEY }}
         script: |
+          # Сохраняем .env если существует
+          if [ -f "/var/www/testinscube/.env" ]; then
+            cp /var/www/testinscube/.env /tmp/env_backup
+          fi
+          
+          # Очищаем только нужные директории
           rm -rf /var/www/testinscube/.next
           rm -rf /var/www/testinscube/node_modules
+          mkdir -p /var/www/testinscube/.next
 
-    - name: Deploy with rsync (точная синхронизация)
-      uses: burnett01/rsync-deployments@v5
+    - name: Deploy files (SCP)
+      uses: appleboy/scp-action@v1
       with:
-        switches: -avz --delete
-        path: ./
-        remote_path: /var/www/testinscube/
-        remote_host: ${{ secrets.YC_HOST }}
-        remote_user: ${{ secrets.YC_USER }}
-        remote_key: ${{ secrets.YC_SSH_KEY }}
-        exclude: |
-          .git
-          .github
-          .gitignore
-          README.md
+        host: ${{ secrets.YC_HOST }}
+        username: ${{ secrets.YC_USER }}
+        key: ${{ secrets.YC_SSH_KEY }}
+        source: ".next/,public/,package.json,package-lock.json,next.config.js,.env.production"
+        target: "/var/www/testinscube"
+        overwrite: true
+        strip_components: 0
+
+    - name: Restore .env
+      uses: appleboy/ssh-action@v1
+      with:
+        host: ${{ secrets.YC_HOST }}
+        username: ${{ secrets.YC_USER }}
+        key: ${{ secrets.YC_SSH_KEY }}
+        script: |
+          if [ -f "/tmp/env_backup" ]; then
+            mv /tmp/env_backup /var/www/testinscube/.env
+            chmod 600 /var/www/testinscube/.env
+          fi
 
     - name: Install and restart
       uses: appleboy/ssh-action@v1
