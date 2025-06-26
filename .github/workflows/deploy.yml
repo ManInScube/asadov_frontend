@@ -41,4 +41,4 @@ jobs:
         script: |
           cd /var/www/testinscube
           npm ci --production
-          pm2 restart testinscube || pm2 start npm --name "testinscube" -- start
+          pm2 restart restart test-next-app || pm2 start npm --name "restart test-next-app" -- start
