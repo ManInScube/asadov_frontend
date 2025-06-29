@@ -89,7 +89,7 @@ const Project = () =>{
     }      
 
         const currentTitlesMemo = useMemo(() => {
-            if (currentTitles && typeof currentTitles === 'object' && title[language]) {
+            if (currentTitles && typeof currentTitles === 'object' && currentTitles[language]) {
                 return setCurrentTitles[language];
             }
             return currentTitles['RU'] || {}; // fallback на RU, если язык не найден
