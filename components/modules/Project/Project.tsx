@@ -113,7 +113,7 @@ const Project = () =>{
                 </svg>
                 <h2 style={{marginTop:'10px'}}>{project?.title}</h2>
 
-                {/* <div className={styles.project__row}>
+                <div className={styles.project__row}>
                
                         {project?.place&&  
                             (
@@ -183,7 +183,7 @@ const Project = () =>{
                                 </div>      
                             )
                         }
-                </div> */}
+                </div>
                 
                 { project?.richDescription !== null ?
                     <div style={{marginTop: 40}}>
