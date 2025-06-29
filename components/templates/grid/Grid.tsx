@@ -91,7 +91,7 @@ const Grid = ({items}: IGridProps) =>{
                   {isMobile ? ArrowUpMobile : ArrowUp}
                 </a>
                 {visibleTiles.map((item,index)=>(
-                <a key={item.documentId} className={`${styles.gridItem} ${size.get(item.size)}`}
+                <a key={item.documentId} className={`${styles.gridItem} ${size.get(item.size ?? 2)}`}
                 style={{ animationDelay: `${index * 0.1}s` }} // Задержка для плавности
                 onClick={()=>dispatch(setCurrentProject(item.id))}
                 href={`/project/${item.documentId}`}

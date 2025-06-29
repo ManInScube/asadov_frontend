@@ -1,44 +1,44 @@
-name: Deploy to Yandex Cloud
+# name: Deploy to Yandex Cloud
 
-on:
-  push:
-    branches:
-      - main
+# on:
+#   push:
+#     branches:
+#       - main
 
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
+# jobs:
+#   deploy:
+#     runs-on: ubuntu-latest
 
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+#     steps:
+#     - name: Checkout code
+#       uses: actions/checkout@v3
 
-    - name: Install dependencies
-      run: npm install
+#     - name: Install dependencies
+#       run: npm install
 
-    - name: Build Next.js app
-      run: |
-        npm run build
-        ls -la .next  # Проверка что сборка создана
+#     - name: Build Next.js app
+#       run: |
+#         npm run build
+#         ls -la .next  # Проверка что сборка создана
 
-    - name: Deploy built files
-      uses: appleboy/scp-action@v0.1.3
-      with:
-        host: ${{ secrets.YC_HOST }}
-        username: ${{ secrets.YC_USER }}
-        key: ${{ secrets.YC_SSH_KEY }}
-        source: ".next/*,public/*,package.json"
-        target: "/var/www/testinscube"
-        overwrite: true
-        strip_components: 0
+#     - name: Deploy built files
+#       uses: appleboy/scp-action@v0.1.3
+#       with:
+#         host: ${{ secrets.YC_HOST }}
+#         username: ${{ secrets.YC_USER }}
+#         key: ${{ secrets.YC_SSH_KEY }}
+#         source: ".next/*,public/*,package.json"
+#         target: "/var/www/testinscube"
+#         overwrite: true
+#         strip_components: 0
 
-    - name: Install production deps and restart
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.YC_HOST }}
-        username: ${{ secrets.YC_USER }}
-        key: ${{ secrets.YC_SSH_KEY }}
-        script: |
-          cd /var/www/testinscube
-          npm ci --production
-          pm2 restart test-next-app || pm2 start npm --name "test-next-app" -- start
+#     - name: Install production deps and restart
+#       uses: appleboy/ssh-action@master
+#       with:
+#         host: ${{ secrets.YC_HOST }}
+#         username: ${{ secrets.YC_USER }}
+#         key: ${{ secrets.YC_SSH_KEY }}
+#         script: |
+#           cd /var/www/testinscube
+#           npm ci --production
+#           pm2 restart test-next-app || pm2 start npm --name "test-next-app" -- start

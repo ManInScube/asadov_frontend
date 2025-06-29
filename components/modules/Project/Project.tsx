@@ -1,5 +1,5 @@
 import { useAppSelector } from "@/lib/hooks"
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import styles from './Project.module.scss'
 import Gallery from "../Gallery/Gallery";
 import RichTextRenderer from "../RichTextRenderer/RichTextRenderer";
@@ -16,6 +16,7 @@ const Project = () =>{
     const [isExpanded, setIsExpanded] = useState(false);
     const language = useAppSelector(state=>state.projectsSlice.language)
     const isMobile = useMediaQuery('(max-width: 768px)');
+    const [currentTitles, setCurrentTitles] = useState<Object>(titles)
 
     const maxLength = 200;
 
@@ -86,6 +87,13 @@ const Project = () =>{
             partners: 'Partners',
         }
     }      
+
+        const currentTitlesMemo = useMemo(() => {
+            if (currentTitles && typeof currentTitles === 'object' && title[language]) {
+                return setCurrentTitles[language];
+            }
+            return currentTitles['RU'] || {}; // fallback на RU, если язык не найден
+        }, [currentTitles, language]);
     return(
         <main className={styles.project}>
             <div className={styles.project__banner}>
@@ -110,7 +118,7 @@ const Project = () =>{
                         {project?.place&&  
                             (
                                 <div className={styles.info}>
-                                    <span>{title[language].location}</span>
+                                    <span>{currentTitlesMemo[language].location}</span>
                                     <span>{project?.place}</span>
                                 </div>
                             )
@@ -118,7 +126,7 @@ const Project = () =>{
                         {project?.client&&  
                             (
                                 <div className={styles.info}>
-                                    <span>{title[language].client}</span>
+                                    <span>{currentTitlesMemo[language].client}</span>
                                     <span>{project?.client}</span>
                                 </div>
                             )
@@ -126,7 +134,7 @@ const Project = () =>{
                         {project?.year&&  
                             (
                                 <div className={styles.info}>
-                                    <span>{title[language].year} {project?.project === 'project' ? title[language].project : title[language].building}</span>
+                                    <span>{currentTitlesMemo[language].year} {project?.project === 'project' ? title[language].project : title[language].building}</span>
                                     <span>{project?.year}</span>
                                 </div>    
                             )
@@ -135,7 +143,7 @@ const Project = () =>{
                         {project?.team&&  
                             (
                                 <div className={styles.info}>
-                                    <span>{title[language].team}</span>
+                                    <span>{currentTitlesMemo[language].team}</span>
                                     <span>{project?.team}</span>
                                 </div>   
                             )
@@ -144,7 +152,7 @@ const Project = () =>{
                         {project?.category&&  
                             (
                                 <div className={styles.info}>
-                                    <span>{title[language].field}</span>
+                                    <span>{currentTitlesMemo[language].field}</span>
                                     <span>{categories[project?.category]}</span>
                                 </div>   
                             )
@@ -153,7 +161,7 @@ const Project = () =>{
                         {project?.projectStatus&&  
                             (
                                 <div className={styles.info}>
-                                    <span>{title[language].status}</span>
+                                    <span>{currentTitlesMemo[language].status}</span>
                                     <span>{project?.projectStatus}</span>
                                 </div>   
                             )
@@ -162,7 +170,7 @@ const Project = () =>{
                         {project?.partners&&  
                             (
                                 <div className={styles.info}>
-                                    <span>{title[language].partners}</span>
+                                    <span>{currentTitlesMemo[language].partners}</span>
                                     <span>{project?.partners}</span>
                                 </div>
                             )
@@ -170,7 +178,7 @@ const Project = () =>{
                         {project?.area &&  
                             (
                                 <div className={styles.info}>
-                                    <span>{title[language].area}</span>
+                                    <span>{currentTitlesMemo[language].area}</span>
                                     <span>{project?.area}</span>
                                 </div>      
                             )
