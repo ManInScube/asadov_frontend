@@ -93,7 +93,7 @@ const Project = () =>{
         //     }
         //     return currentTitles['RU'] || {}; // fallback на RU, если язык не найден
         // }, [currentTitles, language]);
-        const currentTitles = title[language] || title['ru']; // fallback на ru
+        const currentTitles = title[language?.toLowerCase?.()] || title['ru'];
 
     return(
         <main className={styles.project}>
