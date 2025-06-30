@@ -8,6 +8,33 @@ import useMediaQuery from "@/hooks/useMediaQuery";
 import ExpandButton from "@/components/elements/ExpandButton/ExpandButton";
 
 
+const title = {
+    ru: {
+        location: 'Местоположение',
+        project: 'проекта',
+        building: 'постройки',
+        year: 'Год',
+        status: 'Статус',
+        team: 'Команда',
+        area: 'Показатели',
+        client: 'Заказчик',
+        field: 'Направление',
+        partners: 'Партнеры',
+    },
+    en: {
+        location: 'Location',
+        project: 'of project',
+        building: 'of building',
+        year: 'Year',
+        status: 'Status',
+        team: 'Team',
+        area: 'Area',
+        client: 'Client',
+        field: 'Field',
+        partners: 'Partners',
+    }
+}    
+
 const Project = () =>{
     const [project, setProject] = useState(null);
     const url = window.location.pathname; // Получаем путь, например, "/project/40"
@@ -16,7 +43,7 @@ const Project = () =>{
     const [isExpanded, setIsExpanded] = useState(false);
     const language = useAppSelector(state=>state.projectsSlice.language)
     const isMobile = useMediaQuery('(max-width: 768px)');
-    const [currentTitles, setCurrentTitles] = useState<Object>(titles)
+    const [currentTitles, setCurrentTitles] = useState<Object>(title)
 
     const maxLength = 200;
 
@@ -59,34 +86,7 @@ const Project = () =>{
               top: window.innerHeight,
               behavior: "smooth",
             });
-          };
-
-    const title = {
-        ru: {
-            location: 'Местоположение',
-            project: 'проекта',
-            building: 'постройки',
-            year: 'Год',
-            status: 'Статус',
-            team: 'Команда',
-            area: 'Показатели',
-            client: 'Заказчик',
-            field: 'Направление',
-            partners: 'Партнеры',
-        },
-        en: {
-            location: 'Location',
-            project: 'of project',
-            building: 'of building',
-            year: 'Year',
-            status: 'Status',
-            team: 'Team',
-            area: 'Area',
-            client: 'Client',
-            field: 'Field',
-            partners: 'Partners',
-        }
-    }      
+          };  
 
         const currentTitlesMemo = useMemo(() => {
             if (currentTitles && typeof currentTitles === 'object' && currentTitles[language]) {
@@ -113,7 +113,7 @@ const Project = () =>{
                 </svg>
                 <h2 style={{marginTop:'10px'}}>{project?.title}</h2>
 
-                {/* <div className={styles.project__row}>
+                <div className={styles.project__row}>
                
                         {project?.place&&  
                             (
@@ -183,7 +183,7 @@ const Project = () =>{
                                 </div>      
                             )
                         }
-                </div> */}
+                </div>
                 
                 { project?.richDescription !== null ?
                     <div style={{marginTop: 40}}>
