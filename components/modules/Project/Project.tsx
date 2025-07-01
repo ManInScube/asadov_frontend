@@ -15,6 +15,12 @@ const title = {
         building: 'постройки',
         year: 'Год',
         status: 'Статус',
+        projectStatus: {
+            concept: 'Концепция',
+            project: 'Проект',
+            inprogress: 'Строительство',
+            realisation: 'Реализация'
+        },
         team: 'Команда',
         area: 'Показатели',
         client: 'Заказчик',
@@ -27,6 +33,12 @@ const title = {
         building: 'of building',
         year: 'Year',
         status: 'Status',
+        projectStatus: {
+            concept: 'concept',
+            project: 'project',
+            inprogress: 'in progress',
+            realisation: 'realisation'
+        },
         team: 'Team',
         area: 'Area',
         client: 'Client',
@@ -34,6 +46,13 @@ const title = {
         partners: 'Partners',
     }
 }    
+
+const projectStatus = {
+    concept: '',
+    project: ''
+    inprogress: '',
+    realisation: ''
+}
 
 const Project = () =>{
     const [project, setProject] = useState(null);
@@ -163,7 +182,7 @@ const Project = () =>{
                             (
                                 <div className={styles.info}>
                                     <span>{currentTitles.status}</span>
-                                    <span>{project?.projectStatus}</span>
+                                    <span>{currentTitles.status[project?.projectStatus]}</span>
                                 </div>   
                             )
                         }

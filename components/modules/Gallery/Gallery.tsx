@@ -45,6 +45,7 @@ const Gallery = ({ gallery }: IGalleryProps) => {
               thumbs={{ swiper: thumbsSwiper }}
               modules={[FreeMode, Navigation, Thumbs]}
               className={styles.swiper__img}
+              wrapperClass={styles.swiper__wrapper}
           >
               {gallery &&
                   gallery.map((item, index) => (
