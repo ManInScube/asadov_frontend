@@ -1,7 +1,7 @@
 import { GoogleMap, useLoadScript, LoadScript, Marker, Polyline } from '@react-google-maps/api';
 
 import myMarker from './marker.svg';
-import { useCallback, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 
 
 const containerStyle = {
@@ -44,6 +44,13 @@ return <MapLocal/>
 
 
   function MapLocal(){
+
+    // useEffect(()=>{
+    //   fetch('https://payload.lockbox.api.cloud.yandex.net/lockbox/v1/secrets/e6qhpnm975iroso0binc/payload')
+    //   .then((res)=>{
+    //     console.log(res.json().secretId)
+    //   })
+    // }, [])
     return (
       <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={17} onLoad={onLoad}>
         <Polyline
