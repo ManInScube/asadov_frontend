@@ -94,7 +94,7 @@ const Grid = ({items}: IGridProps) =>{
                 <a key={item.documentId} className={`${styles.gridItem} ${size.get(item.size ?? 2)}`}
                 style={{ animationDelay: `${index * 0.1}s` }} // Задержка для плавности
                 onClick={()=>dispatch(setCurrentProject(item.id))}
-                href={`/project/${item.documentId}`}
+                href={item.type === 'article' ? item.link : `/project/${item.documentId}`}
                 >
                    <img src={`https://testinscube.ru${item.cover?.formats?.large?.url}`} alt="" />
                    <div className={styles.gridItem__info}>

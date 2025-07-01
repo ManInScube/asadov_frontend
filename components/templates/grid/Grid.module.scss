@@ -124,6 +124,7 @@
   
   .medium_horizontal {
     grid-column: span 6;
+    aspect-ratio: 3.6;
     img {
         // height: 194px;
         @media screen and (max-width: 560px){
