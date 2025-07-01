@@ -47,13 +47,6 @@ const title = {
     }
 }    
 
-const projectStatus = {
-    concept: '',
-    project: ''
-    inprogress: '',
-    realisation: ''
-}
-
 const Project = () =>{
     const [project, setProject] = useState(null);
     const url = window.location.pathname; // Получаем путь, например, "/project/40"
@@ -182,7 +175,7 @@ const Project = () =>{
                             (
                                 <div className={styles.info}>
                                     <span>{currentTitles.status}</span>
-                                    <span>{currentTitles.status[project?.projectStatus]}</span>
+                                    <span>{currentTitles.projectStatus[project?.projectStatus]}</span>
                                 </div>   
                             )
                         }
