@@ -18,6 +18,16 @@ const Gallery = ({ gallery }: IGalleryProps) => {
   const prevRef = useRef(null);
   const nextRef = useRef(null);
   const [swiperInstance, setSwiperInstance] = useState(null);
+  const handleSlideChange = (swiper) => {
+    // Получаем активный слайд
+    const activeSlide = swiper.slides[swiper.activeIndex];
+    
+    // Находим изображение в активном слайде
+    const img = activeSlide.querySelector('img');
+    if (img) {
+      console.log('SRC активного изображения:', img.src);
+    }
+  };
   useEffect(() => {
     if (swiperInstance && prevRef.current && nextRef.current) {
       // Привязка кнопок к Swiper navigation
@@ -44,6 +54,7 @@ const Gallery = ({ gallery }: IGalleryProps) => {
               navigation={true}
               thumbs={{ swiper: thumbsSwiper }}
               modules={[FreeMode, Navigation, Thumbs]}
+              onSlideChange={handleSlideChange}
               className={styles.swiper__img}
               wrapperClass={styles.swiper__wrapper}
           >

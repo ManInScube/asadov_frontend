@@ -240,15 +240,15 @@ const HeaderProject = () =>{
             <div className={styles.header__mobile}>
                 <div className={styles.header__menu}>
                     <nav className={styles.header__mobile__nav}>
-                        <a href="https://asadov.studio/about_ru/">О БЮРО</a>
-                        <div onChange={(e)=>setType([e.target.value])}>
+                    <a href="/about">{language==='RU' ? 'О БЮРО' : 'ABOUT'}</a>
+                    <div onChange={(e)=>setType([e.target.value])}>
                             <label htmlFor="architecture">
                                 <input type="radio" name="type" id="architecture" value='architecture'/>
-                                <span>АРХИТЕКТУРА</span>
-                            </label>
+                                <span>{language==='RU' ? 'АРХИТЕКТУРА' : 'ARCHITECTURE'}</span>
+                                </label>
                             <label htmlFor="interior">
                                 <input type="radio" name="type" id="interior" value='interior'/>
-                                <span>ИНТЕРЬЕРЫ</span>
+                                <span>{language==='RU' ? 'ИНТЕРЬЕРЫ' : 'INTERIORS'}</span>
                             </label>
                         </div>
                         <div onChange={(e)=>setStatus([e.target.value])}>

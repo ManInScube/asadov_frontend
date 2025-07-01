@@ -115,7 +115,7 @@ const Header = () =>{
             articlesData.data.forEach((data)=>{
                 return{...data, type: 'articles'}
             })
-
+            console.log(articlesData.data)
             const combinedData = [...projectsData.data, ...articlesData.data];
             // Сортируем
             const sortedProjects = combinedData.sort((a, b) => {
@@ -141,6 +141,7 @@ const Header = () =>{
             articlesData.data.forEach((data)=>{
                 return{...data, type: 'articles'}
             })
+            console.log(articlesData.data)
             const combinedData = [...projectsData.data, ...articlesData.data];
             // Сортируем
             const sortedProjects = combinedData.sort((a, b) => {
