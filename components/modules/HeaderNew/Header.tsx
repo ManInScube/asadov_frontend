@@ -112,11 +112,8 @@ const Header = () =>{
 
             const articlesResponse = await fetch(`https://testinscube.ru/api/articles?${selectedCategories&&`filters[category][$in]=${selectedCategories}`}&populate=*`);
             const articlesData = await articlesResponse.json();
-            articlesData.data.forEach((data)=>{
-                return{...data, type: 'articles'}
-            })
-            console.log(articlesData.data)
-            const combinedData = [...projectsData.data, ...articlesData.data];
+            const modifiedData = articlesData.data.map(data => ({...data, type: 'articles'}));
+            const combinedData = [...projectsData.data, ...modifiedData];
             // Сортируем
             const sortedProjects = combinedData.sort((a, b) => {
                 if (!a.order) return 1;
@@ -138,11 +135,8 @@ const Header = () =>{
 
             const articlesResponse = await fetch(`https://testinscube.ru/api/articles?populate=*`);
             const articlesData = await articlesResponse.json();
-            articlesData.data.forEach((data)=>{
-                return{...data, type: 'articles'}
-            })
-            console.log(articlesData.data)
-            const combinedData = [...projectsData.data, ...articlesData.data];
+            const modifiedData = articlesData.data.map(data => ({...data, type: 'articles'}));
+            const combinedData = [...projectsData.data, ...modifiedData];
             // Сортируем
             const sortedProjects = combinedData.sort((a, b) => {
                 if (!a.order) return 1;

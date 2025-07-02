@@ -73,7 +73,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    bottom: calc(50% - 1em);
+    top: 50%; /* Смещаем верхний край элемента на 50% от родителя */
+    transform: translateY(-50%); /* Поднимаем элемент на половину его высоты */
     z-index: 11;
     cursor: pointer;
     svg{
@@ -100,6 +101,14 @@
     align-items: center;
     justify-content: center;
     z-index: 1000;
+
+    .arrow__left{
+        left: 10px;
+    }
+
+    .arrow__right{
+        right: 10px;
+    }
 }
 
 .modalContainer{

@@ -14,10 +14,11 @@ interface IGalleryProps{
 }
 const Gallery = ({ gallery }: IGalleryProps) => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
-  const [selectedImage, setSelectedImage] = useState<string | null>(null); // Храним ссылку на активное изображение
+  const [selectedImage, setSelectedImage] = useState<boolean>(false); // Храним ссылку на активное изображение
   const prevRef = useRef(null);
   const nextRef = useRef(null);
   const [swiperInstance, setSwiperInstance] = useState(null);
+  const [activeSlideImgLink, setActiveslideImageLink] = useState(null)
   const handleSlideChange = (swiper) => {
     // Получаем активный слайд
     const activeSlide = swiper.slides[swiper.activeIndex];
@@ -25,7 +26,8 @@ const Gallery = ({ gallery }: IGalleryProps) => {
     // Находим изображение в активном слайде
     const img = activeSlide.querySelector('img');
     if (img) {
-      console.log('SRC активного изображения:', img.src);
+    //   console.log('SRC активного изображения:', img.src);
+        setActiveslideImageLink(img.src);
     }
   };
   useEffect(() => {
@@ -63,7 +65,7 @@ const Gallery = ({ gallery }: IGalleryProps) => {
                       <SwiperSlide key={index}>
                           <img
                               src={`https://testinscube.ru${item.url}`}
-                              onClick={() => setSelectedImage(`https://testinscube.ru${item.url}`)} // Открываем модалку
+                              onClick={() => setSelectedImage(true)} // Открываем модалку
                               style={{ cursor: "pointer" }}
                           />
                       </SwiperSlide>
@@ -107,13 +109,23 @@ const Gallery = ({ gallery }: IGalleryProps) => {
 
           {/* Модальное окно */}
           {selectedImage && (
-              <div className={styles.modal} onClick={() => setSelectedImage(null)}>
+              <div className={styles.modal} onClick={() => setSelectedImage(false)}>
                 <div className={styles.modalContainer}>
+                    <a ref={prevRef} className={`${styles.arrow} ${styles.arrow__left}`}  onClick={(e) => e.stopPropagation()}>
+                        <svg width="18" height="31" viewBox="0 0 18 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M16.4746 1L1.99271 15.4819L16.4746 29.9638" stroke="white" stroke-width="2"/>
+                        </svg>
+                    </a>
+                    <a ref={nextRef} className={`${styles.arrow} ${styles.arrow__right}`}  onClick={(e) => e.stopPropagation()}>
+                        <svg width="18" height="31" viewBox="0 0 18 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1.48242 1L15.9643 15.4819L1.48242 29.9638" stroke="white" stroke-width="2"/>
+                        </svg>
+                    </a>
                     <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
-                        <span className={styles.close} onClick={() => setSelectedImage(null)}>
+                        <span className={styles.close} onClick={() => setSelectedImage(false)}>
                             &times;
                         </span>
-                        <img src={selectedImage} alt="Full Size" />
+                        <img src={activeSlideImgLink} alt="Full Size" />
                     </div>
                 </div>
               </div>
