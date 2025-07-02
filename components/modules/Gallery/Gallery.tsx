@@ -17,8 +17,9 @@ const Gallery = ({ gallery }: IGalleryProps) => {
   const [selectedImage, setSelectedImage] = useState<boolean>(false); // Храним ссылку на активное изображение
   const prevRef = useRef(null);
   const nextRef = useRef(null);
+  const swiperRef = useRef(null);
   const [swiperInstance, setSwiperInstance] = useState(null);
-  const [activeSlideImgLink, setActiveslideImageLink] = useState(null)
+  const [activeSlideImgLink, setActiveslideImageLink] = useState<string | null>(null)
   const handleSlideChange = (swiper) => {
     // Получаем активный слайд
     const activeSlide = swiper.slides[swiper.activeIndex];
@@ -28,6 +29,18 @@ const Gallery = ({ gallery }: IGalleryProps) => {
     if (img) {
     //   console.log('SRC активного изображения:', img.src);
         setActiveslideImageLink(img.src);
+    }
+  };
+
+  const goNext = () => {
+    if (swiperRef.current) {
+      swiperRef.current.swiper.slideNext();
+    }
+  };
+
+  const goPrev = () => {
+    if (swiperRef.current) {
+      swiperRef.current.swiper.slidePrev();
     }
   };
   useEffect(() => {
@@ -52,6 +65,7 @@ const Gallery = ({ gallery }: IGalleryProps) => {
                   } as CSSProperties
               }
               onSwiper={setSwiperInstance}
+              ref={swiperRef}
               spaceBetween={10}
               navigation={true}
               thumbs={{ swiper: thumbsSwiper }}
@@ -65,7 +79,7 @@ const Gallery = ({ gallery }: IGalleryProps) => {
                       <SwiperSlide key={index}>
                           <img
                               src={`https://testinscube.ru${item.url}`}
-                              onClick={() => setSelectedImage(true)} // Открываем модалку
+                              onClick={() => {setSelectedImage(true); activeSlideImgLink === null && setActiveslideImageLink(`https://testinscube.ru${item.url}`)} } // Открываем модалку
                               style={{ cursor: "pointer" }}
                           />
                       </SwiperSlide>
@@ -111,12 +125,12 @@ const Gallery = ({ gallery }: IGalleryProps) => {
           {selectedImage && (
               <div className={styles.modal} onClick={() => setSelectedImage(false)}>
                 <div className={styles.modalContainer}>
-                    <a ref={prevRef} className={`${styles.arrow} ${styles.arrow__left}`}  onClick={(e) => e.stopPropagation()}>
+                    <a className={`${styles.arrow} ${styles.arrow__left}`}  onClick={(e) => {e.stopPropagation(); goPrev()}}>
                         <svg width="18" height="31" viewBox="0 0 18 31" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M16.4746 1L1.99271 15.4819L16.4746 29.9638" stroke="white" stroke-width="2"/>
                         </svg>
                     </a>
-                    <a ref={nextRef} className={`${styles.arrow} ${styles.arrow__right}`}  onClick={(e) => e.stopPropagation()}>
+                    <a className={`${styles.arrow} ${styles.arrow__right}`}  onClick={(e) => {e.stopPropagation(); goNext()}}>
                         <svg width="18" height="31" viewBox="0 0 18 31" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M1.48242 1L15.9643 15.4819L1.48242 29.9638" stroke="white" stroke-width="2"/>
                         </svg>
