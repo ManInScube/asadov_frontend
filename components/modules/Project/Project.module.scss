@@ -52,7 +52,8 @@
             // max-width: 300px;
             // width: fit-content;
             width: 29%;
-            flex: 1 1  29%; 
+            // flex: 1 1 29%; 
+            flex: 0 1 29%; 
             min-width: 200px;
             @media screen and (max-width: 560px){
                 width: 100%;

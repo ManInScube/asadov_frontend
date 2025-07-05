@@ -35,7 +35,7 @@ const ProjectsMap = () =>{
 
     async function getData(){
         try {
-            const projectsResponse = await fetch(`https://testinscube.ru/api/projects?sort[0]=lat:desc&pagination[page]=1&pagination[pageSize]=25&locale=${language ? language?.toLowerCase() : 'ru' }&populate=*`)
+            const projectsResponse = await fetch(`https://testinscube.ru/api/projects?sort[0]=lat:desc&pagination[page]=1&pagination[pageSize]=100&locale=${language ? language?.toLowerCase() : 'ru' }&populate=*`)
             const projectsData = await projectsResponse.json()
             setProjects(projectsData.data);
         } catch (error) {

@@ -6,7 +6,7 @@ import 'swiper/css/free-mode';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
 import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
-import { CSSProperties, useEffect, useRef, useState } from 'react';
+import { CSSProperties, useCallback, useEffect, useRef, useState } from 'react';
 import styles from './Gallery.module.scss'
 
 interface IGalleryProps{
@@ -43,6 +43,26 @@ const Gallery = ({ gallery }: IGalleryProps) => {
       swiperRef.current.swiper.slidePrev();
     }
   };
+
+  const handleKeyDown = useCallback((event) => {
+    // Check for specific keys or combinations
+    if (event.key === 'ArrowLeft') {
+        goPrev()
+    }
+    if (event.key === 'ArrowRight') {
+        goNext();
+    }
+  }, [])
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [handleKeyDown]);
+
+
   useEffect(() => {
     if (swiperInstance && prevRef.current && nextRef.current) {
       // Привязка кнопок к Swiper navigation
