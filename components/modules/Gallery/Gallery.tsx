@@ -52,6 +52,9 @@ const Gallery = ({ gallery }: IGalleryProps) => {
     if (event.key === 'ArrowRight') {
         goNext();
     }
+    if (event.key === 'Escape') {
+        setSelectedImage(false);
+    }
   }, [])
 
   useEffect(() => {
