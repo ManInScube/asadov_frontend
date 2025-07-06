@@ -107,52 +107,22 @@ const Header = () =>{
     
     async function hh(){
         try {
-            // Функция для получения всех проектов с пагинацией
-            const getAllProjects = async () => {
-                let allProjects = [];
-                let start = 0;
-                const limit = 100;
-                
-                while (true) {
-                    const projectsResponse = await fetch(`https://testinscube.ru/api/projects?pagination[start]=${start}&pagination[limit]=${limit}&${type.map(item=>`filters[type][$in]=${item}`).join("&")}&${status.map(item=>`filters[state][$in]=${item}`).join("&")}&${selectedCategories&&`filters[category][$in]=${selectedCategories}`}&locale=${language ? language?.toLowerCase() : 'ru' }&populate=*`);
-                    const projectsData = await projectsResponse.json();
-                    
-                    // Добавляем полученные проекты к общему массиву
-                    allProjects.push(...projectsData.data);
-                    
-                    // Проверяем, есть ли еще проекты для загрузки
-                    const { total, start: currentStart, limit: currentLimit } = projectsData.meta.pagination;
-                    
-                    // Если загрузили все проекты, выходим из цикла
-                    if (currentStart + currentLimit >= total) {
-                        break;
-                    }
-                    
-                    // Увеличиваем start для следующего запроса
-                    start += limit;
-                }
-                
-                return allProjects;
-            };
-    
-            // Получаем все проекты
-            const allProjects = await getAllProjects();
-    
-            // Получаем статьи
+            const projectsResponse = await fetch(`https://testinscube.ru/api/projects?pagination[limit]=500&${type.map(item=>`filters[type][$in]=${item}`).join("&")}&${status.map(item=>`filters[state][$in]=${item}`).join("&")}&${selectedCategories&&`filters[category][$in]=${selectedCategories}`}&locale=${language ? language?.toLowerCase() : 'ru' }&populate=*`)
+            const projectsData = await projectsResponse.json();
+
             const articlesResponse = await fetch(`https://testinscube.ru/api/articles?${selectedCategories&&`filters[category][$in]=${selectedCategories}`}&populate=*`);
             const articlesData = await articlesResponse.json();
             const modifiedData = articlesData.data.map(data => ({...data, type: 'articles'}));
-    
+
             console.log(modifiedData)
-            const combinedData = [...allProjects, ...modifiedData];
-            
+            const combinedData = [...projectsData.data, ...modifiedData];
             // Сортируем
             const sortedProjects = combinedData.sort((a, b) => {
                 if (!a.order) return 1;
                 if (!b.order) return -1;
                 return a.order - b.order;
             });
-    
+
             // Диспатчим в store
             dispatch(addProjects(sortedProjects));
         } catch (error) {
@@ -162,7 +132,7 @@ const Header = () =>{
 
     async function getDefaultProjects(){
         try {
-            const projectsResponse = await fetch(`https://testinscube.ru/api/projects?pagination[limit]=100&${type.map(item => `filters[type][$in]=${item}`).join("&")}&locale=${language ? language?.toLowerCase() : 'ru'}&populate=*`)
+            const projectsResponse = await fetch(`https://testinscube.ru/api/projects?pagination[limit]=500&${type.map(item => `filters[type][$in]=${item}`).join("&")}&locale=${language ? language?.toLowerCase() : 'ru'}&populate=*`)
             const projectsData = await projectsResponse.json();
 
             const articlesResponse = await fetch(`https://testinscube.ru/api/articles?populate=*`);
