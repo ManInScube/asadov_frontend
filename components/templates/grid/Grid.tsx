@@ -92,7 +92,7 @@ const Grid = ({items}: IGridProps) =>{
         <>
           {visibleTiles?.length>0?
             <div className={styles.gridContainer}>
-                <a onClick={scrollUp} className={`${styles.arrowUp} ${!isMobile && styles.arrowUp}`}>
+                <a onClick={scrollUp} className={`${styles.arrowUp} ${!isMobile && styles.arrowUp_inversion}`}>
                   {isMobile ? ArrowUpMobile : ArrowUp}
                 </a>
                 {visibleTiles.map((item,index)=>(
