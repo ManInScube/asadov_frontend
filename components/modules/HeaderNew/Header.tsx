@@ -5,7 +5,7 @@ import styles from './Header.module.scss'
 import HeaderFilterItem from '@/components/elements/HeaderFilterItem/HeaderFilterItem'
 import { categories, categories2 } from '.'
 import { useAppDispatch, useAppSelector } from '@/lib/hooks'
-import { addProjects, toggleLanguage } from '@/lib/features/projects'
+import { addProjects, toggleLanguage, toggleSearchMode } from '@/lib/features/projects'
 import useMediaQuery from '@/hooks/useMediaQuery'
 import { useRouter, useSearchParams } from "next/navigation";
 
@@ -37,6 +37,11 @@ const Header = () =>{
     const underscoreRef = useRef(null);
     const startingPointRef = useRef();  
     const activeCategoryRef = useRef<{ [key: string]: HTMLLIElement | null }>({});
+    
+    const handleSearchMode = (val) =>{
+        setIsSearchMode(val)
+        dispatch(toggleSearchMode(val))
+    }
 
     const handleScroll = () => {
         setIsScrolled(window.scrollY > 10);
@@ -282,7 +287,7 @@ useEffect(() => {
                         </label>
                     </div>
                         <div className={styles.header__icons}>
-                            {!isSearchMode && <a onClick={()=>setIsSearchMode(true)}>
+                            {!isSearchMode && <a onClick={()=>handleSearchMode(true)}>
                                 <svg width="26" height="27" viewBox="0 0 26 27" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M4.72744 6.19502C6.35885 4.64385 7.52075 3.84951 8.92707 3.89985C10.3717 3.95168 12.2174 4.89662 15.1754 7.33226C16.7605 9.00325 17.7473 10.5457 17.9874 11.9918C18.2205 13.3953 17.7642 14.8021 16.2267 16.264C13.2231 19.1195 8.78412 18.5129 5.68439 15.2528C4.09395 13.58 3.12842 12.0061 2.91269 10.5293C2.70312 9.09449 3.18929 7.65759 4.72744 6.19502Z" stroke="#73A533"/>
                                     <path d="M15.7178 17.1572L20.9643 22.4037" stroke="#73A533"/>
@@ -317,7 +322,7 @@ useEffect(() => {
                 {
                     isSearchMode
                     ?
-                    <form className={styles.header__search} onSubmit={handleSearch} onBlurCapture={()=>setIsSearchMode(false)}>
+                    <form className={styles.header__search} onSubmit={handleSearch} onBlurCapture={()=>handleSearchMode(false)}>
                         <input 
                             type="text"
                             value={value}
@@ -430,15 +435,15 @@ useEffect(() => {
                     </div>
                 </div>
                 <a className={styles.mobile__langToggle} 
-                // onClick={()=>toggleLanguageHandler(language === 'RU' ? 'EN' : 'RU')}
+                onClick={()=>toggleLanguageHandler(language === 'RU' ? 'EN' : 'RU')}
                 >
-                    {/* <span>{language === 'RU' ? 'EN' : 'RU'}</span>
+                    <span>{language === 'RU' ? 'EN' : 'RU'}</span>
                     <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M1 10L5 5.5L1 1" stroke="#73A533"/>
-                    </svg> */}
+                    </svg>
 
                     
-                    <div className={styles.language__toggle}>
+                    {/* <div className={styles.language__toggle}>
                         <label>
                             <input
                                 type="radio"
@@ -459,7 +464,7 @@ useEffect(() => {
                             />
                             <span>РУ</span>
                         </label>
-                    </div>
+                    </div> */}
 
                 </a>
 

@@ -113,6 +113,7 @@
   .large {
     grid-column: span 6;
     grid-row: span 2;
+    aspect-ratio: 1.73 !important;
     img{
       // height: 400px;
 
@@ -180,5 +181,21 @@
   /* Анимация с задержкой */
   .gridItem[data-delay] {
     animation-delay: attr(data-delay s);
+  }
+
+  #scrollTopArrow {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: 1000;
+    color: white; /* Изначальный цвет (инвертируется) */
+    mix-blend-mode: difference; /* Автоматическая инверсия цвета */
   }
   

@@ -1,6 +1,7 @@
 'use client'
 import Layout from "@/components/layout/Layout";
 import Grid from "@/components/templates/grid/Grid";
+import { useAppSelector } from "@/lib/hooks";
 import { useEffect, useState } from "react";
 
 export default function Home() {
@@ -23,12 +24,18 @@ export default function Home() {
     setList(combined)
   }
 
+  const isSearchMode = useAppSelector(state => state.projectsSlice?.isSearchMode ?? false);
+
+
   useEffect(()=>{
     // getList()
   },[])
     return (
     <Layout>
-        <Grid items={[]}/>
+       {isSearchMode 
+       ? <div style={{ width: '100%', height: '100vh' }}></div> 
+       : <Grid items={[]}
+       />}
     </Layout>
     );
   }

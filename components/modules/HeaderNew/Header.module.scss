@@ -10,6 +10,9 @@
 
     &__pages{
         font-size: 1.5em;
+        label:first-of-type{
+            margin-right: 5px;
+        }
     }
 
     &__menu{
@@ -114,6 +117,7 @@
             flex-direction: row;
             justify-content: center;
             align-items: center;
+            font-size: 1.3em;
 
             span{
                 margin-right: 4px;

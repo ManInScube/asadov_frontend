@@ -159,7 +159,7 @@ const toggleYear = (year: string) => {
     });
   };
     useEffect(()=>{
-        fetch('https://testinscube.ru/api/employees?populate=*')
+        fetch('https://testinscube.ru/api/employees?pagination[limit]=100&populate=*')
         .then((response)=>{
             return response.json()
         })

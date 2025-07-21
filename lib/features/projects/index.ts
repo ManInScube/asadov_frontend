@@ -5,6 +5,7 @@ const initialState = {
     currentProject: null,
     page: 1,
     language: typeof window !== "undefined" ? localStorage.getItem('language') : 'RU',
+    isSearchMode: false,
 };
 
 export const projectsSlice = createSlice({
@@ -25,8 +26,11 @@ export const projectsSlice = createSlice({
             localStorage.setItem('language', lang); // сохраняем
             return { ...state, language: lang };
         },
+        toggleSearchMode: (state, action) => {
+            return { ...state, language: action.payload };
+        },
     },
 });
 
-export const { addProjects, setCurrentProject, incrementPage, toggleLanguage } = projectsSlice.actions;
+export const { addProjects, setCurrentProject, incrementPage, toggleLanguage, toggleSearchMode } = projectsSlice.actions;
 export default projectsSlice.reducer;

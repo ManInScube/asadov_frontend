@@ -21,6 +21,20 @@ const title = {
             inprogress: 'Строительство',
             realisation: 'Реализация'
         },
+        fields: {
+            masterplan:'Мастерпланы',
+            hotel:'Гостиницы',
+            living:'Жилье',
+            villas:'Поселки/Виллы',
+            offices:'Офсиы',
+            culture:'Культура',
+            med:'Медицина',
+            education:'Образование',
+            sport:'Спорт',
+            market:'Торговля',
+            transport:'Транспорт',
+            improvement:'Благоустройство',
+        },
         team: 'Команда',
         area: 'Показатели',
         client: 'Заказчик',
@@ -38,6 +52,20 @@ const title = {
             project: 'project',
             inprogress: 'in progress',
             realisation: 'realisation'
+        },
+        fields: {
+            masterplan:'Masterplan',
+            hotel:'Hotel',
+            living:'Living',
+            villas:'Villas',
+            offices:'Offices',
+            culture:'Culture',
+            med:'Medicine',
+            education:'Education',
+            sport:'Sport',
+            market:'Market',
+            transport:'Transport',
+            improvement:'Improvement',
         },
         team: 'Team',
         area: 'Area',
@@ -166,7 +194,7 @@ const Project = () =>{
                             (
                                 <div className={styles.info}>
                                     <span>{currentTitles.field}</span>
-                                    <span>{categories[project?.category]}</span>
+                                    <span>{currentTitles.fields[project?.category]}</span>
                                 </div>   
                             )
                         }

@@ -16,6 +16,10 @@ body {
   overflow-x: hidden;
 }
 
+html {
+  scrollbar-gutter: stable;
+}
+
 .youtube{
   height: 40px !important;
 }
