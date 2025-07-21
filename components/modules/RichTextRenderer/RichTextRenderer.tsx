@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import styles from './RichTextRenderer.module.css';
+import styles from './RichTextRenderer.module.scss'
 
 // Список предлогов и союзов для автопереноса
 const HANGING_WORDS = [
