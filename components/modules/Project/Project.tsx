@@ -185,7 +185,7 @@ const Project = () =>{
                             (
                                 <div className={styles.info}>
                                     <span>{currentTitles.team}</span>
-                                    <span>{project?.team}</span>
+                                    <AuthorsList authors={project?.team} />
                                 </div>   
                             )
                         }

@@ -1,35 +1,76 @@
-import styles from './RichTextRenderer.module.scss'
+import { useEffect, useRef } from 'react';
+import styles from './RichTextRenderer.module.css';
+
+// Список предлогов и союзов для автопереноса
+const HANGING_WORDS = [
+  'в', 'без', 'до', 'из', 'к', 'на', 'по', 'о', 'от', 'перед',
+  'при', 'через', 'с', 'у', 'за', 'над', 'об', 'под', 'про',
+  'и', 'а', 'но', 'да', 'или', 'либо', 'то', 'ни', 'не'
+];
 
 const RichTextRenderer = ({ content }) => {
-    return (
-      <div className={styles.richTextRenderer}>
-        {content?.map((node, index) => {
-          if (node.type === "heading") {
-            const Tag = `h${node.level || 1}`; // Определяем уровень заголовка
-            return (
-              <Tag key={index}>
-                {node.children.map((child, i) =>
-                  child.bold ? <strong key={i}>{child.text}</strong> : child.text
-                )}
-              </Tag>
-            );
-          }
-  
-          if (node.type === "paragraph") {
-            return (
-              <p key={index}>
-                {node.children.map((child, i) =>
-                  child.bold ? <strong key={i}>{child.text}</strong> : child.text
-                )}
-              </p>
-            );
-          }
-  
-          return null; // Пропускаем неизвестные элементы
-        })}
-      </div>
-    );
+  const containerRef = useRef(null);
+
+  // Функция для обработки висячих предлогов в тексте
+  const fixHangingPrepositions = (text) => {
+    if (!text) return text;
+    
+    const regex = new RegExp(`(^|\\s)([${HANGING_WORDS.join('')}]+)\\s`, 'gi');
+    return text.replace(regex, '$1$2\u00A0'); // Заменяем пробел на неразрывный
   };
 
-  export default RichTextRenderer;
-  
+  // Обработка висячих предлогов после рендеринга
+  useEffect(() => {
+    if (containerRef.current) {
+      const processTextNodes = (node) => {
+        if (node.nodeType === Node.TEXT_NODE) {
+          const newText = fixHangingPrepositions(node.nodeValue);
+          if (newText !== node.nodeValue) {
+            node.nodeValue = newText;
+          }
+        } else if (node.nodeType === Node.ELEMENT_NODE) {
+          Array.from(node.childNodes).forEach(processTextNodes);
+        }
+      };
+
+      processTextNodes(containerRef.current);
+    }
+  }, [content]);
+
+  // Функция для рендеринга текста с учетом жирного начертания
+  const renderText = (children) => {
+    return children.map((child, i) => {
+      if (child.bold) {
+        return <strong key={i}>{fixHangingPrepositions(child.text)}</strong>;
+      }
+      return fixHangingPrepositions(child.text);
+    });
+  };
+
+  return (
+    <div className={styles.richTextRenderer} ref={containerRef}>
+      {content?.map((node, index) => {
+        if (node.type === "heading") {
+          const Tag = `h${node.level || 1}`;
+          return (
+            <Tag key={index}>
+              {renderText(node.children)}
+            </Tag>
+          );
+        }
+
+        if (node.type === "paragraph") {
+          return (
+            <p key={index}>
+              {renderText(node.children)}
+            </p>
+          );
+        }
+
+        return null;
+      })}
+    </div>
+  );
+};
+
+export default RichTextRenderer;

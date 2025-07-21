@@ -165,6 +165,11 @@
     bottom: 1em;
     right: 5em;
     z-index: 10;
+
+    &_inversion{
+      mix-blend-mode: plus-lighter;
+      filter: invert(0.7);
+    }
   }
 
   @keyframes slideIn {

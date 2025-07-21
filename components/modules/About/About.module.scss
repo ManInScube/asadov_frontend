@@ -454,6 +454,10 @@
             gap: 2.5em;
             margin-top: 40px;
 
+            @media (max-width: 560px) {
+                justify-content: space-between;
+            }
+
             a{
                 width: 5.5em;
                 cursor: pointer;

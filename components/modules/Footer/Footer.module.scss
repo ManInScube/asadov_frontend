@@ -75,7 +75,7 @@
     }
 
     h2{
-        font-size: 1.5em;
+        font-size: calc(1.5em - 2px);
         color: $black;
         font-weight: 300;
         @media screen and (max-width: 560px){
@@ -98,7 +98,7 @@
             text-decoration: none;
             list-style: none;
             flex: 1 1 40%;
-            font-size: 0.875em;
+            font-size: calc(0.875em - 2px);
             @media screen and (max-width: 560px){
                 flex: 1 1 100%;
             }
