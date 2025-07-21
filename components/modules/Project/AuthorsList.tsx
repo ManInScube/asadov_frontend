@@ -30,3 +30,5 @@ const AuthorsList = ({ authors }) => {
     </div>
   );
 };
+
+export default AuthorsList;

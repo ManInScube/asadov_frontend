@@ -6,6 +6,7 @@ import RichTextRenderer from "../RichTextRenderer/RichTextRenderer";
 import { categories } from "../HeaderNew";
 import useMediaQuery from "@/hooks/useMediaQuery";
 import ExpandButton from "@/components/elements/ExpandButton/ExpandButton";
+import AuthorsList from "./AuthorsList";
 
 
 const title = {
