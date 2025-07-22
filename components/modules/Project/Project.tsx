@@ -7,6 +7,7 @@ import { categories } from "../HeaderNew";
 import useMediaQuery from "@/hooks/useMediaQuery";
 import ExpandButton from "@/components/elements/ExpandButton/ExpandButton";
 import AuthorsList from "./AuthorsList";
+import ProjectMap from "../ProjectMap/ProjectMap";
 
 
 const title = {
@@ -275,6 +276,10 @@ const Project = () =>{
             <div className={styles.project__gallery}>
                 <Gallery gallery={project?.gallery}/>
             </div>
+
+            {(project?.lat && project?.lng) && <div className={styles.project__maop}>
+                <ProjectMap position={{lat: project?.lat, lng: project?.lng }} />
+            </div>}
         </main>
     )
 }
