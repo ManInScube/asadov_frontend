@@ -94,18 +94,6 @@
         width: 100%;
         gap: 25px;
     }
-
-    &__teamLeft{
-        font-family: $font-black;
-        font-size: 1em;
-        width:140px;
-        text-align: left;
-    }
-
-    &__teamRight{
-        font-family: $font-light;
-        font-size: 1em;
-    }
     
     span:first-of-type{
         font-family: $font-black;
@@ -119,6 +107,18 @@
         @media screen and (max-width: 560px){
            text-align: left;
         }
+    }
+
+    &__teamLeft{
+        font-family: $font-black !important;
+        font-size: 1em !important;
+        width:140px;
+        text-align: left;
+    }
+
+    &__teamRight{
+        font-family: $font-light;
+        font-size: 1em;
     }
 }
 
