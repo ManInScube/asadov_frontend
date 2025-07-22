@@ -1,5 +1,5 @@
 
-const AuthorsList = ({ authors }) => {
+const AuthorsList = ({ authors, className }) => {
     // Преобразуем строку в массив, удаляя лишние пробелы
     const authorsArray = typeof authors === 'string' 
       ? authors.split(',').map(author => author.trim()) 
@@ -16,11 +16,11 @@ const AuthorsList = ({ authors }) => {
     const secondColumn = shouldSplit ? authorsArray.slice(splitIndex) : [];
     
     return (
-      <div style={{ display: 'flex' }}>
+      <div style={{ display: 'flex' }} className={className}>
         {/* Первый столбец */}
         <div style={{ marginRight: '20px' }}>
           {firstColumn.map((author, index) => (
-            <div key={index}>- {author}</div>
+            <div key={index}>{author}</div>
           ))}
         </div>
         
@@ -28,7 +28,7 @@ const AuthorsList = ({ authors }) => {
         {shouldSplit && (
           <div>
             {secondColumn.map((author, index) => (
-              <div key={index}>- {author}</div>
+              <div key={index}>{author}</div>
             ))}
           </div>
         )}

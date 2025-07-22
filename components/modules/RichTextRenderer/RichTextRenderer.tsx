@@ -4,7 +4,7 @@ import styles from './RichTextRenderer.module.scss';
 const fixHangingPrepositions = (text) => {
   if (!text) return text;
   
-  const prepositions = ['в', 'без', 'до', 'из', 'к', 'на', 'по', 'о', 'от', 'перед', 
+  const prepositions = ['но и', 'и не', 'и в', 'из-за', 'то есть', 'как бы', 'в', 'без', 'до', 'из', 'к', 'на', 'по', 'о', 'от', 'перед', 
                        'при', 'через', 'с', 'у', 'за', 'над', 'об', 'под', 'про', 
                        'и', 'а', 'но', 'да', 'или', 'либо', 'то', 'ни', 'не'];
   
