@@ -102,6 +102,14 @@ const Project = () =>{
         }
     },[])
 
+    useEffect(()=>{
+        console.log(projects)
+        if(projects && projects?.length > 0)
+        {
+            console.log(projects.slice(0, 4))
+        }
+    },[projects])
+
     const projectId = useAppSelector(state=>state.projectsSlice.currentProject)
     async function getProject() {
         try {
