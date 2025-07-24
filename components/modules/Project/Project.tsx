@@ -84,6 +84,7 @@ const Project = () =>{
 
     const [isExpanded, setIsExpanded] = useState(false);
     const language = useAppSelector(state=>state.projectsSlice.language)
+    const projects = useAppSelector(state=>state.projectsSlice.list)
     const isMobile = useMediaQuery('(max-width: 768px)');
 
     const maxLength = 200;
@@ -94,6 +95,11 @@ const Project = () =>{
 
     useEffect(()=>{
         getProject()
+
+        if(projects && projects?.length > 0)
+        {
+            console.log(projects.slice(0, 4))
+        }
     },[])
 
     const projectId = useAppSelector(state=>state.projectsSlice.currentProject)
