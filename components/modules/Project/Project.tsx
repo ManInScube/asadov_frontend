@@ -303,7 +303,7 @@ const Project = () =>{
 
             <div className={styles.project__similar}>
                 <div className={styles.project__container}>
-                    <span className={styles.project__similarTile}>{currentTitles.seeSimilar}</span>
+                    <span className={styles.project__similarTitle}>{currentTitles.seeSimilar}</span>
                 </div>
                 <div className={styles.gridContainer}>
                     {
