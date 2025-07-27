@@ -91,9 +91,21 @@
             margin-bottom: 10px;
         }
     }
+
+    &__container{
+        width: 65%;
+        margin: 0 auto;
+        margin-top: 3em;
+
+
+        @media (max-width: 560px) {
+            width: 100%;
+            padding: 0 10px;
+        }
+    }
+
     &__similar{
         width: 100%;
-        margin-top: 3em;
 
         &Title{
             font-family: $font-light;

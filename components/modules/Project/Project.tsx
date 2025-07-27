@@ -97,8 +97,9 @@ const Project = () =>{
 
     useEffect(()=>{
         getProject()
-
-        getSimilatProjects()
+        .then(()=>{
+            getSimilatProjects()
+        })
     },[])
 
     const projectId = useAppSelector(state=>state.projectsSlice.currentProject)
@@ -301,7 +302,9 @@ const Project = () =>{
             </div>}
 
             <div className={styles.project__similar}>
-                <span className={styles.project__similarTile}>{currentTitles.seeSimilar}</span>
+                <div className={styles.project__container}>
+                    <span className={styles.project__similarTile}>{currentTitles.seeSimilar}</span>
+                </div>
                 <div className={styles.gridContainer}>
                     {
                         similarProjects !== null && similarProjects?.map((item) => (
