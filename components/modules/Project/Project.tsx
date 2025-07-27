@@ -8,7 +8,6 @@ import useMediaQuery from "@/hooks/useMediaQuery";
 import ExpandButton from "@/components/elements/ExpandButton/ExpandButton";
 import AuthorsList from "./AuthorsList";
 import ProjectMap from "../ProjectMap/ProjectMap";
-import gridStyles from '../../templates/Grid/Grid.module.scss'
 
 
 const title = {
@@ -303,10 +302,10 @@ const Project = () =>{
 
             <div className={styles.project__similar}>
                 <span className={styles.project__similarTile}>{currentTitles.seeSimilar}</span>
-                <div className={gridStyles.gridContainer}>
+                <div className={styles.gridContainer}>
                     {
                         similarProjects !== null && similarProjects?.map((item) => (
-                            <a key={item.documentId} className={`${gridStyles.gridItem} ${gridStyles.small}`}
+                            <a key={item.documentId} className={`${styles.gridItem} ${styles.small}`}
                                 href={item?.type === 'articles' ? item.link : `/project/${item?.documentId}`}
                             >
                                 <img src={`https://testinscube.ru${item?.type ==='articles' ? item?.cover?.[0].formats?.large?.url : item.cover?.formats?.large?.url}`} alt="" />
