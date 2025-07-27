@@ -27,7 +27,7 @@ export const projectsSlice = createSlice({
             return { ...state, language: lang };
         },
         toggleSearchMode: (state, action) => {
-            return { ...state, language: action.payload };
+            return { ...state, isSearchMode: action.payload };
         },
     },
 });
