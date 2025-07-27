@@ -90,19 +90,21 @@ const Project = () =>{
     const isMobile = useMediaQuery('(max-width: 768px)');
 
     const maxLength = 200;
+    const projectId = useAppSelector(state=>state.projectsSlice.currentProject)
 
     const toggleExpand = () => {
       setIsExpanded(!isExpanded);
     };
 
-    useEffect(()=>{
+    useEffect(() => {
         getProject()
-        .then(()=>{
-            getSimilatProjects()
-        })
-    },[])
-
-    const projectId = useAppSelector(state=>state.projectsSlice.currentProject)
+            .then((projectData) => {
+                if (projectData) {
+                    getSimilarProjects(projectData.category);
+                }
+            })
+    }, [])
+    
     async function getProject() {
         try {
             const primaryResponse = await fetch(`https://testinscube.ru/api/projects?filters[documentId][$eq]=${id}&locale=${language?.toLowerCase()}&populate=*`);
@@ -110,36 +112,36 @@ const Project = () =>{
     
             if (primaryData.data && primaryData.data.length > 0) {
                 setProject(primaryData.data[0]);
-                return;
+                return primaryData.data[0]; // Возвращаем данные
             }
     
             const fallbackResponse = await fetch(`https://testinscube.ru/api/projects?filters[documentId][$eq]=${id}&populate=*`);
             const fallbackData = await fallbackResponse.json();
     
-            if (fallbackData.data) {
+            if (fallbackData.data && fallbackData.data.length > 0) {
                 console.log(fallbackData.data[0])
                 setProject(fallbackData.data[0]);
+                return fallbackData.data[0]; // Возвращаем данные
             } else {
-                setProject(null); // или показать ошибку
+                setProject(null);
+                return null;
             }
     
         } catch (error) {
             console.error("Ошибка при получении проекта:", error);
+            return null;
         }
     }
-
-    async function getSimilatProjects() {
+    
+    async function getSimilarProjects(category: string) {
+        if (!category) return;
+        
         try {
-            await fetch(`https://testinscube.ru/api/projects?pagination[limit]=4&filters[category][$eq]=${project?.category}&populate=*`)
-            .then((res) => {
-                return res.json();
-            })
-            .then((data) => {
-                setSimilarProjects(data.data)
-            })
-        }
-        catch (error) {
-            console.error("Ошибка при получении проекта:", error);
+            const response = await fetch(`https://testinscube.ru/api/projects?pagination[limit]=4&filters[category][$eq]=${category}&populate=*`);
+            const data = await response.json();
+            setSimilarProjects(data.data);
+        } catch (error) {
+            console.error("Ошибка при получении похожих проектов:", error);
         }
     }
     
@@ -303,7 +305,9 @@ const Project = () =>{
 
             <div className={styles.project__similar}>
                 <div className={styles.project__container}>
-                    <span className={styles.project__similarTitle}>{currentTitles.seeSimilar}</span>
+                    <span className={styles.project__similarTitle}>
+                        {currentTitles.seeSimilar}:
+                    </span>
                 </div>
                 <div className={styles.gridContainer}>
                     {
