@@ -87,6 +87,11 @@
         width: 66%;
         margin: 0 auto;
         margin-top: 3em;
+
+        @media screen and (max-width: 560px){
+            width: 100%;
+            padding: 0 10px;
+        }
         svg{
             margin-bottom: 10px;
         }
@@ -127,7 +132,7 @@
 
     @media screen and (max-width: 560px){
       grid-template-columns: repeat(6, 1fr);
-
+      padding: 0 10px;
     }
   }
 
