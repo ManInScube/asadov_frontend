@@ -50,23 +50,6 @@ const HeaderProject = () =>{
 
         return () => window.removeEventListener("scroll", handleScroll);
       }, [isScrolled]);
-    
-    
-    async function hh(){
-        await fetch(`https://testinscube.ru/api/projects?${type.map(item=>`filters[type][$in]=${item}`).join("&")}&${status.map(item=>`filters[state][$in]=${item}`).join("&")}&${selectedCategories&&`filters[category][$in]=${selectedCategories}`}&locale=${language.toLowerCase()}&populate=*`)
-        .then((response)=>{
-            return response.json()
-        })
-        .then((data)=>{
-            console.log(data)
-            const sortedProjects = data.data.sort((a, b)=>{
-                if(!a.order) return 1;
-                if(!b.order) return -1;
-                return a.order-b.order;
-            })
-            dispatch(addProjects(sortedProjects))
-        })
-    }
 
     
         const toggleLanguageHandler = (value) => {
@@ -83,20 +66,6 @@ const HeaderProject = () =>{
         // setType(e);
         router.push(`/?type=${type}`);
     };
-//сделать сортировку по порядку мб или добавить опцию в меню
-    // useEffect(()=>{
-    //     hh()
-    //     handleType(type)
-    // },[type, status, selectedCategories])
-
-    const handleType = (type: any) =>{
-        setType(type);
-        if(type.includes("architecture")){
-            setSubmenu(categories)
-            return
-        }
-        setSubmenu(categories2)
-    }
     
     return(
         <header className={`${styles.header} ${isScrolled && styles.header_scrolled}`}>
@@ -239,9 +208,9 @@ const HeaderProject = () =>{
         {menuOpened &&
             <div className={styles.header__mobile}>
                 <div className={styles.header__menu}>
-                    <nav className={styles.header__mobile__nav}>
+                    {/* <nav className={styles.header__mobile__nav}>
                     <a href="/about">{language==='RU' ? 'О БЮРО' : 'ABOUT'}</a>
-                    <div onChange={(e)=>setType([e.target.value])}>
+                        <div onChange={(e)=>setType([e.target.value])}>
                             <label htmlFor="architecture">
                                 <input type="radio" name="type" id="architecture" value='architecture'/>
                                 <span>{language==='RU' ? 'АРХИТЕКТУРА' : 'ARCHITECTURE'}</span>
@@ -261,7 +230,7 @@ const HeaderProject = () =>{
                                 <span>РЕАЛИЗАЦИЯ</span>
                             </label>
                         </div>
-                    </nav>
+                    </nav> */}
                     <ul>
                     {Object.keys(categories).map((item:string)=>(
                         <HeaderFilterItem 

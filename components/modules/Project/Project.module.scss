@@ -60,7 +60,8 @@
                 max-width: 100%;
 
                 span{
-                    max-width: 300px;
+                    max-width: 200px;
+                    width: 100%;
                     text-align: right;
                 }
             }
@@ -255,6 +256,9 @@
         font-family: $font-black;
         font-size: 1em;
         width:140px;
+        @media screen and (max-width: 560px){
+            width:110px;
+        }
         text-align: left;
     }
     span:last-of-type{

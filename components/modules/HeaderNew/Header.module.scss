@@ -20,7 +20,7 @@
     }
 
     @media (max-width: 560px) {
-        padding: 20px 20px;
+        padding: 20px 10px;
     }
     
     &__switch{
@@ -42,6 +42,9 @@
         position: fixed !important;
         width: 100vw;
         padding: 20px 60px;
+        @media (max-width: 560px) {
+            padding: 20px 10px;
+        }
         top: 0;
         z-index: 1000;
         background: rgba(255, 255, 255, 0.8); /* Полупрозрачный фон */
@@ -165,6 +168,7 @@
 
     &__logo{
         @media (max-width: 560px) {
+            display: flex;
         }
         @media (max-width: 1440px) {
             width: 250px;

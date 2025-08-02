@@ -110,7 +110,7 @@ const Header = () =>{
         console.log("Selected Category:", selectedCategories); // Должно меняться при обновлении URL
     }, [selectedCategories]);
     
-    async function hh(){
+    async function getProjects(){
         try {
             const projectsResponse = await fetch(`https://testinscube.ru/api/projects?pagination[limit]=500&${type.map(item=>`filters[type][$in]=${item}`).join("&")}&${status.map(item=>`filters[state][$in]=${item}`).join("&")}&${selectedCategories&&`filters[category][$in]=${selectedCategories}`}&locale=${language ? language?.toLowerCase() : 'ru' }&populate=*`)
             const projectsData = await projectsResponse.json();
@@ -184,7 +184,7 @@ useEffect(() => {
       });
 
     if (selectedCategories !== undefined) {
-        hh();
+        getProjects();
         setMenuOpened(false)
         if(!isMobile){
         const activeCategoryObj = positions.filter(item=>item.key==selectedCategories)
@@ -367,7 +367,7 @@ useEffect(() => {
                         <path d="M23.4844 24.4209L32.9009 33.8853" stroke="#73A533" stroke-width="2.5"/>
                     </svg>
                 </a>
-                <a>
+                <a href='/map'>
                     <svg xmlns="http://www.w3.org/2000/svg" width="35" height="36" viewBox="0 0 35 36" fill="none">
                         <path d="M10.7647 22.3735C13.3144 24.9352 15.0708 26.2402 17.083 26.3448C19.1157 26.4502 21.707 25.3424 25.9206 22.0839C28.1287 19.8087 29.4187 17.6957 29.6622 15.6641C29.8991 13.6876 29.169 11.5518 26.777 9.14868C22.1191 4.46934 15.711 4.88796 11.4925 9.21356C9.2688 11.4937 8.00276 13.6616 7.7946 15.7494C7.59217 17.7811 8.37214 19.9699 10.7647 22.3735Z" stroke="#73A533" stroke-width="2"/>
                         <path d="M28.2395 24.3478C17.9351 32.3362 14.3905 30.813 8.25397 24.6479C2.11747 18.4828 3.58185 12.6826 9.12594 6.99767" stroke="#73A533" stroke-width="2"/>
